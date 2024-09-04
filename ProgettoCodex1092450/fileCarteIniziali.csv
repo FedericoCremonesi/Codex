@@ -2,5 +2,5 @@
 82,vegetale,animale,funghi,insetti,animale,vuoto,vuoto,funghi,funghi,,
 83,insetti,animale,funghi,vegetale,vuoto,vuoto,vuoto,vuoto,vegetale,funghi,
 84,vegetale,insetti,animale,funghi,vuoto,vuoto,vuoto,vuoto,animale,insetti,
-85,insetti,funghi,vegetale,animale,vuoto,vuoto,nonEsistente,nonEsistente,animale,insetti,vegetale
-86,funghi,animale,vegetale,insetti,vuoto,vuoto,nonEsistente,nonEsistente,vegetale,animale,funghi
+85,insetti,funghi,vegetale,animale,vuoto,vuoto,nascosto,nascosto,animale,insetti,vegetale
+86,funghi,animale,vegetale,insetti,vuoto,vuoto,nascosto,nascosto,vegetale,animale,funghi
