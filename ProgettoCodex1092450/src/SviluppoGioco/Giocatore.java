@@ -1,6 +1,6 @@
 package SviluppoGioco;
 
-import java.util.Set;
+import java.util.List;
 
 import Carte.Carta;
 import Carte.CartaObiettivo;
@@ -11,7 +11,7 @@ public class Giocatore {
 	private String colorePedina;
 	private int punti;
 	private String[][] campo;
-	private Set<Carta> mano;
+	private List<Carta> mano;
 	private CartaObiettivo obiettivoSegreto;
 	private int conteggioObiettiviCompletati;
 	
