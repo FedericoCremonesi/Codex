@@ -1,4 +1,4 @@
-package SviluppoGioco;
+package Giocatori;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class Giocatore {
 	private String nickname;
 	private String colorePedina;
 	private int punti;
-	private String[][] campo;
-	private List<Carta> mano;
+	private Campo campo;
+	private Mano mano;
 	private CartaObiettivo obiettivoSegreto;
 	private int conteggioObiettiviCompletati;
 	
