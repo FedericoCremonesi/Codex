@@ -6,9 +6,11 @@ import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
 import giocatori.Giocatore;
+import tavoloEMazzi.Tavolo;
 
 public class Partita {
 	
-	public List<Giocatore> gruppoGiocatori;
+	private List<Giocatore> gruppoGiocatori;
+	private Tavolo tavoloDiGioco;
 
 }

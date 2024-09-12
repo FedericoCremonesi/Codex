@@ -8,8 +8,8 @@ import carte.CartaRisorsa;
 
 public class Tavolo {
 	
-	public Mazzo<CartaRisorsa> mazzoCarteRisorsa;
-	public Mazzo<CartaOro> mazzoCarteOro;
-	public CartaObiettivo[] obiettiviComuni;
+	private Mazzo<CartaRisorsa> mazzoCarteRisorsa;
+	private Mazzo<CartaOro> mazzoCarteOro;
+	private CartaObiettivo[] obiettiviComuni;
 
 }

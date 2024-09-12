@@ -6,6 +6,6 @@ import carte.Carta;
 
 public class Mazzo <T extends Carta> {
 	
-	public List<T> carteNelMazzo;
+	private List<T> carteNelMazzo;
 
 }
