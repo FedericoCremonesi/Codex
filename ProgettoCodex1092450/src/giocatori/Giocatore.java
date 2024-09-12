@@ -1,9 +1,9 @@
-package Giocatori;
+package giocatori;
 
 import java.util.List;
 
-import Carte.Carta;
-import Carte.CartaObiettivo;
+import carte.Carta;
+import carte.CartaObiettivo;
 
 public class Giocatore {
 	

@@ -1,8 +1,8 @@
-package TavoloEMazzi;
+package tavoloEMazzi;
 
 import java.util.List;
 
-import Carte.Carta;
+import carte.Carta;
 
 public class Mazzo <T extends Carta> {
 	

@@ -1,4 +1,4 @@
-package Angoli;
+package angoli;
 
 public class AngoloVisibile extends Angolo {
 	

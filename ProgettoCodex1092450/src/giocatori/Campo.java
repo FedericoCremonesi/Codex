@@ -1,4 +1,4 @@
-package Giocatori;
+package giocatori;
 
 public class Campo {
 	

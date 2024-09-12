@@ -1,10 +1,10 @@
-package TavoloEMazzi;
+package tavoloEMazzi;
 
 import java.util.List;
 
-import Carte.CartaObiettivo;
-import Carte.CartaOro;
-import Carte.CartaRisorsa;
+import carte.CartaObiettivo;
+import carte.CartaOro;
+import carte.CartaRisorsa;
 
 public class Tavolo {
 	

@@ -1,4 +1,4 @@
-package Carte;
+package carte;
 
 public class CartaRisorsa extends CartaGiocabile{
 	

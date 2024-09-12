@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import SviluppoGioco.Partita;
+import sviluppoGioco.Partita;
 
 public class Main {
 

@@ -1,8 +1,8 @@
-package Giocatori;
+package giocatori;
 
 import java.util.List;
 
-import Carte.Carta;
+import carte.Carta;
 
 public class Mano {
 	

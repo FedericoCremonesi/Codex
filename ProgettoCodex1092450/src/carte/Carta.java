@@ -1,4 +1,4 @@
-package Carte;
+package carte;
 
 public abstract class Carta {
 	
