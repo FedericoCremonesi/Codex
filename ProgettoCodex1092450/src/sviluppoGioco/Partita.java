@@ -12,5 +12,6 @@ public class Partita {
 	
 	private List<Giocatore> gruppoGiocatori;
 	private Tavolo tavoloDiGioco;
+	private static Boolean ultimoRound;
 
 }
