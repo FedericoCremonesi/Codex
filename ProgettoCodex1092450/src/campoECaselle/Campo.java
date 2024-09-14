@@ -1,4 +1,4 @@
-package giocatori;
+package campoECaselle;
 
 public class Campo {
 	

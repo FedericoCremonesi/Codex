@@ -2,6 +2,7 @@ package giocatori;
 
 import java.util.List;
 
+import campoECaselle.Campo;
 import carte.Carta;
 import carte.CartaObiettivo;
 
