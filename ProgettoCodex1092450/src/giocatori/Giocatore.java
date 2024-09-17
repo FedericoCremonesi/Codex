@@ -9,7 +9,7 @@ import carte.CartaObiettivo;
 public class Giocatore {
 	
 	private String nickname;
-	private String colorePedina;
+	private Pedina colorePedina;
 	private int punti;
 	private Campo campo;
 	private Mano mano;

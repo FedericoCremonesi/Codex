@@ -1,4 +1,4 @@
-package angoli;
+package facceEAngoli;
 
 public enum Risorsa {
 	

@@ -10,8 +10,19 @@ import tavoloEMazzi.Tavolo;
 
 public class Partita {
 	
+	private static final int MIN_GIOCATORI = 2;
+	private static final int MAX_GIOCATORI = 4;
+	
+	
 	private List<Giocatore> gruppoGiocatori;
 	private Tavolo tavoloDiGioco;
-	private static Boolean ultimoRound;
+	
+	private int numeroRoundGiocati;
+	private Boolean ultimoRound;
+	
+	
+	public void gioca() {
+		
+	}
 
 }
