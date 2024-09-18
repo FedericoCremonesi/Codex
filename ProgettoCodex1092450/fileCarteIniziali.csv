@@ -1,6 +1,6 @@
-81,funghi,vegetale,insetti,animale,vuoto,vegetale,insetti,vuoto,insetti,,
-82,vegetale,animale,funghi,insetti,animale,vuoto,vuoto,funghi,funghi,,
-83,insetti,animale,funghi,vegetale,vuoto,vuoto,vuoto,vuoto,vegetale,funghi,
-84,vegetale,insetti,animale,funghi,vuoto,vuoto,vuoto,vuoto,animale,insetti,
-85,insetti,funghi,vegetale,animale,vuoto,vuoto,nascosto,nascosto,animale,insetti,vegetale
-86,funghi,animale,vegetale,insetti,vuoto,vuoto,nascosto,nascosto,vegetale,animale,funghi
+81,FUNGHI,VEGETALE,INSETTI,ANIMALE,vuoto,VEGETALE,INSETTI,vuoto,INSETTI,null,null
+82,VEGETALE,ANIMALE,FUNGHI,INSETTI,ANIMALE,vuoto,vuoto,FUNGHI,FUNGHI,null,null
+83,INSETTI,ANIMALE,FUNGHI,VEGETALE,vuoto,vuoto,vuoto,vuoto,VEGETALE,FUNGHI,null
+84,VEGETALE,INSETTI,ANIMALE,FUNGHI,vuoto,vuoto,vuoto,vuoto,ANIMALE,INSETTI,null
+85,INSETTI,FUNGHI,VEGETALE,ANIMALE,vuoto,vuoto,nascosto,nascosto,ANIMALE,INSETTI,VEGETALE
+86,FUNGHI,ANIMALE,VEGETALE,INSETTI,vuoto,vuoto,nascosto,nascosto,VEGETALE,ANIMALE,FUNGHI

@@ -9,7 +9,6 @@ public class Main {
 		
 		Partita partita = new Partita();
 		
-		System.out.println("Una nuova partita ha inizio");
 		partita.gioca();
 
 	}

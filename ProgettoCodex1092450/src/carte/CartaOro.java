@@ -19,17 +19,31 @@ public class CartaOro extends CartaGiocabile{
 	private int quantitàRisorsaNecessaria2;
 	
 	
-	public CartaOro(int id, String facciaDiGioco, Casella casellaDiGioco, Faccia fronte, Faccia retro, ColoreCarta colore,
-			int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1,
+	//Overloading del costruttore
+	/**
+	 * Costruttore delle carte oro con 2 tipi diversi di risorse necessarie per la loro giocata (sulla faccia frontale)
+	 */
+	public CartaOro(int id, Faccia fronte, Faccia retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1,
 			Risorsa risorsaNecessaria2, int quantitàRisorsaNecessaria2) {
-		super(id, facciaDiGioco, casellaDiGioco, fronte, retro);
-		this.colore = colore;
+		super(id, fronte, retro);
 		this.punti = punti;
 		this.condizionePunti = condizionePunti;
 		this.risorsaNecessaria1 = risorsaNecessaria1;
 		this.quantitàRisorsaNecessaria1 = quantitàRisorsaNecessaria1;
 		this.risorsaNecessaria2 = risorsaNecessaria2;
 		this.quantitàRisorsaNecessaria2 = quantitàRisorsaNecessaria2;
+	}
+	
+	//Overloading del costruttore
+	/**
+	 * Costruttore delle carte oro con 1 solo tipo di risorsa necessaria per la loro giocata (sulla faccia frontale)
+	 */
+	public CartaOro(int id, Faccia fronte, Faccia retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1) {
+		super(id, fronte, retro);
+		this.punti = punti;
+		this.condizionePunti = condizionePunti;
+		this.risorsaNecessaria1 = risorsaNecessaria1;
+		this.quantitàRisorsaNecessaria1 = quantitàRisorsaNecessaria1;
 	}
 	
 }

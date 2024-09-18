@@ -11,10 +11,8 @@ public class CartaRisorsa extends CartaGiocabile {
 	private int punti;
 
 	
-	public CartaRisorsa(int id, String facciaDiGioco, Casella casellaDiGioco, Faccia fronte, Faccia retro,
-			ColoreCarta colore, int punti) {
-		super(id, facciaDiGioco, casellaDiGioco, fronte, retro);
-		this.colore = colore;
+	public CartaRisorsa(int id, Faccia fronte, Faccia retro, int punti) {
+		super(id, fronte, retro);
 		this.punti = punti;
 	}
 	
