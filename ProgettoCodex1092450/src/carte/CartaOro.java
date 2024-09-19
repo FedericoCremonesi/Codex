@@ -46,4 +46,9 @@ public class CartaOro extends CartaGiocabile{
 		this.quantitàRisorsaNecessaria1 = quantitàRisorsaNecessaria1;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "C.Oro: "+super.toString()+" "+colore+" "+punti+" "+condizionePunti+" "+risorsaNecessaria1+" "+quantitàRisorsaNecessaria1+" "+risorsaNecessaria2+" "+quantitàRisorsaNecessaria2;
+	}
 }

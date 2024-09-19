@@ -10,4 +10,11 @@ public class AngoloVisibile extends Angolo {
 		this.contenuto = contenuto;
 		this.coperto = false;
 	}
+	
+	
+	@Override
+	public String toString()
+	{
+		return ""+super.toString()+contenuto;
+	}
 }

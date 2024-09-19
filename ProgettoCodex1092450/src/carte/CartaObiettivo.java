@@ -7,4 +7,9 @@ public class CartaObiettivo extends Carta{
 		super(id);
 	}
 
+	
+	@Override
+	public String toString() {
+		return "C.Obiettivo: "+super.toString();
+	}
 }

@@ -14,7 +14,7 @@ public class Faccia {
 	
 	//Overloading del metodo costruttore
 	/**
-	 * Costrutte della faccia frontale delle carte: risorsa, oro e iniziali
+	 * Costruttore della faccia frontale delle carte: risorsa, oro e iniziali
 	 */
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx) {
 		this.angoloAltoSx = angoloAltoSx;
@@ -29,9 +29,9 @@ public class Faccia {
 	
 	
 	//Overloading del metodo costruttore
-		/**
-		 * Costrutte della faccia sul retro delle carte: risorsa e oro
-		 */
+	/**
+	 * Costruttore della faccia sul retro delle carte: risorsa e oro
+	 */
 	public Faccia(Risorsa risorsaRetroCentrale) {
 		this.angoloAltoSx = new AngoloVisibile("vuoto");
 		this.angoloAltoDx = new AngoloVisibile("vuoto");
@@ -44,7 +44,7 @@ public class Faccia {
 	
 	//Overloading del metodo costruttore
 	/**
-	 * Costrutte della faccia sul retro delle carte: iniziali con 1 risorsa centrale
+	 * Costruttore della faccia sul retro delle carte: iniziali con 1 risorsa centrale
 	 */
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx,
 			Risorsa risorsaRetroCentrale) {
@@ -59,7 +59,7 @@ public class Faccia {
 	
 	//Overloading del metodo costruttore
 	/**
-	 * Costrutte della faccia sul retro delle carte: iniziali con 2 risorse centrali
+	 * Costruttore della faccia sul retro delle carte: iniziali con 2 risorse centrali
 	 */
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx,
 			Risorsa risorsaRetroCentrale, Risorsa risorsaRetroCentraleAggiuntiva1) {
@@ -74,7 +74,7 @@ public class Faccia {
 	
 	//Overloading del metodo costruttore
 	/**
-	 * Costrutte della faccia sul retro delle carte: iniziali con 3 risorse centrali
+	 * Costruttore della faccia sul retro delle carte: iniziali con 3 risorse centrali
 	 */
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx,
 			Risorsa risorsaRetroCentrale, Risorsa risorsaRetroCentraleAggiuntiva1, Risorsa risorsaRetroCentraleAggiuntiva2) {
@@ -85,6 +85,12 @@ public class Faccia {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
 		this.risorsaRetroCentraleAggiuntiva2 = risorsaRetroCentraleAggiuntiva2;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "["+angoloAltoSx+" "+angoloAltoDx+" "+angoloBassoSx+" "+angoloBassoDx+" "+risorsaRetroCentrale+" "+risorsaRetroCentraleAggiuntiva1+" "+risorsaRetroCentraleAggiuntiva2+"]";
 	}
 	
 }

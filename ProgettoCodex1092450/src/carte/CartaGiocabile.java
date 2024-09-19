@@ -19,4 +19,9 @@ public abstract class CartaGiocabile extends Carta {
 		this.retro = retro;
 	}
 
+	
+	@Override
+	public String toString() {
+		return ""+super.toString()+" "+fronte.toString()+" "+retro.toString();
+	}
 }

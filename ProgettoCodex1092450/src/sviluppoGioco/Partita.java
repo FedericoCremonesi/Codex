@@ -29,9 +29,14 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Funzione principale in cui sono scritti tutti i passaggi della partita
+	 */
 	public void gioca() {
 		System.out.println("Una nuova partita ha inizio");
 		tavoloDiGioco.creaMazzi();
+		tavoloDiGioco.stampaMazzi(); //testing
+		//...
 		Giocatore.numeroGiocatori = richiediNumeroGiocatori();
 	}
 	

@@ -16,4 +16,9 @@ public class CartaRisorsa extends CartaGiocabile {
 		this.punti = punti;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "C.Risorsa: "+super.toString()+" "+colore+" "+punti;
+	}
 }

@@ -19,4 +19,12 @@ public class Mazzo <T extends Carta> {
 		carteNelMazzo.add((T) cartaDaAggiungere);
 	}
 
+	
+	public void stampaMazzo()
+	{
+		for(Carta cartaDaStampare : carteNelMazzo)
+		{
+			System.out.println(cartaDaStampare.toString());
+		}
+	}
 }

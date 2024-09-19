@@ -9,6 +9,7 @@ import carte.CartaIniziale;
 import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
+import facceEAngoli.Angolo;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Faccia;
 import facceEAngoli.Risorsa;
@@ -52,7 +53,7 @@ public class Tavolo {
 				if(Integer.parseInt(splitted[0]) >= 1 && Integer.parseInt(splitted[0]) <= 40)
 				{
 					mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaRisorsa( Integer.parseInt(splitted[0]),
-												new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
+												new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
 												new Faccia(Risorsa.valueOf(splitted[5])),
 												Integer.parseInt(splitted[6]) ));
 				} else
@@ -62,7 +63,7 @@ public class Tavolo {
 					{
 						//Così costruisco le carte oro con 2 tipi diversi di risorse necessarie per la loro giocata (sulla faccia frontale) -> uso overloading
 						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaOro( Integer.parseInt(splitted[0]),
-								new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
 								new Faccia(Risorsa.valueOf(splitted[5])),
 								Integer.parseInt(splitted[6]), splitted[7],
 								Risorsa.valueOf(splitted[8]), Integer.parseInt(splitted[9]),
@@ -70,7 +71,7 @@ public class Tavolo {
 					} else {
 						//Così costruisco le carte oro con 1 solo tipo di risorsa necessaria per la loro giocata (sulla faccia frontale) -> uso overloading
 						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaOro( Integer.parseInt(splitted[0]),
-								new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
 								new Faccia(Risorsa.valueOf(splitted[5])),
 								Integer.parseInt(splitted[6]), splitted[7],
 								Risorsa.valueOf(splitted[8]), Integer.parseInt(splitted[9]) ));
@@ -82,22 +83,22 @@ public class Tavolo {
 					{
 						//Così creo le carte iniziali con 1 risorsa sul retro -> uso overloading
 						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaIniziale( Integer.parseInt(splitted[0]),
-								new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
-								new Faccia(new AngoloVisibile(splitted[5]),new AngoloVisibile(splitted[6]),new AngoloVisibile(splitted[7]),new AngoloVisibile(splitted[8]),Risorsa.valueOf(splitted[9])) ));
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[5]),Angolo.creaAngoloInBaseAInput(splitted[6]),Angolo.creaAngoloInBaseAInput(splitted[7]),Angolo.creaAngoloInBaseAInput(splitted[8]),Risorsa.valueOf(splitted[9])) ));
 					} else
 						if(!(splitted[10].equals("null")) && splitted[11].equals("null"))
 					{
 						//Così creo le carte iniziali con 2 risorse sul retro -> uso overloading
 						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaIniziale( Integer.parseInt(splitted[0]),
-								new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
-								new Faccia(new AngoloVisibile(splitted[5]),new AngoloVisibile(splitted[6]),new AngoloVisibile(splitted[7]),new AngoloVisibile(splitted[8]),Risorsa.valueOf(splitted[9]),Risorsa.valueOf(splitted[10])) ));
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[5]),Angolo.creaAngoloInBaseAInput(splitted[6]),Angolo.creaAngoloInBaseAInput(splitted[7]),Angolo.creaAngoloInBaseAInput(splitted[8]),Risorsa.valueOf(splitted[9]),Risorsa.valueOf(splitted[10])) ));
 					} else
 						if((!(splitted[10].equals("null"))) && (!(splitted[11].equals("null"))))
 					{
 						//Così creo le carte iniziali con 3 risorse sul retro -> uso overloading
 						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaIniziale( Integer.parseInt(splitted[0]),
-								new Faccia(new AngoloVisibile(splitted[1]),new AngoloVisibile(splitted[2]),new AngoloVisibile(splitted[3]),new AngoloVisibile(splitted[4])),
-								new Faccia(new AngoloVisibile(splitted[5]),new AngoloVisibile(splitted[6]),new AngoloVisibile(splitted[7]),new AngoloVisibile(splitted[8]),Risorsa.valueOf(splitted[9]),Risorsa.valueOf(splitted[10]),Risorsa.valueOf(splitted[11])) ));
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[1]),Angolo.creaAngoloInBaseAInput(splitted[2]),Angolo.creaAngoloInBaseAInput(splitted[3]),Angolo.creaAngoloInBaseAInput(splitted[4])),
+								new Faccia(Angolo.creaAngoloInBaseAInput(splitted[5]),Angolo.creaAngoloInBaseAInput(splitted[6]),Angolo.creaAngoloInBaseAInput(splitted[7]),Angolo.creaAngoloInBaseAInput(splitted[8]),Risorsa.valueOf(splitted[9]),Risorsa.valueOf(splitted[10]),Risorsa.valueOf(splitted[11])) ));
 					}
 				} else
 				if(Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 102)
@@ -111,5 +112,17 @@ public class Tavolo {
 			System.out.println("Non è stato possibile trovare il file con le carte");
 		}
 		
+	}
+	
+	
+	public void stampaMazzi() {
+		System.out.println("Mazzo carte risorsa:");
+		mazzoCarteRisorsa.stampaMazzo();
+		System.out.println("Mazzo carte oro:");
+		mazzoCarteOro.stampaMazzo();
+		System.out.println("Mazzo carte iniziali:");
+		mazzoCarteIniziali.stampaMazzo();
+		System.out.println("Mazzo carte obiettivo:");
+		mazzoCarteObiettivo.stampaMazzo();
 	}
 }

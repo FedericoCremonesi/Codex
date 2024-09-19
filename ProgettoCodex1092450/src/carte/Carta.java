@@ -10,4 +10,9 @@ public abstract class Carta {
 		this.id = id;
 	}
 
+	
+	@Override
+	public String toString() {
+		return ""+id;
+	}
 }
