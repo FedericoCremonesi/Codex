@@ -32,6 +32,7 @@ public class Tavolo {
 	
 	
 	public void creaMazzi() {
+		System.out.println("Creando i 4 mazzi di carte...");
 		creaMazzoDaFile(mazzoCarteRisorsa, new File("fileCarteRisorsa.csv"));
 		creaMazzoDaFile(mazzoCarteOro, new File("fileCarteOro.csv"));
 		creaMazzoDaFile(mazzoCarteIniziali, new File("fileCarteIniziali.csv"));
@@ -116,6 +117,7 @@ public class Tavolo {
 	
 	
 	public void stampaMazzi() {
+		System.out.println("Stampo i 4 mazzi di carte:");
 		System.out.println("Mazzo carte risorsa:");
 		mazzoCarteRisorsa.stampaMazzo();
 		System.out.println("Mazzo carte oro:");
@@ -124,5 +126,14 @@ public class Tavolo {
 		mazzoCarteIniziali.stampaMazzo();
 		System.out.println("Mazzo carte obiettivo:");
 		mazzoCarteObiettivo.stampaMazzo();
+	}
+	
+	
+	public void mescolaMazzi() {
+		System.out.println("Mescolando i 4 mazzi di carte...");
+		mazzoCarteRisorsa.mescolaMazzo();
+		mazzoCarteOro.mescolaMazzo();
+		mazzoCarteIniziali.mescolaMazzo();
+		mazzoCarteObiettivo.mescolaMazzo();
 	}
 }

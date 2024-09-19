@@ -35,6 +35,8 @@ public class Partita {
 	public void gioca() {
 		System.out.println("Una nuova partita ha inizio");
 		tavoloDiGioco.creaMazzi();
+		//tavoloDiGioco.stampaMazzi(); //testing
+		tavoloDiGioco.mescolaMazzi();
 		tavoloDiGioco.stampaMazzi(); //testing
 		//...
 		Giocatore.numeroGiocatori = richiediNumeroGiocatori();

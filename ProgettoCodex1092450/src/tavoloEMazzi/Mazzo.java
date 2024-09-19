@@ -1,5 +1,7 @@
 package tavoloEMazzi;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import carte.Carta;
@@ -26,5 +28,11 @@ public class Mazzo <T extends Carta> {
 		{
 			System.out.println(cartaDaStampare.toString());
 		}
+	}
+	
+	
+	public void mescolaMazzo()
+	{
+		Collections.shuffle(carteNelMazzo);
 	}
 }
