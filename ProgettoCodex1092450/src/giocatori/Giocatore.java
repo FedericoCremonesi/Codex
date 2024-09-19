@@ -9,8 +9,9 @@ import carte.CartaObiettivo;
 
 public class Giocatore {
 	
-	private static final int MIN_GIOCATORI = 2;
-	private static final int MAX_GIOCATORI = 4;
+	
+	public static final int MIN_GIOCATORI = 2;
+	public static final int MAX_GIOCATORI = 4;
 	
 	public static int numeroGiocatori;
 	
@@ -22,4 +23,86 @@ public class Giocatore {
 	private CartaObiettivo obiettivoSegreto;
 	private int conteggioObiettiviCompletati;
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+	public Pedina getColorePedina() {
+		return colorePedina;
+	}
+
+
+	public void setColorePedina(Pedina colorePedina) {
+		this.colorePedina = colorePedina;
+	}
+
+
+	public int getPunti() {
+		return punti;
+	}
+
+
+	public void setPunti(int punti) {
+		this.punti = punti;
+	}
+
+
+	public Campo getCampo() {
+		return campo;
+	}
+
+
+	public void setCampo(Campo campo) {
+		this.campo = campo;
+	}
+
+
+	public Mano getMano() {
+		return mano;
+	}
+
+
+	public void setMano(Mano mano) {
+		this.mano = mano;
+	}
+
+
+	public CartaObiettivo getObiettivoSegreto() {
+		return obiettivoSegreto;
+	}
+
+
+	public void setObiettivoSegreto(CartaObiettivo obiettivoSegreto) {
+		this.obiettivoSegreto = obiettivoSegreto;
+	}
+
+
+	public int getConteggioObiettiviCompletati() {
+		return conteggioObiettiviCompletati;
+	}
+
+
+	public void setConteggioObiettiviCompletati(int conteggioObiettiviCompletati) {
+		this.conteggioObiettiviCompletati = conteggioObiettiviCompletati;
+	}
+	
+	
+	public Giocatore(String nickname) {
+		System.out.println("Creazione di un giocatore con questo nickname in corso...");
+		this.nickname = nickname;
+		this.punti = 0;
+		this.conteggioObiettiviCompletati = 0;
+	}
+	
+	
+	public void stampaNickname() {
+		System.out.println(nickname);
+	}
 }
