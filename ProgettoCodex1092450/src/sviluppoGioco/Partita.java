@@ -12,12 +12,14 @@ import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
 import giocatori.Giocatore;
+import giocatori.Pedina;
 import tavoloEMazzi.Mazzo;
 import tavoloEMazzi.Tavolo;
 
 public class Partita {
 
 	private static List<Giocatore> gruppoGiocatori;
+	private static List<Pedina> coloriPedinaDisponibili;
 	private Tavolo tavoloDiGioco;
 	private int numeroRoundGiocati;
 	private Boolean ultimoRound;
@@ -25,6 +27,7 @@ public class Partita {
 	
 	public Partita() {
 		this.gruppoGiocatori = new ArrayList<Giocatore>();
+		this.coloriPedinaDisponibili = new ArrayList<Pedina>(List.of(Pedina.ROSSA,Pedina.GIALLA,Pedina.VERDE,Pedina.BLU));
 		this.tavoloDiGioco = new Tavolo();
 		this.numeroRoundGiocati = 0;
 		this.ultimoRound = false;
@@ -43,6 +46,9 @@ public class Partita {
 		Giocatore.numeroGiocatori = richiediNumeroGiocatori();
 		richiediNicknameGiocatori();
 		mischiaOrdineGiocatori();
+		creaListaColori();
+		stampaListaColori();
+		faiScegliereColore();
 	}
 	
 	
@@ -111,6 +117,67 @@ public class Partita {
 		{
 			System.out.print("- ");
 			g.stampaNickname();
+		}
+	}
+	
+	//elimina
+	public static void creaListaColori() {
+		System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
+		coloriPedinaDisponibili.add(Pedina.ROSSA);
+		coloriPedinaDisponibili.add(Pedina.GIALLA);
+		coloriPedinaDisponibili.add(Pedina.VERDE);
+		coloriPedinaDisponibili.add(Pedina.BLU);
+		System.out.println("Lista delle pedine creata !");
+	}
+	
+	
+	public static void stampaListaColori() {
+		System.out.println("Le pedine disponibili al momento sono: ");
+		for(Pedina colorePedina : coloriPedinaDisponibili)
+		{
+			System.out.print("- ");
+			System.out.println(colorePedina.toString().toLowerCase());
+		}
+	}
+	
+	//correggi
+	public static void faiScegliereColore() {
+		for(Giocatore g : gruppoGiocatori)
+		{
+			boolean coloreSceltoEUnColore;
+			boolean coloreSceltoEDisponibile;
+			do {
+				stampaListaColori();
+				System.out.println("\n"+g+", quale pedina preferisci scegliere?");
+				Scanner sc = new Scanner(System.in);
+				String coloreScelto = sc.nextLine();
+				coloreScelto = coloreScelto.toUpperCase(); //rende maiuscolo il colore inserito, in modo da considerare "Rosso","rosso","ROSSO" tutti come "ROSSO"
+				
+				//Controllo che la stringa inserita dall'utente sia il colore di una delle pedine del gioco
+				coloreSceltoEUnColore = false;
+				if ( coloreScelto.equals(Pedina.ROSSA) || coloreScelto.equals(Pedina.GIALLA) || coloreScelto.equals(Pedina.VERDE) || coloreScelto.equals(Pedina.BLU) ) {
+					coloreSceltoEUnColore = true;
+				}
+				
+				//Controllo che il colore scelto sia ancora disponibile
+				coloreSceltoEDisponibile = false;
+				for (Pedina p : coloriPedinaDisponibili)
+				{
+					if (coloreScelto.equals(p.toString()))
+					{
+						coloreSceltoEDisponibile = true;
+					}
+				}
+				
+				if(!coloreSceltoEUnColore) {
+					System.out.println("La stringa scritta non risulta essere uno dei colori del gioco, inserire Rossa, Gialla, Verde o Blu");
+				} else if(!coloreSceltoEDisponibile) {
+					System.out.println("Il colore inserito non è più disponibile, è già stato selezionato da un altro giocatore");
+				} else {
+					g.setColorePedina(Pedina.valueOf(coloreScelto));
+					coloriPedinaDisponibili.remove(Pedina.valueOf(coloreScelto));
+				}
+			} while (!coloreSceltoEUnColore && !coloreSceltoEDisponibile);
 		}
 	}
 }

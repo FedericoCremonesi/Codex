@@ -111,6 +111,7 @@ public class Tavolo {
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("Non è stato possibile trovare il file con le carte");
+			System.exit(0);
 		}
 		
 	}
