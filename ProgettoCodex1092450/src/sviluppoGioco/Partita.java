@@ -48,7 +48,6 @@ public class Partita {
 		richiediNicknameGiocatori();
 		mischiaOrdineGiocatori();
 		creaListaColori();
-		stampaListaColori();
 		faiScegliereColore();
 	}
 	
@@ -121,6 +120,7 @@ public class Partita {
 		}
 	}
 	
+	
 	public static void creaListaColori() {
 		System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
 		coloriPedinaDisponibili = new HashSet<Pedina>();
@@ -141,23 +141,22 @@ public class Partita {
 		}
 	}
 	
-	//correggi
+	
 	public static void faiScegliereColore() {
 		for(Giocatore g : gruppoGiocatori)
 		{
-			boolean coloreSceltoEUnColore = true;
-			boolean coloreSceltoEDisponibile = true;
-			Scanner sc;
+			boolean coloreSceltoEUnColore = false;
+			boolean coloreSceltoEDisponibile = false;
 			do {
 				stampaListaColori();
 				System.out.println("\n"+g.getNickname()+", quale pedina preferisci scegliere?");
-				sc = new Scanner(System.in);
+				Scanner sc = new Scanner(System.in);
 				String coloreScelto = sc.nextLine();
 				coloreScelto = coloreScelto.toUpperCase(); //rende maiuscolo il colore inserito, in modo da considerare "Rosso","rosso","ROSSO" tutti come "ROSSO"
 				
 				//Controllo che la stringa inserita dall'utente sia il colore di una delle pedine del gioco
 				coloreSceltoEUnColore = false;
-				if ( coloreScelto.equals(Pedina.ROSSA) || coloreScelto.equals(Pedina.GIALLA) || coloreScelto.equals(Pedina.VERDE) || coloreScelto.equals(Pedina.BLU) ) {
+				if ( coloreScelto.equals(Pedina.ROSSA.toString()) || coloreScelto.equals(Pedina.GIALLA.toString()) || coloreScelto.equals(Pedina.VERDE.toString()) || coloreScelto.equals(Pedina.BLU.toString()) ) {
 					coloreSceltoEUnColore = true;
 				}
 				
