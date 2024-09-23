@@ -1,7 +1,8 @@
 package carte;
 
 import campoECaselle.Casella;
-import facceEAngoli.Faccia;
+import facceEAngoli.FacciaFronte;
+import facceEAngoli.FacciaRetro;
 
 public abstract class CartaGiocabile extends Carta {
 
@@ -9,11 +10,11 @@ public abstract class CartaGiocabile extends Carta {
 	private String facciaDiGioco;
 	private Casella casellaDiGioco;
 	
-	private Faccia fronte;
-	private Faccia retro;
+	private FacciaFronte fronte;
+	private FacciaRetro retro;
 	
 	
-	public CartaGiocabile(int id, Faccia fronte, Faccia retro) {
+	public CartaGiocabile(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id);
 		this.fronte = fronte;
 		this.retro = retro;
@@ -24,4 +25,5 @@ public abstract class CartaGiocabile extends Carta {
 	public String toString() {
 		return ""+super.toString()+" "+fronte.toString()+" "+retro.toString();
 	}
+	
 }

@@ -1,12 +1,13 @@
 package carte;
 
 import campoECaselle.Casella;
-import facceEAngoli.Faccia;
+import facceEAngoli.FacciaFronte;
+import facceEAngoli.FacciaRetro;
 
-public class CartaIniziale extends CartaGiocabile{
+public class CartaIniziale extends CartaGiocabile implements Giocabile {
 
 
-	public CartaIniziale(int id, Faccia fronte, Faccia retro) {
+	public CartaIniziale(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id, fronte, retro);
 	}
 	
@@ -14,5 +15,11 @@ public class CartaIniziale extends CartaGiocabile{
 	@Override
 	public String toString() {
 		return "C.Iniziale: "+super.toString();
+	}
+
+
+	@Override
+	public void print() {
+		
 	}
 }

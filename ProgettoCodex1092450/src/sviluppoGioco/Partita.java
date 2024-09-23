@@ -49,6 +49,7 @@ public class Partita {
 		mischiaOrdineGiocatori();
 		creaListaColori();
 		faiScegliereColore();
+		consegnaEGiocoCarteIniziali();
 	}
 	
 	
@@ -179,6 +180,14 @@ public class Partita {
 					coloriPedinaDisponibili.remove(Pedina.valueOf(coloreScelto));
 				}
 			} while ((!coloreSceltoEUnColore) || (!coloreSceltoEDisponibile));
+		}
+	}
+	
+	
+	public void consegnaEGiocoCarteIniziali() {
+		for(Giocatore g : gruppoGiocatori)
+		{
+			//...
 		}
 	}
 }

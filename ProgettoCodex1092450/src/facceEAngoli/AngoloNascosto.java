@@ -8,4 +8,5 @@ public class AngoloNascosto extends Angolo {
 	{
 		return ""+super.toString()+"nascosto";
 	}
+	
 }

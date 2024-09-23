@@ -15,10 +15,4 @@ public abstract class Angolo {
 		
 	}
 
-	
-	@Override
-	public String toString()
-	{
-		return "";
-	}
 }

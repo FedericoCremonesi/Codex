@@ -1,10 +1,11 @@
 package carte;
 
 import campoECaselle.Casella;
-import facceEAngoli.Faccia;
+import facceEAngoli.FacciaFronte;
+import facceEAngoli.FacciaRetro;
 import facceEAngoli.Risorsa;
 
-public class CartaOro extends CartaGiocabile{
+public class CartaOro extends CartaGiocabile implements Giocabile {
 	
 	
 	private ColoreCarta colore;
@@ -23,7 +24,7 @@ public class CartaOro extends CartaGiocabile{
 	/**
 	 * Costruttore delle carte oro con 2 tipi diversi di risorse necessarie per la loro giocata (sulla faccia frontale)
 	 */
-	public CartaOro(int id, Faccia fronte, Faccia retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1,
+	public CartaOro(int id, FacciaFronte fronte, FacciaRetro retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1,
 			Risorsa risorsaNecessaria2, int quantitàRisorsaNecessaria2) {
 		super(id, fronte, retro);
 		this.punti = punti;
@@ -38,7 +39,7 @@ public class CartaOro extends CartaGiocabile{
 	/**
 	 * Costruttore delle carte oro con 1 solo tipo di risorsa necessaria per la loro giocata (sulla faccia frontale)
 	 */
-	public CartaOro(int id, Faccia fronte, Faccia retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1) {
+	public CartaOro(int id, FacciaFronte fronte, FacciaRetro retro, int punti, String condizionePunti, Risorsa risorsaNecessaria1, int quantitàRisorsaNecessaria1) {
 		super(id, fronte, retro);
 		this.punti = punti;
 		this.condizionePunti = condizionePunti;
@@ -50,5 +51,11 @@ public class CartaOro extends CartaGiocabile{
 	@Override
 	public String toString() {
 		return "C.Oro: "+super.toString()+" "+colore+" "+punti+" "+condizionePunti+" "+risorsaNecessaria1+" "+quantitàRisorsaNecessaria1+" "+risorsaNecessaria2+" "+quantitàRisorsaNecessaria2;
+	}
+	
+	
+	@Override
+	public void print() {
+		
 	}
 }
