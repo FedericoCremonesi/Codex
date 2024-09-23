@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import carte.CartaObiettivo;
 import carte.CartaOro;
@@ -19,7 +21,7 @@ import tavoloEMazzi.Tavolo;
 public class Partita {
 
 	private static List<Giocatore> gruppoGiocatori;
-	private static List<Pedina> coloriPedinaDisponibili;
+	private static Set<Pedina> coloriPedinaDisponibili;
 	private Tavolo tavoloDiGioco;
 	private int numeroRoundGiocati;
 	private Boolean ultimoRound;
@@ -27,7 +29,6 @@ public class Partita {
 	
 	public Partita() {
 		this.gruppoGiocatori = new ArrayList<Giocatore>();
-		this.coloriPedinaDisponibili = new ArrayList<Pedina>(List.of(Pedina.ROSSA,Pedina.GIALLA,Pedina.VERDE,Pedina.BLU));
 		this.tavoloDiGioco = new Tavolo();
 		this.numeroRoundGiocati = 0;
 		this.ultimoRound = false;
@@ -120,9 +121,9 @@ public class Partita {
 		}
 	}
 	
-	//elimina
 	public static void creaListaColori() {
 		System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
+		coloriPedinaDisponibili = new HashSet<Pedina>();
 		coloriPedinaDisponibili.add(Pedina.ROSSA);
 		coloriPedinaDisponibili.add(Pedina.GIALLA);
 		coloriPedinaDisponibili.add(Pedina.VERDE);
@@ -144,12 +145,13 @@ public class Partita {
 	public static void faiScegliereColore() {
 		for(Giocatore g : gruppoGiocatori)
 		{
-			boolean coloreSceltoEUnColore;
-			boolean coloreSceltoEDisponibile;
+			boolean coloreSceltoEUnColore = true;
+			boolean coloreSceltoEDisponibile = true;
+			Scanner sc;
 			do {
 				stampaListaColori();
-				System.out.println("\n"+g+", quale pedina preferisci scegliere?");
-				Scanner sc = new Scanner(System.in);
+				System.out.println("\n"+g.getNickname()+", quale pedina preferisci scegliere?");
+				sc = new Scanner(System.in);
 				String coloreScelto = sc.nextLine();
 				coloreScelto = coloreScelto.toUpperCase(); //rende maiuscolo il colore inserito, in modo da considerare "Rosso","rosso","ROSSO" tutti come "ROSSO"
 				
@@ -177,7 +179,7 @@ public class Partita {
 					g.setColorePedina(Pedina.valueOf(coloreScelto));
 					coloriPedinaDisponibili.remove(Pedina.valueOf(coloreScelto));
 				}
-			} while (!coloreSceltoEUnColore && !coloreSceltoEDisponibile);
+			} while ((!coloreSceltoEUnColore) || (!coloreSceltoEDisponibile));
 		}
 	}
 }
