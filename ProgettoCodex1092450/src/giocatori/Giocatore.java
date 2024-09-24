@@ -97,6 +97,7 @@ public class Giocatore {
 	public Giocatore(String nickname) {
 		System.out.println("Creazione di un giocatore con questo nickname in corso...");
 		this.nickname = nickname;
+		this.campo = new Campo();
 		this.punti = 0;
 		this.conteggioObiettiviCompletati = 0;
 	}

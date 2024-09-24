@@ -3,12 +3,24 @@ package campoECaselle;
 import carte.Carta;
 
 public class CasellaGiocabile extends Casella {
+
 	
 	private Carta cartaContenuta;
 	
-	public CasellaGiocabile(Coordinata coordinataCasella) {
-		super(coordinataCasella);
+	
+	public Carta getCartaContenuta() {
+		return cartaContenuta;
 	}
+
+	public void setCartaContenuta(Carta cartaContenuta) {
+		this.cartaContenuta = cartaContenuta;
+	}
+	
+	
+	public CasellaGiocabile(int x, int y) {
+		super(x, y);
+	}
+	
 	
 	public boolean isEmpty()
 	{

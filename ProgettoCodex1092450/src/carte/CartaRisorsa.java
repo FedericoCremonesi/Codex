@@ -5,7 +5,7 @@ import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
 import facceEAngoli.Risorsa;
 
-public class CartaRisorsa extends CartaGiocabile implements Giocabile {
+public class CartaRisorsa extends CartaGiocabile {
 
 
 	private ColoreCarta colore;

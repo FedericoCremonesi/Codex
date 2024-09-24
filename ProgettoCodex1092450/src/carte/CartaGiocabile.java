@@ -1,6 +1,7 @@
 package carte;
 
 import campoECaselle.Casella;
+import campoECaselle.CasellaGiocabile;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
 
@@ -55,4 +56,10 @@ public abstract class CartaGiocabile extends Carta {
 		return ""+super.toString()+" "+fronte.toString()+" "+retro.toString();
 	}
 	
+	
+	public void posizionaSuCampo(CartaGiocabile cartaDaGiocare, CasellaGiocabile casellaInCuiPosizionareCarta) {
+		casellaInCuiPosizionareCarta.setCartaContenuta(cartaDaGiocare);
+		cartaDaGiocare.setCasellaDiGioco(casellaInCuiPosizionareCarta);
+		System.out.println("Carta giocata!");
+	}
 }

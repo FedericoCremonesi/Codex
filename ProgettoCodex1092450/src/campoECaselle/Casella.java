@@ -2,10 +2,11 @@ package campoECaselle;
 
 public abstract class Casella {
 	
-	private final Coordinata coordinataCasella;
+	private final int x; //x è la coordinata delle righe
+	private final int y; //y è la coordinata delle colonne
 	
-	public Casella(Coordinata coordinataCasella) {
-		this.coordinataCasella = coordinataCasella;
+	public Casella(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
-	
 }

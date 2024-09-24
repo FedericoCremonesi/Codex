@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import campoECaselle.Casella;
+import campoECaselle.CasellaGiocabile;
 import carte.CartaIniziale;
 import carte.CartaObiettivo;
 import carte.CartaOro;
@@ -188,15 +190,27 @@ public class Partita {
 	public void consegnaEGiocoCarteIniziali() {
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.println("Estraendo una carta a caso per: "+g.getNickname()+"...");
+			System.out.println("\nEstraendo una carta per: "+g.getNickname()+"...");
 			
 			System.out.println("La carta estratta è la seguente:");
-			CartaIniziale cartaDaGiocareSulCampo = tavoloDiGioco.getMazzoCarteIniziali().getCarta(1);
-			tavoloDiGioco.getMazzoCarteIniziali().removeCarta(1);
+			CartaIniziale cartaDaGiocareSulCampo = tavoloDiGioco.getMazzoCarteIniziali().getCarta(0); //indice 0 perchè voglio la prima carta (e le arraylist partono da 0)
+			tavoloDiGioco.getMazzoCarteIniziali().removeCarta(0);
 			
 			cartaDaGiocareSulCampo.print();
 			
-			//...
+			String sceltaFacciaDiGioco;
+			do {
+				System.out.println(g.getNickname()+" su quale faccia vuoi giocare la carta?");
+				Scanner sc = new Scanner(System.in);
+				sceltaFacciaDiGioco = sc.nextLine().toUpperCase();
+				if(sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) {
+					cartaDaGiocareSulCampo.setFacciaDiGioco(sceltaFacciaDiGioco);
+					cartaDaGiocareSulCampo.posizionaSuCampo(cartaDaGiocareSulCampo, (CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
+				} else {
+					System.out.println("Inserimento non valido, scrivere Fronte oppure Retro");
+				}
+			} while (!( (sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) ));
+			
 		}
 	}
 }
