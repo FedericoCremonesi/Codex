@@ -74,30 +74,31 @@ public class CartaOro extends CartaGiocabile implements Giocabile {
 	
 	@Override
 	public void print() {
+		String tipologiaCarta = "oro";
 		if (!(super.getFacciaDiGioco().toLowerCase().equals("retro")))
 		{
-			super.getFronte().printFaccia(colore.toString());
+			super.getFronte().printFaccia(colore.toString(), tipologiaCarta);
 		}
 		if (!(super.getFacciaDiGioco().toLowerCase().equals("fronte")))
 		{
-			super.getRetro().printFaccia(colore.toString());
+			super.getRetro().printFaccia(colore.toString(), tipologiaCarta);
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
 		
-		System.out.print("Punti dati dalla carta: "+punti);
+		System.out.print("\u001B[33m"+"Punti dati dalla carta: "+"\u001B[0m"+punti);
 		if(condizionePunti.equals("nessunaCondizione"))
 		{
 			System.out.println(); //va semplicemente a capo
 		} else {
 			System.out.print(" per ogni ");
 			if(condizionePunti.equals("angoliCoperti")) {
-				System.out.println("angolo coperto con la giocata di questa carta");
+				System.out.println("angolo coperto"); //si intende "angolo coperto con la giocata di questa carta"
 			} else {
-				System.out.println(condizionePunti+" visibile nel campo del giocatore dopo la giocata di questa carta");
+				System.out.println(condizionePunti+" visibile nel campo"); //si intende "visibile nel campo del giocatore dopo la giocata di questa carta"
 			}
 		}
 		
-		System.out.print("Condizioni per poter giocare questa carta (con la faccia di gioco frontale): "+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString());
+		System.out.print("\u001B[33m"+"Condizioni di gioco: "+"\u001B[0m"+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
 		if(risorsaNecessaria2==null)
 		{
 			System.out.println(); //va semplicemente a capo
