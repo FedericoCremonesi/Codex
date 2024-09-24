@@ -53,6 +53,7 @@ public class Partita {
 		creaListaColori();
 		faiScegliereColore();
 		consegnaEGiocoCarteIniziali();
+		consegnaCarteRisorsaEOro();
 	}
 	
 	
@@ -190,13 +191,8 @@ public class Partita {
 	public void consegnaEGiocoCarteIniziali() {
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.println("\nEstraendo una carta per: "+g.getNickname()+"...");
-			
-			System.out.println("La carta estratta è la seguente:");
-			CartaIniziale cartaDaGiocareSulCampo = tavoloDiGioco.getMazzoCarteIniziali().getCarta(0); //indice 0 perchè voglio la prima carta (e le arraylist partono da 0)
-			tavoloDiGioco.getMazzoCarteIniziali().removeCarta(0);
-			
-			cartaDaGiocareSulCampo.print();
+			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
+			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiPrimaCartaDaMazzo();
 			
 			String sceltaFacciaDiGioco;
 			do {
@@ -204,12 +200,33 @@ public class Partita {
 				Scanner sc = new Scanner(System.in);
 				sceltaFacciaDiGioco = sc.nextLine().toUpperCase();
 				if(sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) {
-					cartaDaGiocareSulCampo.setFacciaDiGioco(sceltaFacciaDiGioco);
-					cartaDaGiocareSulCampo.posizionaSuCampo(cartaDaGiocareSulCampo, (CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
+					cartaInizialeEstratta.setFacciaDiGioco(sceltaFacciaDiGioco);
+					cartaInizialeEstratta.posizionaSuCampo((CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
 				} else {
 					System.out.println("Inserimento non valido, scrivere Fronte oppure Retro");
 				}
 			} while (!( (sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) ));
+		}
+	}
+	
+	
+	public void consegnaCarteRisorsaEOro() {
+		for(Giocatore g : gruppoGiocatori)
+		{
+			//Carte risorsa (2):
+			System.out.println("\nEstraendo due carte risorsa per: "+g.getNickname()+"...");
+			for(int i=0; i<2; i++) {
+				CartaRisorsa cartaRisorsaEstratta = (CartaRisorsa) tavoloDiGioco.getMazzoCarteRisorsa().estraiPrimaCartaDaMazzo();
+				
+				cartaRisorsaEstratta.aggiungiAMano(g.getMano());
+			}
+			
+			
+			//Carta oro (1):
+			System.out.println("\nEstraendo una carta oro per: "+g.getNickname()+"...");
+			CartaOro cartaOroEstratta = (CartaOro) tavoloDiGioco.getMazzoCarteOro().estraiPrimaCartaDaMazzo();
+			
+			cartaOroEstratta.aggiungiAMano(g.getMano());
 			
 		}
 	}

@@ -55,4 +55,13 @@ public class Mazzo <T extends Carta> {
 	{
 		return carteNelMazzo.get(i);
 	}
+	
+	
+	public Carta estraiPrimaCartaDaMazzo() {
+		System.out.println("\nCarta estratta:");
+		T cartaEstratta = carteNelMazzo.get(0); //indice 0 perchè voglio la prima carta (e le arraylist partono da 0)
+		cartaEstratta.print();
+		carteNelMazzo.remove(0);
+		return cartaEstratta;
+	}
 }

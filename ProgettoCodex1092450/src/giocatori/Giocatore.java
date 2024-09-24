@@ -98,6 +98,7 @@ public class Giocatore {
 		System.out.println("Creazione di un giocatore con questo nickname in corso...");
 		this.nickname = nickname;
 		this.campo = new Campo();
+		this.mano = new Mano();
 		this.punti = 0;
 		this.conteggioObiettiviCompletati = 0;
 	}

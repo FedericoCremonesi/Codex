@@ -4,6 +4,7 @@ import campoECaselle.Casella;
 import campoECaselle.CasellaGiocabile;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
+import giocatori.Mano;
 
 public abstract class CartaGiocabile extends Carta {
 	
@@ -57,9 +58,14 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
-	public void posizionaSuCampo(CartaGiocabile cartaDaGiocare, CasellaGiocabile casellaInCuiPosizionareCarta) {
-		casellaInCuiPosizionareCarta.setCartaContenuta(cartaDaGiocare);
-		cartaDaGiocare.setCasellaDiGioco(casellaInCuiPosizionareCarta);
+	public void posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
+		casellaInCuiPosizionareCarta.setCartaContenuta(this);
+		this.setCasellaDiGioco(casellaInCuiPosizionareCarta);
 		System.out.println("Carta giocata!");
+	}
+	
+	
+	public void aggiungiAMano(Mano manoInCuiAggiungereCarta) {
+		manoInCuiAggiungereCarta.aggiungiCartaAMano(this);
 	}
 }

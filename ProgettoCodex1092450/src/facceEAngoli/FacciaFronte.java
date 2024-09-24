@@ -81,7 +81,7 @@ public class FacciaFronte {
 			coloreLatiAngoli = "\u001B[30m"; //stampo i lati degli angoli delle carte risorsa di colore nero
 			break;
 		case "oro":
-			coloreLatiAngoli = "\u001B[33m"; ////stampo i lati degli angoli delle carte risorsa di colore oro
+			coloreLatiAngoli = "\u001B[33m"; //stampo i lati degli angoli delle carte oro di colore giallo
 			break;
 		default:
 			coloreLatiAngoli = "";
