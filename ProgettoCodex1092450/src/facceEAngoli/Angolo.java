@@ -12,7 +12,6 @@ public abstract class Angolo {
 			AngoloVisibile angoloVisibile = new AngoloVisibile(input);
 			return angoloVisibile;
 		}
-		
 	}
 
 }

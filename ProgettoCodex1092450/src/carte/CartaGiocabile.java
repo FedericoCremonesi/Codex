@@ -5,7 +5,6 @@ import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
 
 public abstract class CartaGiocabile extends Carta {
-
 	
 	private String facciaDiGioco;
 	private Casella casellaDiGioco;
@@ -14,10 +13,40 @@ public abstract class CartaGiocabile extends Carta {
 	private FacciaRetro retro;
 	
 	
+	public String getFacciaDiGioco() {
+		return facciaDiGioco;
+	}
+	public void setFacciaDiGioco(String facciaDiGioco) {
+		this.facciaDiGioco = facciaDiGioco;
+	}
+	
+	public Casella getCasellaDiGioco() {
+		return casellaDiGioco;
+	}
+	public void setCasellaDiGioco(Casella casellaDiGioco) {
+		this.casellaDiGioco = casellaDiGioco;
+	}
+
+	public FacciaFronte getFronte() {
+		return fronte;
+	}
+	public void setFronte(FacciaFronte fronte) {
+		this.fronte = fronte;
+	}
+
+	public FacciaRetro getRetro() {
+		return retro;
+	}
+	public void setRetro(FacciaRetro retro) {
+		this.retro = retro;
+	}
+	
+	
 	public CartaGiocabile(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id);
 		this.fronte = fronte;
 		this.retro = retro;
+		this.facciaDiGioco = "non ancora giocata";
 	}
 
 	

@@ -12,4 +12,9 @@ public class CartaObiettivo extends Carta{
 	public String toString() {
 		return "C.Obiettivo: "+super.toString();
 	}
+	
+	
+	public void print() {
+		System.out.println("Questa è una carta obiettivo");
+	}
 }

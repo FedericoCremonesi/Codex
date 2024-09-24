@@ -15,4 +15,9 @@ public abstract class Carta {
 	public String toString() {
 		return ""+id;
 	}
+	
+	
+	public void print() {
+		System.out.println("Questo non dovrebbe essere stampato");
+	}
 }

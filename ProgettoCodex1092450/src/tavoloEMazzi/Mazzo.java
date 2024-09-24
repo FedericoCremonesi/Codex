@@ -26,7 +26,7 @@ public class Mazzo <T extends Carta> {
 	{
 		for(Carta cartaDaStampare : carteNelMazzo)
 		{
-			System.out.println(cartaDaStampare.toString());
+			cartaDaStampare.print();
 		}
 	}
 	
