@@ -35,4 +35,24 @@ public class Mazzo <T extends Carta> {
 	{
 		Collections.shuffle(carteNelMazzo);
 	}
+	
+	
+	//Overloading
+	//Qui viene rimossa dal mazzo una carta specifica passata in ingresso
+	public void removeCarta(Carta cartaDaRimuovere)
+	{
+		carteNelMazzo.remove(cartaDaRimuovere);
+	}
+	
+	//Overloading
+	//Qui viene rimossa dal mazzo la prima carta del mazzo stesso
+	public void removeCarta(int i)
+	{
+		carteNelMazzo.remove(i);
+	}
+	
+	public T getCarta(int i)
+	{
+		return carteNelMazzo.get(i);
+	}
 }

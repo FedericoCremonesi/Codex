@@ -17,11 +17,48 @@ import facceEAngoli.Risorsa;
 
 public class Tavolo {
 	
+	
 	private Mazzo<CartaRisorsa> mazzoCarteRisorsa;
 	private Mazzo<CartaOro> mazzoCarteOro;
 	private Mazzo<CartaIniziale> mazzoCarteIniziali;
 	private Mazzo<CartaObiettivo> mazzoCarteObiettivo;
 	private CartaObiettivo[] obiettiviComuni;
+	
+	
+	public Mazzo<CartaRisorsa> getMazzoCarteRisorsa() {
+		return mazzoCarteRisorsa;
+	}
+	public void setMazzoCarteRisorsa(Mazzo<CartaRisorsa> mazzoCarteRisorsa) {
+		this.mazzoCarteRisorsa = mazzoCarteRisorsa;
+	}
+
+	public Mazzo<CartaOro> getMazzoCarteOro() {
+		return mazzoCarteOro;
+	}
+	public void setMazzoCarteOro(Mazzo<CartaOro> mazzoCarteOro) {
+		this.mazzoCarteOro = mazzoCarteOro;
+	}
+
+	public Mazzo<CartaIniziale> getMazzoCarteIniziali() {
+		return mazzoCarteIniziali;
+	}
+	public void setMazzoCarteIniziali(Mazzo<CartaIniziale> mazzoCarteIniziali) {
+		this.mazzoCarteIniziali = mazzoCarteIniziali;
+	}
+
+	public Mazzo<CartaObiettivo> getMazzoCarteObiettivo() {
+		return mazzoCarteObiettivo;
+	}
+	public void setMazzoCarteObiettivo(Mazzo<CartaObiettivo> mazzoCarteObiettivo) {
+		this.mazzoCarteObiettivo = mazzoCarteObiettivo;
+	}
+
+	public CartaObiettivo[] getObiettiviComuni() {
+		return obiettiviComuni;
+	}
+	public void setObiettiviComuni(CartaObiettivo[] obiettiviComuni) {
+		this.obiettiviComuni = obiettiviComuni;
+	}
 
 	
 	public Tavolo() {

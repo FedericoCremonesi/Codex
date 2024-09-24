@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import carte.CartaIniziale;
 import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
@@ -41,7 +42,7 @@ public class Partita {
 	public void gioca() {
 		System.out.println("Una nuova partita ha inizio");
 		tavoloDiGioco.creaMazzi();
-			tavoloDiGioco.stampaMazzi(); //testing
+			//tavoloDiGioco.stampaMazzi(); //testing
 		tavoloDiGioco.mescolaMazzi();
 			//tavoloDiGioco.stampaMazzi(); //testing
 		Giocatore.numeroGiocatori = richiediNumeroGiocatori();
@@ -176,7 +177,7 @@ public class Partita {
 				} else if(!coloreSceltoEDisponibile) {
 					System.out.println("Il colore inserito non è più disponibile, è già stato selezionato da un altro giocatore");
 				} else {
-					g.setColorePedina(Pedina.valueOf(coloreScelto));
+					g.assegnaColorePedina(Pedina.valueOf(coloreScelto));
 					coloriPedinaDisponibili.remove(Pedina.valueOf(coloreScelto));
 				}
 			} while ((!coloreSceltoEUnColore) || (!coloreSceltoEDisponibile));
@@ -187,6 +188,14 @@ public class Partita {
 	public void consegnaEGiocoCarteIniziali() {
 		for(Giocatore g : gruppoGiocatori)
 		{
+			System.out.println("Estraendo una carta a caso per: "+g.getNickname()+"...");
+			
+			System.out.println("La carta estratta è la seguente:");
+			CartaIniziale cartaDaGiocareSulCampo = tavoloDiGioco.getMazzoCarteIniziali().getCarta(1);
+			tavoloDiGioco.getMazzoCarteIniziali().removeCarta(1);
+			
+			cartaDaGiocareSulCampo.print();
+			
 			//...
 		}
 	}
