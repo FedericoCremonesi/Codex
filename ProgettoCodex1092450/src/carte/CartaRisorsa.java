@@ -11,6 +11,14 @@ public class CartaRisorsa extends CartaGiocabile {
 	private ColoreCarta colore;
 	
 	private int punti;
+	
+	
+	public ColoreCarta getColore() {
+		return colore;
+	}
+	public void setColore(ColoreCarta colore) {
+		this.colore = colore;
+	}
 
 	
 	public CartaRisorsa(int id, FacciaFronte fronte, FacciaRetro retro, int punti) {
@@ -46,6 +54,6 @@ public class CartaRisorsa extends CartaGiocabile {
 			super.getRetro().printFaccia(colore.toString(), tipologiaCarta);
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
-		System.out.println("\u001B[30m"+" ➤ Punti dati dalla carta: "+"\u001B[0m"+punti);
+		System.out.println(ColoreCarta.CODICE_COLORE_CARTA_RISORSA+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
 	}
 }

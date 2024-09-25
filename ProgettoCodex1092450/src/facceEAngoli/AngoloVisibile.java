@@ -22,13 +22,13 @@ public class AngoloVisibile extends Angolo {
 			return " (coperto)";
 		} else {
 			if(contenuto.equals(Risorsa.FUNGHI.toString())) {
-				return "\u001B[31m"+"  FUNGHI  "+"\u001B[0m"; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
+				return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.codiceResetColore; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
 			} else if(contenuto.equals(Risorsa.VEGETALE.toString())) {
-				return "\u001B[32m"+" VEGETALE "+"\u001B[0m";
+				return Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+Risorsa.codiceResetColore;
 			} else if(contenuto.equals(Risorsa.ANIMALE.toString())) {
-				return "\u001B[34m"+"  ANIMALE "+"\u001B[0m";
+				return Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+Risorsa.codiceResetColore;
 			} else if(contenuto.equals(Risorsa.INSETTI.toString())) {
-				return "\u001B[35m"+"  INSETTI "+"\u001B[0m";
+				return Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+Risorsa.codiceResetColore;
 			} else if(contenuto.equals(Oggetto.PIUMA.toString())) {
 				return "   PIUMA  ";
 			} else if(contenuto.equals(Oggetto.INCHIOSTRO.toString())) {

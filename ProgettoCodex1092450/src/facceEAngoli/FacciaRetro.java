@@ -87,59 +87,38 @@ public class FacciaRetro extends FacciaFronte {
 	
 	//sovrascrivo solo i metodi per stampare la parte "media" della faccia, in quanto per la parte "alta" e "bassa" si possono usare gli stessi metodi della faccia frontale
 	@Override
-	public void printRiga6(String coloreContorno, String resetColore) {
+	public void printRiga6(String coloreContorno) {
 		//stampo la carta: riga6
-		if(!(risorsaRetroCentrale == null))
-		{
-			if(risorsaRetroCentrale.toString().equals(Risorsa.FUNGHI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[31m"+"  FUNGHI  "+"\u001B[0m"+coloreContorno+"             |"+resetColore); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
-			} else if(risorsaRetroCentrale.toString().equals(Risorsa.VEGETALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[32m"+" VEGETALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentrale.toString().equals(Risorsa.ANIMALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[34m"+"  ANIMALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentrale.toString().equals(Risorsa.INSETTI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[35m"+"  INSETTI "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			}
-		} else {
-			System.out.println(coloreContorno+"|                                    |"+resetColore);
-		}
+		printRigaCartaDaRisorsa(risorsaRetroCentrale, coloreContorno);
 	}
 	
 	@Override
-	public void printRiga7(String coloreContorno, String resetColore) {
+	public void printRiga7(String coloreContorno) {
 		//stampo la carta: riga7
-		if(!(risorsaRetroCentraleAggiuntiva1 == null))
-		{
-			if(risorsaRetroCentraleAggiuntiva1.toString().equals(Risorsa.FUNGHI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[31m"+"  FUNGHI  "+"\u001B[0m"+coloreContorno+"             |"+resetColore); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
-			} else if(risorsaRetroCentraleAggiuntiva1.toString().equals(Risorsa.VEGETALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[32m"+" VEGETALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentraleAggiuntiva1.toString().equals(Risorsa.ANIMALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[34m"+"  ANIMALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentraleAggiuntiva1.toString().equals(Risorsa.INSETTI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[35m"+"  INSETTI "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			}
-		} else {
-			System.out.println(coloreContorno+"|                                    |"+resetColore);
-		}
+		printRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva1, coloreContorno);
 	}
 	
 	@Override
-	public void printRiga8(String coloreContorno, String resetColore) {
+	public void printRiga8(String coloreContorno) {
 		//stampo la carta: riga8
-		if(!(risorsaRetroCentraleAggiuntiva2 == null))
+		printRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva2, coloreContorno);
+	}
+	
+	
+	public void printRigaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
+		if(!(risorsa == null))
 		{
-			if(risorsaRetroCentraleAggiuntiva2.toString().equals(Risorsa.FUNGHI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[31m"+"  FUNGHI  "+"\u001B[0m"+coloreContorno+"             |"+resetColore); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
-			} else if(risorsaRetroCentraleAggiuntiva2.toString().equals(Risorsa.VEGETALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[32m"+" VEGETALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentraleAggiuntiva2.toString().equals(Risorsa.ANIMALE.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[34m"+"  ANIMALE "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
-			} else if(risorsaRetroCentraleAggiuntiva2.toString().equals(Risorsa.INSETTI.toString())) {
-				System.out.println(coloreContorno+"|             "+"\u001B[35m"+"  INSETTI "+"\u001B[0m"+coloreContorno+"             |"+resetColore);
+			if(risorsa.toString().equals(Risorsa.FUNGHI.toString())) {
+				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
+			} else if(risorsa.toString().equals(Risorsa.VEGETALE.toString())) {
+				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
+			} else if(risorsa.toString().equals(Risorsa.ANIMALE.toString())) {
+				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
+			} else if(risorsa.toString().equals(Risorsa.INSETTI.toString())) {
+				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
 			}
 		} else {
-			System.out.println(coloreContorno+"|                                    |"+resetColore);
+			System.out.println(coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		}
 	}
 }

@@ -20,6 +20,14 @@ public class CartaOro extends CartaGiocabile {
 	private int quantitàRisorsaNecessaria2;
 	
 	
+	public ColoreCarta getColore() {
+		return colore;
+	}
+	public void setColore(ColoreCarta colore) {
+		this.colore = colore;
+	}
+	
+	
 	//Overloading del costruttore
 	/**
 	 * Costruttore delle carte oro con 2 tipi diversi di risorse necessarie per la loro giocata (sulla faccia frontale)
@@ -85,7 +93,7 @@ public class CartaOro extends CartaGiocabile {
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
 		
-		System.out.print("\u001B[33m"+" ➤ Punti dati dalla carta: "+"\u001B[0m"+punti);
+		System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
 		if(condizionePunti.equals("nessunaCondizione"))
 		{
 			System.out.println(); //va semplicemente a capo
@@ -98,7 +106,7 @@ public class CartaOro extends CartaGiocabile {
 			}
 		}
 		
-		System.out.print("\u001B[33m"+" ➤ Condizioni di gioco: "+"\u001B[0m"+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
+		System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Condizioni di gioco: "+ColoreCarta.CODICE_RESET_COLORE+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
 		if(risorsaNecessaria2==null)
 		{
 			System.out.println(); //va semplicemente a capo

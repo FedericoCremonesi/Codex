@@ -56,6 +56,11 @@ public class Partita {
 		consegnaCarteRisorsaEOro();
 		scopriObiettiviComuni();
 		assegnaObiettivoSegreto();
+		if(!ultimoRound) {
+			giocaRound();
+		} else {
+			//controlla punti carte obiettivo ecc (TODO)
+		}
 	}
 	
 	
@@ -70,7 +75,7 @@ public class Partita {
 				{
 					System.out.println("Numero di giocatori inserito non valido, inserire un numero di giocatori tra 2 e 4");
 				}
-			} catch(InputMismatchException e) { //gestisco il caso con una eccezione non controllata
+			} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
 				System.out.println("Inserimento non valido, inserire un numero");
 			}
 		}while (!(numeroGiocatori >= 2 && numeroGiocatori <= 4));
@@ -269,5 +274,19 @@ public class Partita {
 				}
 			} while (!( (sceltaObiettivo.equals("A") || sceltaObiettivo.equals("B")) ));
 		}
+	}
+	
+	
+	public void giocaRound() {
+		numeroRoundGiocati++;
+		for(Giocatore g : gruppoGiocatori)
+		{
+			giocaTurno(g);
+		}
+	}
+	
+	
+	public void giocaTurno(Giocatore g) {
+		g.getCampo().stampaMatriceCampo();
 	}
 }

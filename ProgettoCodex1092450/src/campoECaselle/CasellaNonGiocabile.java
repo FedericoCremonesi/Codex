@@ -6,4 +6,8 @@ public class CasellaNonGiocabile extends Casella {
 		super(x, y);
 	}
 
+	
+	public void stampaCasellaComeQuadratino() {
+		System.out.println("□");
+	}
 }

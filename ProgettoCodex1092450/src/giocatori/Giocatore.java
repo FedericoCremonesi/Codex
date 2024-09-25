@@ -110,15 +110,7 @@ public class Giocatore {
 	
 	
 	public void assegnaColorePedina(Pedina pedinaScelta) {
-		colorePedina = pedinaScelta;
-		if(pedinaScelta.toString().equals(Pedina.ROSSA.toString())) { //utilizzo i codici dei colori per "colorare" i nickname dei giocatori in base al colore scelto
-			nickname = "\u001B[31m"+nickname+"\u001B[0m";
-		} else if(pedinaScelta.toString().equals(Pedina.GIALLA.toString())) {
-			nickname = "\u001B[33m"+nickname+"\u001B[0m";
-		} else if(pedinaScelta.toString().equals(Pedina.VERDE.toString())) {
-			nickname = "\u001B[32m"+nickname+"\u001B[0m";
-		} else if(pedinaScelta.toString().equals(Pedina.BLU.toString())) {
-			nickname = "\u001B[34m"+nickname+"\u001B[0m";
-		}
+		String codiceColorePedina = Pedina.ottieniStringCodiceColoreDaStringa(pedinaScelta.toString());
+		nickname = codiceColorePedina+nickname+Pedina.codiceResetColore;
 	}
 }

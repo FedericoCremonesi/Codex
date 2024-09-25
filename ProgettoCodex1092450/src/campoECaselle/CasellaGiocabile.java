@@ -1,6 +1,9 @@
 package campoECaselle;
 
 import carte.Carta;
+import carte.CartaOro;
+import carte.CartaRisorsa;
+import carte.ColoreCarta;
 
 public class CasellaGiocabile extends Casella {
 
@@ -32,4 +35,17 @@ public class CasellaGiocabile extends Casella {
 		}
 	}
 
+	
+	public void stampaCasellaComeQuadratino() {
+		String coloreCarta = null;
+		if(cartaContenuta instanceof CartaRisorsa) {
+			coloreCarta = ((CartaRisorsa) cartaContenuta).getColore().toString();
+		} else if(cartaContenuta instanceof CartaOro) {
+			coloreCarta = ((CartaOro) cartaContenuta).getColore().toString();
+		}
+		
+		String codiceColoreDaColoreCarta = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
+		
+		System.out.println(codiceColoreDaColoreCarta+"■"+ColoreCarta.CODICE_RESET_COLORE);
+	}
 }

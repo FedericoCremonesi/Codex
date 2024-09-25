@@ -150,7 +150,7 @@ public class Tavolo {
 				
 			}
 			
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) { //gestisco il caso con una eccezione controllata
 			System.out.println("Non è stato possibile trovare il file con le carte");
 			System.exit(0);
 		}

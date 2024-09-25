@@ -18,4 +18,9 @@ public class Mano {
 	public void aggiungiCartaAMano(CartaGiocabile cartaDaAggiungere) {
 		carteInMano.add(cartaDaAggiungere);
 	}
+	
+	
+	public void stampaMano() {
+		
+	}
 }

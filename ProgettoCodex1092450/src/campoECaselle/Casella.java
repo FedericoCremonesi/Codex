@@ -9,4 +9,9 @@ public abstract class Casella {
 		this.x = x;
 		this.y = y;
 	}
+	
+	
+	public void stampaCasellaComeQuadratino() {
+		
+	}
 }

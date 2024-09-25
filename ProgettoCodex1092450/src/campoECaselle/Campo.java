@@ -34,5 +34,10 @@ public class Campo {
 			}
 		}
 	}
+	
+	
+	public void stampaMatriceCampo() {
+		
+	}
 
 }
