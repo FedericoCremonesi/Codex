@@ -11,7 +11,7 @@ public enum Pedina {
 			//Codice per reset colore: "\u001B[0m"
 	
 	
-	public static final String codiceResetColore = "\u001B[0m";
+	public static final String CODICE_RESET_COLORE = "\u001B[0m";
 	
 	
 	public static String ottieniStringCodiceColoreDaStringa(String stringaConColore)

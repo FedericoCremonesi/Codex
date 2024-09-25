@@ -13,5 +13,5 @@ public enum Risorsa {
 	public static final String CODICE_COLORE_RISORSA_VEGETALE = "\u001B[32m";
 	public static final String CODICE_COLORE_RISORSA_ANIMALE = "\u001B[34m";
 	public static final String CODICE_COLORE_RISORSA_INSETTI = "\u001B[35m";
-	public static final String codiceResetColore = "\u001B[0m";
+	public static final String CODICE_RESET_COLORE = "\u001B[0m";
 }

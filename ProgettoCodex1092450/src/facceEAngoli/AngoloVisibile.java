@@ -22,13 +22,13 @@ public class AngoloVisibile extends Angolo {
 			return " (coperto)";
 		} else {
 			if(contenuto.equals(Risorsa.FUNGHI.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.codiceResetColore; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
+				return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.CODICE_RESET_COLORE; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
 			} else if(contenuto.equals(Risorsa.VEGETALE.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+Risorsa.codiceResetColore;
+				return Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+Risorsa.CODICE_RESET_COLORE;
 			} else if(contenuto.equals(Risorsa.ANIMALE.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+Risorsa.codiceResetColore;
+				return Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+Risorsa.CODICE_RESET_COLORE;
 			} else if(contenuto.equals(Risorsa.INSETTI.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+Risorsa.codiceResetColore;
+				return Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+Risorsa.CODICE_RESET_COLORE;
 			} else if(contenuto.equals(Oggetto.PIUMA.toString())) {
 				return "   PIUMA  ";
 			} else if(contenuto.equals(Oggetto.INCHIOSTRO.toString())) {

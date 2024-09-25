@@ -111,6 +111,6 @@ public class Giocatore {
 	
 	public void assegnaColorePedina(Pedina pedinaScelta) {
 		String codiceColorePedina = Pedina.ottieniStringCodiceColoreDaStringa(pedinaScelta.toString());
-		nickname = codiceColorePedina+nickname+Pedina.codiceResetColore;
+		nickname = codiceColorePedina+nickname+Pedina.CODICE_RESET_COLORE;
 	}
 }
