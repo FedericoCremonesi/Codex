@@ -54,6 +54,8 @@ public class Partita {
 		faiScegliereColore();
 		consegnaEGiocoCarteIniziali();
 		consegnaCarteRisorsaEOro();
+		scopriObiettiviComuni();
+		assegnaObiettivoSegreto();
 	}
 	
 	
@@ -213,7 +215,7 @@ public class Partita {
 	public void consegnaCarteRisorsaEOro() {
 		for(Giocatore g : gruppoGiocatori)
 		{
-			//Carte risorsa (2):
+			//Carte risorsa:
 			System.out.println("\nEstraendo due carte risorsa per: "+g.getNickname()+"...");
 			for(int i=0; i<2; i++) {
 				CartaRisorsa cartaRisorsaEstratta = (CartaRisorsa) tavoloDiGioco.getMazzoCarteRisorsa().estraiPrimaCartaDaMazzo();
@@ -221,13 +223,51 @@ public class Partita {
 				cartaRisorsaEstratta.aggiungiAMano(g.getMano());
 			}
 			
-			
-			//Carta oro (1):
+			//Carta oro:
 			System.out.println("\nEstraendo una carta oro per: "+g.getNickname()+"...");
 			CartaOro cartaOroEstratta = (CartaOro) tavoloDiGioco.getMazzoCarteOro().estraiPrimaCartaDaMazzo();
 			
 			cartaOroEstratta.aggiungiAMano(g.getMano());
 			
+		}
+	}
+	
+	
+	public void scopriObiettiviComuni() {
+		System.out.println("\nEstraendo i due obiettivi comuni...");
+		for(int i=0; i<2; i++) {
+			tavoloDiGioco.aggiungiObiettivoComune( i, (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo()) );
+		}
+	}
+
+	
+	public void assegnaObiettivoSegreto() {
+		for(Giocatore g : gruppoGiocatori)
+		{
+			System.out.println("\nEstraendo due carte obiettivo per: "+g.getNickname()+"...");
+			System.out.print("A:");
+			CartaObiettivo obiettivoEstratto1 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo());
+			System.out.print("B:");
+			CartaObiettivo obiettivoEstratto2 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo());
+			
+			String sceltaObiettivo;
+			do {
+				System.out.println(g.getNickname()+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?");
+				Scanner sc = new Scanner(System.in);
+				sceltaObiettivo = sc.nextLine().toUpperCase();
+				if(sceltaObiettivo.equals("A") || sceltaObiettivo.equals("B")) {
+					switch (sceltaObiettivo) {
+					case "A":
+						g.setObiettivoSegreto(obiettivoEstratto1);
+						tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto2);
+					case "B":
+						g.setObiettivoSegreto(obiettivoEstratto2);
+						tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto1);
+					}
+				} else {
+					System.out.println("Inserimento non valido, scrivere A oppure B");
+				}
+			} while (!( (sceltaObiettivo.equals("A") || sceltaObiettivo.equals("B")) ));
 		}
 	}
 }

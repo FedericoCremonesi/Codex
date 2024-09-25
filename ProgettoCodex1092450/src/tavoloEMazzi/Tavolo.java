@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import campoECaselle.Casella;
 import carte.CartaIniziale;
 import carte.CartaObiettivo;
 import carte.CartaOro;
@@ -66,6 +67,8 @@ public class Tavolo {
 		this.mazzoCarteOro = new Mazzo<CartaOro>(new ArrayList<CartaOro>()); //posso mettere "<CartaOro>" dopo "new Mazzo" *
 		this.mazzoCarteIniziali = new Mazzo(new ArrayList<CartaIniziale>()); //* ma posso anche evitare di mettere "<CartaIniziale>" dopo "new Mazzo", non è necessario
 		this.mazzoCarteObiettivo = new Mazzo(new ArrayList<CartaObiettivo>());
+		
+		obiettiviComuni = new CartaObiettivo[2]; //creo il vettore degli obiettivi comuni vuoto
 	}
 	
 	
@@ -174,5 +177,11 @@ public class Tavolo {
 		mazzoCarteOro.mescolaMazzo();
 		mazzoCarteIniziali.mescolaMazzo();
 		mazzoCarteObiettivo.mescolaMazzo();
+	}
+	
+	
+	public void aggiungiObiettivoComune(int indice, CartaObiettivo carta) {
+		obiettiviComuni[indice] = carta;
+		System.out.println("Carta aggiunta agli obiettivi comuni");
 	}
 }

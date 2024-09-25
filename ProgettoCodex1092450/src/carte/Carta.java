@@ -6,6 +6,11 @@ public abstract class Carta {
 	private final int id;
 	
 	
+	public int getId() {
+		return id;
+	}
+
+
 	public Carta(int id) {
 		this.id = id;
 	}

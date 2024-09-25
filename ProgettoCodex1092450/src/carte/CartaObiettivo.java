@@ -15,6 +15,6 @@ public class CartaObiettivo extends Carta{
 	
 	
 	public void print() {
-		System.out.println("Questa è una carta obiettivo");
+		System.out.println("Questa è una carta obiettivo, id: "+super.getId());
 	}
 }

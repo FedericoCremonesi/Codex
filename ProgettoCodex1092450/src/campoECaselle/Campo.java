@@ -18,7 +18,7 @@ public class Campo {
 	
 	
 	public Campo() {
-		caselleDelCampo = new Casella[DIM][DIM];
+		caselleDelCampo = new Casella[DIM][DIM]; //creo la matrice (doppio vettore) vuota
 		
 		for(int i=0; i<DIM; i++) //i indica la riga
 								 //gli indici vanno da 0 a 80 (verranno visualizzate coordinate da -40 a 40)
