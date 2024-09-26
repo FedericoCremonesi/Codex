@@ -59,4 +59,5 @@ public class CasellaGiocabile extends Casella {
 			return;
 		}
 	}
+	
 }

@@ -1,5 +1,8 @@
 package campoECaselle;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import sviluppoGioco.Partita;
 
 public class Campo {
@@ -38,8 +41,8 @@ public class Campo {
 	}
 	
 	
-	public void stampaMatriceCampo() {
-		System.out.println("Campo di gioco al momento:");
+	public void stampaMatriceCampoAQuadratini() {
+		System.out.println("\nCampo di gioco:");
 		
 		int coordinataDaStampare;
 		
@@ -110,6 +113,11 @@ public class Campo {
 			//non aggiungo alcuno spazio se stampando il numero occupo già 3 spazi (cioè se il numero è tra -40 e -10)
 			System.out.print(coordinataDaStampare);
 		}
+	}
+	
+	
+	public void stampa3x3AttornoACartaInCampo() {
+		System.out.println("DA FARE"); //TODO
 	}
 
 }

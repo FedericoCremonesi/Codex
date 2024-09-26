@@ -129,7 +129,7 @@ public class Partita {
 	public static void mischiaOrdineGiocatori() {
 		System.out.println("\nGenerando ordine di gioco casuale...");
 		Collections.shuffle(gruppoGiocatori);
-		System.out.println("L'ordine di gioco del giocatori è :");
+		System.out.println("L'ordine di gioco dei giocatori è:");
 		
 		int indicePerOrdineGioco=1;
 		for(Giocatore g : gruppoGiocatori)
@@ -268,16 +268,17 @@ public class Partita {
 				System.out.println(g.getNickname()+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?");
 				Scanner sc = new Scanner(System.in);
 				sceltaObiettivo = sc.nextLine().toUpperCase();
-				if(sceltaObiettivo.equals("A") || sceltaObiettivo.equals("B")) {
-					switch (sceltaObiettivo) {
-					case "A":
-						g.setObiettivoSegreto(obiettivoEstratto1);
-						tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto2);
-					case "B":
-						g.setObiettivoSegreto(obiettivoEstratto2);
-						tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto1);
-					}
-				} else {
+				
+				switch (sceltaObiettivo) {
+				case "A":
+					g.setObiettivoSegreto(obiettivoEstratto1);
+					tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto2);
+					break;
+				case "B":
+					g.setObiettivoSegreto(obiettivoEstratto2);
+					tavoloDiGioco.getMazzoCarteObiettivo().aggiungiCartaAMazzo(obiettivoEstratto1);
+					break;
+				default:
 					System.out.println("Inserimento non valido, scrivere A oppure B");
 				}
 			} while (!( (sceltaObiettivo.equals("A") || sceltaObiettivo.equals("B")) ));
@@ -297,6 +298,82 @@ public class Partita {
 	
 	public void giocaTurno(Giocatore g) {
 		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
-		g.getCampo().stampaMatriceCampo();
+		g.getCampo().stampaMatriceCampoAQuadratini();
+		g.getMano().stampaCarteInMano();
+		
+		String sceltaOpzione;
+		do {
+			System.out.println("\n"+g.getNickname()+" cosa vuoi fare?");
+			System.out.println("\tA: Visualizzare le carte attorno ad una precisa carta sul campo");
+			System.out.println("\tB: Visualizzare gli obiettivi comuni");
+			System.out.println("\tC: Visualizzare il tuo obiettivo segreto");
+			System.out.println("\tD: Proseguire con il turno");
+
+			Scanner sc = new Scanner(System.in);
+			sceltaOpzione = sc.nextLine().toUpperCase();
+			
+			switch (sceltaOpzione) {
+			case "A":
+				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
+				int[] coordinateCasella = chiediCoordinateCasellaGiocabile();
+				g.getCampo().stampa3x3AttornoACartaInCampo();
+				break;
+			case "B":
+				//...
+				System.out.println("SCELTAb");
+				break;
+			case "C":
+				//...
+				System.out.println("SCELTAc");
+				break;
+			case "D":
+				System.out.println();
+				break;
+			default:
+				System.out.println("Inserimento non valido, scrivere A, B, C oppure D");
+			}
+				
+		} while (!( sceltaOpzione.equals("D") ));
+		
+		//...
+	}
+	
+	
+	public int[] chiediCoordinateCasellaGiocabile() {
+		
+		Scanner sc = new Scanner(System.in);
+		boolean ok = true;
+		
+		/* CONTINUA DA QUI (TODO)
+		
+		do {
+			try {
+				System.out.print("Coordinata righe: ");
+				int coordinataX = sc.nextInt();
+				System.out.println();
+				
+				System.out.print("Coordinata colonne: ");
+				int coordinataY = sc.nextInt();
+				System.out.println();
+			} catch (InputMismatchException e) {
+				System.out.println("Inserimento non valido, inserire due numeri");
+				ok = false;
+			}
+			
+			try {
+				//...
+			} catch (ArrayIndexOutOfBoundsException e) {
+				//...
+				ok = false;
+			}
+			
+			if() {
+				ok = false;
+			}
+		} while (!ok);
+		
+		*/
+		
+		return null;
 	}
 }

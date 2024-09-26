@@ -20,7 +20,10 @@ public class Mano {
 	}
 	
 	
-	public void stampaMano() {
-		
+	public void stampaCarteInMano() {
+		System.out.println("\nCarte in mano:");
+		for(CartaGiocabile c : carteInMano) {
+			c.print();
+		}
 	}
 }
