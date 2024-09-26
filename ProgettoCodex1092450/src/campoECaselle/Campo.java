@@ -43,7 +43,7 @@ public class Campo {
 		
 		int coordinataDaStampare;
 		
-		System.out.print("    ");
+		System.out.print("    "); //stampo degli spazi per allineare al meglio gli indici delle colonne
 		
 		for(int j=0; j<DIM; j++) //uso j perchè per convenzione ho indicato con questa lettera le colonne, potevo usare una qualsiasi altra variabile
 		{
