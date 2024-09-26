@@ -26,8 +26,13 @@ public class Partita {
 	private static List<Giocatore> gruppoGiocatori;
 	private static Set<Pedina> coloriPedinaDisponibili;
 	private Tavolo tavoloDiGioco;
-	private int numeroRoundGiocati;
+	private static int numeroRoundGiocati;
 	private Boolean ultimoRound;
+	
+	
+	public static int getNumeroRoundGiocati() {
+		return numeroRoundGiocati;
+	}
 	
 	
 	public Partita() {
@@ -125,10 +130,13 @@ public class Partita {
 		System.out.println("\nGenerando ordine di gioco casuale...");
 		Collections.shuffle(gruppoGiocatori);
 		System.out.println("L'ordine di gioco del giocatori è :");
+		
+		int indicePerOrdineGioco=1;
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.print("- ");
+			System.out.print(indicePerOrdineGioco+"- ");
 			g.stampaNickname();
+			indicePerOrdineGioco++;
 		}
 	}
 	
@@ -278,6 +286,7 @@ public class Partita {
 	
 	
 	public void giocaRound() {
+		System.out.println("\nInizia un nuovo round!");
 		numeroRoundGiocati++;
 		for(Giocatore g : gruppoGiocatori)
 		{
@@ -287,6 +296,7 @@ public class Partita {
 	
 	
 	public void giocaTurno(Giocatore g) {
+		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
 		g.getCampo().stampaMatriceCampo();
 	}
 }

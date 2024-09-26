@@ -1,6 +1,8 @@
 package campoECaselle;
 
 import carte.Carta;
+import carte.CartaGiocabile;
+import carte.CartaIniziale;
 import carte.CartaOro;
 import carte.CartaRisorsa;
 import carte.ColoreCarta;
@@ -8,14 +10,14 @@ import carte.ColoreCarta;
 public class CasellaGiocabile extends Casella {
 
 	
-	private Carta cartaContenuta;
+	private CartaGiocabile cartaContenuta;
 	
 	
-	public Carta getCartaContenuta() {
+	public CartaGiocabile getCartaContenuta() {
 		return cartaContenuta;
 	}
 
-	public void setCartaContenuta(Carta cartaContenuta) {
+	public void setCartaContenuta(CartaGiocabile cartaContenuta) {
 		this.cartaContenuta = cartaContenuta;
 	}
 	
@@ -27,7 +29,7 @@ public class CasellaGiocabile extends Casella {
 	
 	public boolean isEmpty()
 	{
-		if(cartaContenuta.equals(null))
+		if(cartaContenuta == null)
 		{
 			return true;
 		} else {
@@ -37,15 +39,24 @@ public class CasellaGiocabile extends Casella {
 
 	
 	public void stampaCasellaComeQuadratino() {
-		String coloreCarta = null;
-		if(cartaContenuta instanceof CartaRisorsa) {
-			coloreCarta = ((CartaRisorsa) cartaContenuta).getColore().toString();
-		} else if(cartaContenuta instanceof CartaOro) {
-			coloreCarta = ((CartaOro) cartaContenuta).getColore().toString();
+		if(cartaContenuta instanceof CartaIniziale) {
+			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_RISORSA+"■■■"+ColoreCarta.CODICE_RESET_COLORE);
+					//uso impropriamente la costante con il codice colore nero per le carte risorsa per colorare la carta iniziale quando stampata nella matrice
+			return;
+		} else {
+			String coloreCarta = null;
+			if(cartaContenuta instanceof CartaRisorsa) {
+				coloreCarta = ((CartaRisorsa) cartaContenuta).getColore().toString();
+			} else if(cartaContenuta instanceof CartaOro) {
+				coloreCarta = ((CartaOro) cartaContenuta).getColore().toString();
+			} else if(isEmpty()){
+				coloreCarta = "";
+			}
+			
+			String codiceColoreDaColoreCarta = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
+			
+			System.out.print(codiceColoreDaColoreCarta+"■■■"+ColoreCarta.CODICE_RESET_COLORE);
+			return;
 		}
-		
-		String codiceColoreDaColoreCarta = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
-		
-		System.out.println(codiceColoreDaColoreCarta+"■"+ColoreCarta.CODICE_RESET_COLORE);
 	}
 }
