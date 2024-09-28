@@ -131,7 +131,7 @@ public class Campo {
 				{
 					if(caselleDelCampo[i][j] instanceof CasellaGiocabile) {
 						if(((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty()) { //posso eseguire un casting sulla casella considerata perchè nella condizione dell'if precedente ho appena controllato che la casella fosse di tipo "Giocabile"
-							System.out.println("[                                     ]"); //TODO, da modificare
+							System.out.println("[                                     ]"); //TODO, ancora da modificare
 						} else {
 							((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().print(k.toString()); //analogamente a prima, posso eseguire un casting per i medesimi motivi
 							//per poter convertire il k (intero) in una stringa (cioè ciò che il metodo print riceve in ingresso) devo dichiarare k come Integer ("classe wrapper" di int) e usare il metodo toString()
