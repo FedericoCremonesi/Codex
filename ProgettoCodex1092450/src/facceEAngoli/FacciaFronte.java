@@ -9,6 +9,9 @@ public class FacciaFronte {
 	private Angolo angoloBassoSx;
 	private Angolo angoloBassoDx;
 	
+	protected String[] insiemeRigheFaccia;
+	public final int NUMERO_RIGHE_FACCIA=13; //in una faccia ci sono 13 righe in totali
+	
 	
 	public Angolo getAngoloAltoSx() {
 		return angoloAltoSx;
@@ -38,6 +41,13 @@ public class FacciaFronte {
 		this.angoloBassoDx = angoloBassoDx;
 	}
 	
+	public String[] getInsiemeRigheFaccia() {
+		return insiemeRigheFaccia;
+	}
+	public void setInsiemeRigheFaccia(String[] righeFaccia) {
+		this.insiemeRigheFaccia = righeFaccia;
+	}
+	
 	
 	/**
 	 * Costruttore della faccia frontale delle carte: risorsa, oro e iniziali
@@ -47,6 +57,7 @@ public class FacciaFronte {
 		this.angoloAltoDx = angoloAltoDx;
 		this.angoloBassoSx = angoloBassoSx;
 		this.angoloBassoDx = angoloBassoDx;
+		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
 	}
 	
 	
@@ -56,7 +67,7 @@ public class FacciaFronte {
 	}
 	
 	
-	public void printFaccia(String coloreCarta, String tipologiaCarta) { 
+	public void printFaccia(String coloreCarta, String tipologiaCarta, String numeroRigaDaStampare) { 
 		String coloreContorno=null;
 		coloreContorno = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
 		
@@ -72,157 +83,136 @@ public class FacciaFronte {
 			coloreLatiAngoli = "";
 		}
 		
-		//La stampa della carta è "spezzetata" per poter stampare comodamente le carte sul campo
-		printRiga1(coloreContorno);
-		printRiga2(coloreContorno, coloreLatiAngoli);
-		printRiga3(coloreContorno, coloreLatiAngoli);
-		printRiga4(coloreContorno, coloreLatiAngoli);
-		printRiga5(coloreContorno, coloreLatiAngoli);
-		printRiga6(coloreContorno);
-		printRiga7(coloreContorno);
-		printRiga8(coloreContorno);
-		printRiga9(coloreContorno, coloreLatiAngoli);
-		printRiga10(coloreContorno, coloreLatiAngoli);
-		printRiga11(coloreContorno, coloreLatiAngoli);
-		printRiga12(coloreContorno, coloreLatiAngoli);
-		printRiga13(coloreContorno);
-	}
-	
-	
-	public void printRiga1(String coloreContorno) {
-		//stampo la carta: riga1
-		System.out.println(coloreContorno+"▛------------------------------------▜"+ColoreCarta.CODICE_RESET_COLORE);
-	}
-	
-	public void printRiga2(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga2
-		if(angoloAltoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+		insiemeRigheFaccia = costruisciArrayRigheFaccia(coloreContorno, coloreLatiAngoli);
+				
+		if(numeroRigaDaStampare.equals("all")) //se dico di stampare la riga "all" vuol dire che bisogna stampare tutte le righe della carta (cioè tutta la carta)
+		{
+			for(int k=0; k<NUMERO_RIGHE_FACCIA; k++) {
+				System.out.println(insiemeRigheFaccia[k]);
+			}
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			int k = (Integer.parseInt(numeroRigaDaStampare)); //per comodità converto la stringa in un intero e lo metto nella variabile k
+			System.out.println(insiemeRigheFaccia[k]);
+		}
+	}
+	
+	
+	//La stampa della carta è "spezzetata" per poter stampare comodamente le carte affiancate sul campo quando sarà necessario
+	public String[] costruisciArrayRigheFaccia(String coloreContorno, String coloreLatiAngoli) {
+		
+		String[] righeFaccia = new String[NUMERO_RIGHE_FACCIA];
+		
+		//Costruisco la riga1 della faccia
+		righeFaccia[0] = (coloreContorno+"▛------------------------------------▜"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		//Costruisco la riga2 della faccia
+		if(angoloAltoSx instanceof AngoloVisibile) {
+			righeFaccia[1] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+		} else {
+			righeFaccia[1] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[1] = (righeFaccia[1] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[1] = (righeFaccia[1] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga3(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga3
+				
+		//Costruisco la riga3 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[2] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[2] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[2] = (righeFaccia[2] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[2] = (righeFaccia[2] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga4(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga4
+		
+		//Costruisco la riga4 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[3] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[3] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[3] = (righeFaccia[3] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[3] = (righeFaccia[3] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga5(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga5
+		
+		//Costruisco la riga5 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|"+coloreLatiAngoli+"------------▟"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------▟"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[4] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"▙------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[4] = (righeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"▙------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[4] = (righeFaccia[4] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga6(String coloreContorno) {
-		//stampo la carta: riga6
-		System.out.println(coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
-	}
-	
-	public void printRiga7(String coloreContorno) {
-		//stampo la carta: riga7
-		System.out.println(coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
-	}
-	
-	public void printRiga8(String coloreContorno) {
-		//stampo la carta: riga8
-		System.out.println(coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
-	}
-	
-	public void printRiga9(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga9
+		
+		//Costruisco la riga6 della faccia
+		righeFaccia[5] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		//Costruisco la riga7 della faccia
+		righeFaccia[6] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		//Costruisco la riga8 della faccia
+		righeFaccia[7] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		//Costruisco la riga9 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|"+coloreLatiAngoli+"------------▜"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------▜"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[8] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"▛------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[8] = (righeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"▛------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[8] = (righeFaccia[8] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga10(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga10
+		
+		//Costruisco la riga10 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[9] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[9] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[9] = (righeFaccia[9] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[9] = (righeFaccia[9] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga11(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga11
+		
+		//Costruisco la riga11 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[10] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[10] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[10] = (righeFaccia[10] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[10] = (righeFaccia[10] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga12(String coloreContorno, String coloreLatiAngoli) {
-		//stampo la carta: riga12
+		
+		//Costruisco la riga12 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			System.out.print(coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[11] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			System.out.print(coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[11] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			System.out.println(coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[11] = (righeFaccia[11] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			System.out.println(coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE);
+			righeFaccia[11] = (righeFaccia[11] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
-	}
-	
-	public void printRiga13(String coloreContorno) {
-		//stampo la carta: riga13
-		System.out.println(coloreContorno+"▙------------------------------------▟"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		//Costruisco la riga13 della faccia
+		righeFaccia[12] = (coloreContorno+"▙------------------------------------▟"+ColoreCarta.CODICE_RESET_COLORE);
+		
+		return righeFaccia;
 	}
 }

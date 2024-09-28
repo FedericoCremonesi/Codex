@@ -12,6 +12,8 @@ public class CasellaGiocabile extends Casella {
 	
 	private CartaGiocabile cartaContenuta;
 	
+	private String[] insiemeRigheSpazioVuoto = {"ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao","ciao"};
+	
 	
 	public CartaGiocabile getCartaContenuta() {
 		return cartaContenuta;
@@ -36,7 +38,7 @@ public class CasellaGiocabile extends Casella {
 			return false;
 		}
 	}
-
+	
 	
 	public void stampaCasellaComeQuadratino() {
 		if(cartaContenuta instanceof CartaIniziale) {

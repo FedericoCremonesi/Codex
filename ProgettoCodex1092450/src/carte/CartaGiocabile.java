@@ -58,6 +58,9 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
+	//public abstract static void print(String numeroRigaDaStampare);
+	
+	
 	public void posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
 		casellaInCuiPosizionareCarta.setCartaContenuta(this);
 		this.setCasellaDiGioco(casellaInCuiPosizionareCarta);

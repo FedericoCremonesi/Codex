@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import campoECaselle.Campo;
 import campoECaselle.Casella;
 import campoECaselle.CasellaGiocabile;
 import carte.CartaIniziale;
@@ -215,7 +216,7 @@ public class Partita {
 				Scanner sc = new Scanner(System.in);
 				sceltaFacciaDiGioco = sc.nextLine().toUpperCase();
 				if(sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) {
-					cartaInizialeEstratta.setFacciaDiGioco(sceltaFacciaDiGioco);
+					cartaInizialeEstratta.setFacciaDiGioco(sceltaFacciaDiGioco); //setto la faccia di gioco della carta iniziale (giocabile) a "FRONTE" o "RETRO"
 					cartaInizialeEstratta.posizionaSuCampo((CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
 				} else {
 					System.out.println("Inserimento non valido, scrivere Fronte oppure Retro");
@@ -314,9 +315,8 @@ public class Partita {
 			
 			switch (sceltaOpzione) {
 			case "A":
-				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
-				int[] coordinateCasella = chiediCoordinateCasellaGiocabile();
-				g.getCampo().stampa3x3AttornoACartaInCampo();
+				int[] coordinateCasella = chiediCoordinateCasellaGiocabile(g);
+				g.getCampo().stampa3x3AttornoACartaInCampo(coordinateCasella);
 				break;
 			case "B":
 				//...
@@ -339,41 +339,36 @@ public class Partita {
 	}
 	
 	
-	public int[] chiediCoordinateCasellaGiocabile() {
-		
-		Scanner sc = new Scanner(System.in);
-		boolean ok = true;
-		
-		/* CONTINUA DA QUI (TODO)
+	public int[] chiediCoordinateCasellaGiocabile(Giocatore g) {
+		int[] coordinate = {0,0}; //inseriti dei qualsiasi valori di partenza, verranno sovrascritti da ciò che inserirà l'utente
+		boolean ok;
 		
 		do {
+			
+			ok = false;
 			try {
-				System.out.print("Coordinata righe: ");
-				int coordinataX = sc.nextInt();
-				System.out.println();
+				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
 				
+				Scanner sc = new Scanner(System.in); //va qui, altrimenti in caso di errore il ciclo viene eseguito all'infinito
+				
+				System.out.print("Coordinata righe: ");
+				coordinate[0] = sc.nextInt()+40; //L'utente inserirà una coordinata tra -40 e +40 perchè sono quelle stampate ai lati della matrice, in realtà gli indici degli array vanno da 0 a 80, dunque sommo 40
 				System.out.print("Coordinata colonne: ");
-				int coordinataY = sc.nextInt();
-				System.out.println();
-			} catch (InputMismatchException e) {
-				System.out.println("Inserimento non valido, inserire due numeri");
-				ok = false;
+				coordinate[1] = sc.nextInt()+40;
+				
+				if(g.getCampo().getCasellaDaCoordinate(coordinate[0],coordinate[1]) instanceof CasellaGiocabile) {
+					ok = true;
+				} else {
+					System.out.println("\nLe coordinate inserite risultano indicare una casella non giocabile");
+				}
+			} catch (InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
+				System.out.println("\nInserimento non valido, inserire due numeri");
+			} catch (ArrayIndexOutOfBoundsException e) { //gestisco il caso con una eccezione NON controllata
+				System.out.println("\nInserimento non valido, almeno uno degli indici inseriti risulta eccedere la dimensione dell'array");
 			}
 			
-			try {
-				//...
-			} catch (ArrayIndexOutOfBoundsException e) {
-				//...
-				ok = false;
-			}
-			
-			if() {
-				ok = false;
-			}
 		} while (!ok);
 		
-		*/
-		
-		return null;
+		return coordinate;
 	}
 }

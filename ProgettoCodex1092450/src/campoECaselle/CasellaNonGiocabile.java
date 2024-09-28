@@ -11,4 +11,10 @@ public class CasellaNonGiocabile extends Casella {
 		System.out.print("   ");
 	}
 	
+	
+	public void stampaRigaVuota()
+	//Questo metodo serve per quando si vuole stampare una riga vuota della stessa lunghezza di una carta
+	{
+		System.out.println("(                                     )"); //TODO, da modificare
+	}
 }

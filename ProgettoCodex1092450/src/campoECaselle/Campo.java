@@ -116,8 +116,34 @@ public class Campo {
 	}
 	
 	
-	public void stampa3x3AttornoACartaInCampo() {
-		System.out.println("DA FARE"); //TODO
+	public void stampa3x3AttornoACartaInCampo(int[] coordinateCasella) {
+		int partenzaI = coordinateCasella[0]-1; //voglio stampare anche la carta nella riga sopra rispetto a quella alle coordinate comunicate, quindi calcolo -1
+		int partenzaJ = coordinateCasella[1]-1; //voglio stampare anche la carta nella colonna a sinistra rispetto a quella alle coordinate comunicate, quindi calcolo -1
+		System.out.println();
+		//Con questo doppio ciclo for stampo una "matrice" 3x3 di caselle (giocabili e non)
+		for(int i=partenzaI; i<=(partenzaI+2); i++)
+		{
+			for(int j=partenzaJ; j<=(partenzaJ+2); j++)
+			{
+				
+				//Con questo for, per ogni casella che sto analizzando della matrice, stampo riga per riga il contenuto
+				for(Integer k=0; k<13; k++)
+				{
+					if(caselleDelCampo[i][j] instanceof CasellaGiocabile) {
+						if(((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty()) { //posso eseguire un casting sulla casella considerata perchè nella condizione dell'if precedente ho appena controllato che la casella fosse di tipo "Giocabile"
+							System.out.println("[                                     ]"); //TODO, da modificare
+						} else {
+							((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().print(k.toString()); //analogamente a prima, posso eseguire un casting per i medesimi motivi
+							//per poter convertire il k (intero) in una stringa (cioè ciò che il metodo print riceve in ingresso) devo dichiarare k come Integer ("classe wrapper" di int) e usare il metodo toString()
+						}
+					} else if(caselleDelCampo[i][j] instanceof CasellaNonGiocabile) {
+						((CasellaNonGiocabile) caselleDelCampo[i][j]).stampaRigaVuota(); //anche qui posso eseguire un casting sulla casella perchè se la casella considerata non è "Giocabile", per come è costruita la matrice Campo è sicuramente "NonGiocabile"
+					}
+				}
+				
+			}
+		}
 	}
 
+	
 }

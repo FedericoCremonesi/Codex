@@ -19,18 +19,18 @@ public class CartaIniziale extends CartaGiocabile {
 
 
 	@Override
-	public void print() {
+	public void print(String numeroRigaDaStampare) {
 		String tipologiaCarta = "iniziale";
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("retro")))
+		if (!(super.getFacciaDiGioco().equals("RETRO")))
 		{
-			super.getFronte().printFaccia("Nessun colore", tipologiaCarta);
+			super.getFronte().printFaccia("Nessun colore", tipologiaCarta, numeroRigaDaStampare);
 		}
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("fronte")))
+		if (!(super.getFacciaDiGioco().equals("FRONTE")))
 		{
-			super.getRetro().printFaccia("Nessun colore", tipologiaCarta);
+			super.getRetro().printFaccia("Nessun colore", tipologiaCarta, numeroRigaDaStampare);
 		}
-		
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
+		
 	}
 	
 }

@@ -40,6 +40,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = null;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
+		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -52,6 +53,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = null;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
+		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -64,6 +66,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
+		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -76,6 +79,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
 		this.risorsaRetroCentraleAggiuntiva2 = risorsaRetroCentraleAggiuntiva2;
+		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
 	}
 	
 	
@@ -85,40 +89,42 @@ public class FacciaRetro extends FacciaFronte {
 	}
 	
 	
-	//sovrascrivo solo i metodi per stampare la parte "media" della faccia, in quanto per la parte "alta" e "bassa" si possono usare gli stessi metodi della faccia frontale
+	//questo metodo sarà eseguito quando il metodo "printFaccia" della classe madre chiamerà un metodo "costruisciArrayRigheFaccia" con questa signature
 	@Override
-	public void printRiga6(String coloreContorno) {
-		//stampo la carta: riga6
-		printRigaCartaDaRisorsa(risorsaRetroCentrale, coloreContorno);
+	public String[] costruisciArrayRigheFaccia(String coloreContorno, String coloreLatiAngoli) {
+		//Prima di tutto uso il costruttore della classe madre (FacciaFronte) per costruire l'array di stringhe contenenti le 13 righe della faccia
+		String[] righeFaccia = super.costruisciArrayRigheFaccia(coloreContorno, coloreLatiAngoli);
+		
+		//poi modifico le 3 righe che differiscono tra la faccia frontale e quella sul retro
+		
+		//Modifico la riga6 della faccia
+		righeFaccia[5] = ottieniRigaCartaDaRisorsa(risorsaRetroCentrale, coloreContorno);
+		
+		//Modifico la riga7 della faccia
+		righeFaccia[6] = ottieniRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva1, coloreContorno);
+		
+		//Modifico la riga8 della faccia
+		righeFaccia[7] = ottieniRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva2, coloreContorno);
+		
+		return righeFaccia;
 	}
 	
-	@Override
-	public void printRiga7(String coloreContorno) {
-		//stampo la carta: riga7
-		printRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva1, coloreContorno);
-	}
 	
-	@Override
-	public void printRiga8(String coloreContorno) {
-		//stampo la carta: riga8
-		printRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva2, coloreContorno);
-	}
-	
-	
-	public void printRigaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
+	public String ottieniRigaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
 		if(!(risorsa == null))
 		{
 			if(risorsa.toString().equals(Risorsa.FUNGHI.toString())) {
-				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
+				return (coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE); //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
 			} else if(risorsa.toString().equals(Risorsa.VEGETALE.toString())) {
-				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
+				return (coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
 			} else if(risorsa.toString().equals(Risorsa.ANIMALE.toString())) {
-				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
+				return (coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
 			} else if(risorsa.toString().equals(Risorsa.INSETTI.toString())) {
-				System.out.println(coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
+				return (coloreContorno+"|             "+Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+ColoreCarta.CODICE_RESET_COLORE+coloreContorno+"             |"+ColoreCarta.CODICE_RESET_COLORE);
 			}
 		} else {
-			System.out.println(coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+			return (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		}
+		return null;
 	}
 }

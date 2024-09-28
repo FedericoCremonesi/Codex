@@ -43,17 +43,22 @@ public class CartaRisorsa extends CartaGiocabile {
 	
 	
 	@Override
-	public void print() {
+	public void print(String numeroRigaDaStampare) {
 		String tipologiaCarta = "risorsa";
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("retro")))
+		if (!(super.getFacciaDiGioco().equals("RETRO")))
 		{
-			super.getFronte().printFaccia(colore.toString(), tipologiaCarta);
+			super.getFronte().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
 		}
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("fronte")))
+		if (!(super.getFacciaDiGioco().equals("FRONTE")))
 		{
-			super.getRetro().printFaccia(colore.toString(), tipologiaCarta);
+			super.getRetro().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
-		System.out.println(ColoreCarta.CODICE_COLORE_CARTA_RISORSA+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
+		
+		
+		if (super.getFacciaDiGioco().equals("non ancora giocata")) {
+			System.out.println(ColoreCarta.CODICE_COLORE_CARTA_RISORSA+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
+		}
+		//se la carta non è ancora stata giocata sul campo, stampo anche le informazioni aggiuntive relative ad essa
 	}
 }

@@ -81,37 +81,41 @@ public class CartaOro extends CartaGiocabile {
 	
 	
 	@Override
-	public void print() {
+	public void print(String numeroRigaDaStampare) {
 		String tipologiaCarta = "oro";
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("retro")))
+		if (!(super.getFacciaDiGioco().equals("RETRO")))
 		{
-			super.getFronte().printFaccia(colore.toString(), tipologiaCarta);
+			super.getFronte().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
 		}
-		if (!(super.getFacciaDiGioco().toLowerCase().equals("fronte")))
+		if (!(super.getFacciaDiGioco().equals("FRONTE")))
 		{
-			super.getRetro().printFaccia(colore.toString(), tipologiaCarta);
+			super.getRetro().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
 		
-		System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
-		if(condizionePunti.equals("nessunaCondizione"))
-		{
-			System.out.println(); //va semplicemente a capo
-		} else {
-			System.out.print(" per ogni ");
-			if(condizionePunti.equals("angoliCoperti")) {
-				System.out.println("angolo coperto"); //si intende "angolo coperto con la giocata di questa carta"
+		
+		if (super.getFacciaDiGioco().equals("non ancora giocata")) {
+			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
+			if(condizionePunti.equals("nessunaCondizione"))
+			{
+				System.out.println(); //va semplicemente a capo
 			} else {
-				System.out.println(condizionePunti+" visibile nel campo"); //si intende "visibile nel campo del giocatore dopo la giocata di questa carta"
+				System.out.print(" per ogni ");
+				if(condizionePunti.equals("angoliCoperti")) {
+					System.out.println("angolo coperto"); //si intende "angolo coperto con la giocata di questa carta"
+				} else {
+					System.out.println(condizionePunti+" visibile nel campo"); //si intende "visibile nel campo del giocatore dopo la giocata di questa carta"
+				}
+			}
+			
+			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Condizioni di gioco: "+ColoreCarta.CODICE_RESET_COLORE+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
+			if(risorsaNecessaria2==null)
+			{
+				System.out.println(); //va semplicemente a capo
+			} else {
+				System.out.println(" e "+quantitàRisorsaNecessaria2+" risorse del regno "+risorsaNecessaria2.toString());
 			}
 		}
-		
-		System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Condizioni di gioco: "+ColoreCarta.CODICE_RESET_COLORE+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
-		if(risorsaNecessaria2==null)
-		{
-			System.out.println(); //va semplicemente a capo
-		} else {
-			System.out.println(" e "+quantitàRisorsaNecessaria2+" risorse del regno "+risorsaNecessaria2.toString());
-		}
+		//se la carta non è ancora stata giocata sul campo, stampo anche le informazioni aggiuntive relative ad essa
 	}
 }

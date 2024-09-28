@@ -22,7 +22,5 @@ public abstract class Carta {
 	}
 	
 	
-	public void print() {
-		System.out.println("Questo non dovrebbe essere stampato");
-	}
+	public abstract void print(String numeroRigaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
 }
