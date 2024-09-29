@@ -11,7 +11,10 @@ public abstract class Casella {
 	}
 	
 	
-	public void stampaCasellaComeQuadratino() {
-		
-	}
+	//Questo metodo serve per stampare il campo come tabella di quadratini
+	public abstract void stampaCasellaComeQuadratino();
+	
+	//Questo metodo serve per stampare un'area 3x3 di caselle "ingrandite"
+	public abstract void stampaLineaCasellaIngrandita(Integer numeroLineaDaStampare);
+	
 }

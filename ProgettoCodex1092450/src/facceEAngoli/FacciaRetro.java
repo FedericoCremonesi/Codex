@@ -40,7 +40,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = null;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
-		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
+		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -53,7 +53,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = null;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
-		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
+		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -66,7 +66,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
 		this.risorsaRetroCentraleAggiuntiva2 = null;
-		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
+		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
 	//Overloading del metodo costruttore
@@ -79,7 +79,7 @@ public class FacciaRetro extends FacciaFronte {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
 		this.risorsaRetroCentraleAggiuntiva2 = risorsaRetroCentraleAggiuntiva2;
-		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
+		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
 	
@@ -89,28 +89,28 @@ public class FacciaRetro extends FacciaFronte {
 	}
 	
 	
-	//questo metodo sarà eseguito quando il metodo "printFaccia" della classe madre chiamerà un metodo "costruisciArrayRigheFaccia" con questa signature
+	//questo metodo sarà eseguito quando il metodo "printFaccia" della classe madre chiamerà un metodo "costruisciArrayLineeFaccia" con questa signature
 	@Override
-	public String[] costruisciArrayRigheFaccia(String coloreContorno, String coloreLatiAngoli) {
-		//Prima di tutto uso il costruttore della classe madre (FacciaFronte) per costruire l'array di stringhe contenenti le 13 righe della faccia
-		String[] righeFaccia = super.costruisciArrayRigheFaccia(coloreContorno, coloreLatiAngoli);
+	public String[] costruisciArrayLineeFaccia(String coloreContorno, String coloreLatiAngoli) {
+		//Prima di tutto uso il costruttore della classe madre (FacciaFronte) per costruire l'array di stringhe contenenti le 13 linee della faccia
+		String[] lineeFaccia = super.costruisciArrayLineeFaccia(coloreContorno, coloreLatiAngoli);
 		
-		//poi modifico le 3 righe che differiscono tra la faccia frontale e quella sul retro
+		//poi modifico le 3 linee che differiscono tra la faccia frontale e quella sul retro
 		
-		//Modifico la riga6 della faccia
-		righeFaccia[5] = ottieniRigaCartaDaRisorsa(risorsaRetroCentrale, coloreContorno);
+		//Modifico la linea6 della faccia
+		lineeFaccia[5] = ottieniLineaCartaDaRisorsa(risorsaRetroCentrale, coloreContorno);
 		
-		//Modifico la riga7 della faccia
-		righeFaccia[6] = ottieniRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva1, coloreContorno);
+		//Modifico la linea7 della faccia
+		lineeFaccia[6] = ottieniLineaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva1, coloreContorno);
 		
-		//Modifico la riga8 della faccia
-		righeFaccia[7] = ottieniRigaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva2, coloreContorno);
+		//Modifico la linea8 della faccia
+		lineeFaccia[7] = ottieniLineaCartaDaRisorsa(risorsaRetroCentraleAggiuntiva2, coloreContorno);
 		
-		return righeFaccia;
+		return lineeFaccia;
 	}
 	
 	
-	public String ottieniRigaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
+	public String ottieniLineaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
 		if(!(risorsa == null))
 		{
 			if(risorsa.toString().equals(Risorsa.FUNGHI.toString())) {

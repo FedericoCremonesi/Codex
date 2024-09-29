@@ -25,7 +25,7 @@ public class Mano {
 		int n = 1;
 		for(CartaGiocabile c : carteInMano) {
 			System.out.print(n+":\n");
-			c.print("all"); //passo al metodo print il valore "all" per comunicare al metodo printFaccia() in FacciaFronte di stampare tutte le righe della carta
+			c.print("all"); //passo al metodo print il valore "all" per comunicare al metodo printFaccia() in FacciaFronte di stampare tutte le linee della carta
 			n++;
 			System.out.println();
 		}

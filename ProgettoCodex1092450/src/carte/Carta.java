@@ -22,5 +22,5 @@ public abstract class Carta {
 	}
 	
 	
-	public abstract void print(String numeroRigaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
+	public abstract void print(String numeroLineaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
 }

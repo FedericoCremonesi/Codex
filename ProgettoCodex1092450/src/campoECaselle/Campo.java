@@ -120,30 +120,23 @@ public class Campo {
 		int partenzaI = coordinateCasella[0]-1; //voglio stampare anche la carta nella riga sopra rispetto a quella alle coordinate comunicate, quindi calcolo -1
 		int partenzaJ = coordinateCasella[1]-1; //voglio stampare anche la carta nella colonna a sinistra rispetto a quella alle coordinate comunicate, quindi calcolo -1
 		System.out.println();
-		//Con questo doppio ciclo for stampo una "matrice" 3x3 di caselle (giocabili e non)
-		for(int i=partenzaI; i<=(partenzaI+2); i++)
+		
+		//Con questi 3 cicli for stampo una "matrice" 3x3 di caselle (giocabili e non) affiancate
+		
+		for(int i=partenzaI; i<=(partenzaI+2); i++) //Scorre le righe della matrice Campo
 		{
-			for(int j=partenzaJ; j<=(partenzaJ+2); j++)
+			for(Integer k=0; k<13; k++) //Scorre le linee delle singole carte
 			{
-				
-				//Con questo for, per ogni casella che sto analizzando della matrice, stampo riga per riga il contenuto
-				for(Integer k=0; k<13; k++)
+				for(int j=partenzaJ; j<=(partenzaJ+2); j++) //Scorre le colonne della matrice Campo
 				{
-					if(caselleDelCampo[i][j] instanceof CasellaGiocabile) {
-						if(((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty()) { //posso eseguire un casting sulla casella considerata perchè nella condizione dell'if precedente ho appena controllato che la casella fosse di tipo "Giocabile"
-							System.out.println("[                                     ]"); //TODO, ancora da modificare
-						} else {
-							((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().print(k.toString()); //analogamente a prima, posso eseguire un casting per i medesimi motivi
-							//per poter convertire il k (intero) in una stringa (cioè ciò che il metodo print riceve in ingresso) devo dichiarare k come Integer ("classe wrapper" di int) e usare il metodo toString()
-						}
-					} else if(caselleDelCampo[i][j] instanceof CasellaNonGiocabile) {
-						((CasellaNonGiocabile) caselleDelCampo[i][j]).stampaRigaVuota(); //anche qui posso eseguire un casting sulla casella perchè se la casella considerata non è "Giocabile", per come è costruita la matrice Campo è sicuramente "NonGiocabile"
-					}
+					caselleDelCampo[i][j].stampaLineaCasellaIngrandita(k);
 				}
-				
+				System.out.println(); //va a capo una volta finito di stampare la linea k di tutte le 3 caselle affiancate
 			}
 		}
+		
 	}
-
+	
+	
 	
 }

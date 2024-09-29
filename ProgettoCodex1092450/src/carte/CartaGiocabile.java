@@ -58,7 +58,8 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
-	//public abstract static void print(String numeroRigaDaStampare);
+	@Override
+	public abstract void print(String numeroLineaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
 	
 	
 	public void posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {

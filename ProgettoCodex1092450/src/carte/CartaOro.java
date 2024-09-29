@@ -81,15 +81,15 @@ public class CartaOro extends CartaGiocabile {
 	
 	
 	@Override
-	public void print(String numeroRigaDaStampare) {
+	public void print(String numeroLineaDaStampare) {
 		String tipologiaCarta = "oro";
 		if (!(super.getFacciaDiGioco().equals("RETRO")))
 		{
-			super.getFronte().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
+			super.getFronte().printFaccia(colore.toString(), tipologiaCarta, numeroLineaDaStampare);
 		}
 		if (!(super.getFacciaDiGioco().equals("FRONTE")))
 		{
-			super.getRetro().printFaccia(colore.toString(), tipologiaCarta, numeroRigaDaStampare);
+			super.getRetro().printFaccia(colore.toString(), tipologiaCarta, numeroLineaDaStampare);
 		}
 		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
 		

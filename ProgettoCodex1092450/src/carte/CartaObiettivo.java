@@ -15,7 +15,7 @@ public class CartaObiettivo extends Carta{
 	
 	
 	@Override
-	public void print(String numeroRigaDaStampare)
+	public void print(String numeroLineaDaStampare)
 	/*
 	 * Ho messo questa String in ingresso per evitare che fosse eseguito il metodo (astratto) della superclasse Carta nel caso di una chiamata, da parte di un oggetto carta obiettivo, di un metodo print passante in ingresso una String
 	 * 

@@ -9,8 +9,8 @@ public class FacciaFronte {
 	private Angolo angoloBassoSx;
 	private Angolo angoloBassoDx;
 	
-	protected String[] insiemeRigheFaccia;
-	public final int NUMERO_RIGHE_FACCIA=13; //in una faccia ci sono 13 righe in totali
+	protected String[] insiemeLineeFaccia;
+	public final int NUMERO_LINEE_FACCIA=13; //in una faccia ci sono 13 linee in totale
 	
 	
 	public Angolo getAngoloAltoSx() {
@@ -41,11 +41,11 @@ public class FacciaFronte {
 		this.angoloBassoDx = angoloBassoDx;
 	}
 	
-	public String[] getInsiemeRigheFaccia() {
-		return insiemeRigheFaccia;
+	public String[] getInsiemeLineeFaccia() {
+		return insiemeLineeFaccia;
 	}
-	public void setInsiemeRigheFaccia(String[] righeFaccia) {
-		this.insiemeRigheFaccia = righeFaccia;
+	public void setInsiemeLineeFaccia(String[] lineeFaccia) {
+		this.insiemeLineeFaccia = lineeFaccia;
 	}
 	
 	
@@ -57,7 +57,7 @@ public class FacciaFronte {
 		this.angoloAltoDx = angoloAltoDx;
 		this.angoloBassoSx = angoloBassoSx;
 		this.angoloBassoDx = angoloBassoDx;
-		this.insiemeRigheFaccia = new String[NUMERO_RIGHE_FACCIA];
+		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
 	
@@ -67,7 +67,7 @@ public class FacciaFronte {
 	}
 	
 	
-	public void printFaccia(String coloreCarta, String tipologiaCarta, String numeroRigaDaStampare) { 
+	public void printFaccia(String coloreCarta, String tipologiaCarta, String numeroLineaDaStampare) { 
 		String coloreContorno=null;
 		coloreContorno = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
 		
@@ -83,136 +83,137 @@ public class FacciaFronte {
 			coloreLatiAngoli = "";
 		}
 		
-		insiemeRigheFaccia = costruisciArrayRigheFaccia(coloreContorno, coloreLatiAngoli);
+		insiemeLineeFaccia = costruisciArrayLineeFaccia(coloreContorno, coloreLatiAngoli);
+		//l'array con le linee della faccia da stampare lo costruisco ogni volta che devo stamparlo, in quanto potrebbero avvenire delle modifiche agli angoli nel corso della partita
 				
-		if(numeroRigaDaStampare.equals("all")) //se dico di stampare la riga "all" vuol dire che bisogna stampare tutte le righe della carta (cioè tutta la carta)
+		if(numeroLineaDaStampare.equals("all")) //se dico di stampare la linea "all" vuol dire che bisogna stampare tutte le linee della carta (cioè tutta la carta)
 		{
-			for(int k=0; k<NUMERO_RIGHE_FACCIA; k++) {
-				System.out.println(insiemeRigheFaccia[k]);
+			for(int k=0; k<NUMERO_LINEE_FACCIA; k++) {
+				System.out.println(insiemeLineeFaccia[k]); //qui posso usare println perchè quando viene eseguito questo ciclo non starò stampando delle caselle affiancate, bensì le carte per intero (fronte, retro e informazioni aggiuntive)
 			}
 		} else {
-			int k = (Integer.parseInt(numeroRigaDaStampare)); //per comodità converto la stringa in un intero e lo metto nella variabile k
-			System.out.println(insiemeRigheFaccia[k]);
+			int k = (Integer.parseInt(numeroLineaDaStampare)); //converto la stringa in un intero e lo metto nella variabile k
+			System.out.print(insiemeLineeFaccia[k]); //NON println, altrimenti risulta sbagliata la stampa delle 3x3 caselle ingrandite
 		}
 	}
 	
 	
 	//La stampa della carta è "spezzetata" per poter stampare comodamente le carte affiancate sul campo quando sarà necessario
-	public String[] costruisciArrayRigheFaccia(String coloreContorno, String coloreLatiAngoli) {
+	public String[] costruisciArrayLineeFaccia(String coloreContorno, String coloreLatiAngoli) {
 		
-		String[] righeFaccia = new String[NUMERO_RIGHE_FACCIA];
+		String[] lineeFaccia = new String[NUMERO_LINEE_FACCIA];
 		
-		//Costruisco la riga1 della faccia
-		righeFaccia[0] = (coloreContorno+"▛------------------------------------▜"+ColoreCarta.CODICE_RESET_COLORE);
+		//Costruisco la linea1 della faccia
+		lineeFaccia[0] = (coloreContorno+"▛------------------------------------▜"+ColoreCarta.CODICE_RESET_COLORE);
 		
-		//Costruisco la riga2 della faccia
+		//Costruisco la linea2 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			righeFaccia[1] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[1] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[1] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[1] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			righeFaccia[1] = (righeFaccia[1] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[1] = (lineeFaccia[1] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[1] = (righeFaccia[1] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[1] = (lineeFaccia[1] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 				
-		//Costruisco la riga3 della faccia
+		//Costruisco la linea3 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			righeFaccia[2] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[2] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[2] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[2] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			righeFaccia[2] = (righeFaccia[2] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[2] = (lineeFaccia[2] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[2] = (righeFaccia[2] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[2] = (lineeFaccia[2] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga4 della faccia
+		//Costruisco la linea4 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			righeFaccia[3] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[3] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[3] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[3] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			righeFaccia[3] = (righeFaccia[3] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[3] = (lineeFaccia[3] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[3] = (righeFaccia[3] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[3] = (lineeFaccia[3] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga5 della faccia
+		//Costruisco la linea5 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			righeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------▟"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------▟"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[4] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[4] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			righeFaccia[4] = (righeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"▙------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"▙------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[4] = (righeFaccia[4] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga6 della faccia
-		righeFaccia[5] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		//Costruisco la linea6 della faccia
+		lineeFaccia[5] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		
-		//Costruisco la riga7 della faccia
-		righeFaccia[6] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		//Costruisco la linea7 della faccia
+		lineeFaccia[6] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		
-		//Costruisco la riga8 della faccia
-		righeFaccia[7] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
+		//Costruisco la linea8 della faccia
+		lineeFaccia[7] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		
-		//Costruisco la riga9 della faccia
+		//Costruisco la linea9 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			righeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------▜"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------▜"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[8] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[8] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			righeFaccia[8] = (righeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"▛------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"▛------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[8] = (righeFaccia[8] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga10 della faccia
+		//Costruisco la linea10 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			righeFaccia[9] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[9] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[9] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[9] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			righeFaccia[9] = (righeFaccia[9] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[9] = (lineeFaccia[9] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[9] = (righeFaccia[9] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[9] = (lineeFaccia[9] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga11 della faccia
+		//Costruisco la linea11 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			righeFaccia[10] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[10] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[10] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[10] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			righeFaccia[10] = (righeFaccia[10] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[10] = (lineeFaccia[10] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[10] = (righeFaccia[10] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[10] = (lineeFaccia[10] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga12 della faccia
+		//Costruisco la linea12 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			righeFaccia[11] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[11] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
-			righeFaccia[11] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[11] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			righeFaccia[11] = (righeFaccia[11] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[11] = (lineeFaccia[11] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
-			righeFaccia[11] = (righeFaccia[11] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[11] = (lineeFaccia[11] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
-		//Costruisco la riga13 della faccia
-		righeFaccia[12] = (coloreContorno+"▙------------------------------------▟"+ColoreCarta.CODICE_RESET_COLORE);
+		//Costruisco la linea13 della faccia
+		lineeFaccia[12] = (coloreContorno+"▙------------------------------------▟"+ColoreCarta.CODICE_RESET_COLORE);
 		
-		return righeFaccia;
+		return lineeFaccia;
 	}
 }
