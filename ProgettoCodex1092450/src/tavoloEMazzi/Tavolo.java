@@ -24,6 +24,7 @@ public class Tavolo {
 	private Mazzo<CartaIniziale> mazzoCarteIniziali;
 	private Mazzo<CartaObiettivo> mazzoCarteObiettivo;
 	private CartaObiettivo[] obiettiviComuni;
+	private final int NUMERO_OBIETTIVI_COMUNI = 2;
 	
 	
 	public Mazzo<CartaRisorsa> getMazzoCarteRisorsa() {
@@ -68,7 +69,7 @@ public class Tavolo {
 		this.mazzoCarteIniziali = new Mazzo(new ArrayList<CartaIniziale>()); //* ma posso anche evitare di mettere "<CartaIniziale>" dopo "new Mazzo", non è necessario
 		this.mazzoCarteObiettivo = new Mazzo(new ArrayList<CartaObiettivo>());
 		
-		obiettiviComuni = new CartaObiettivo[2]; //creo il vettore degli obiettivi comuni vuoto
+		obiettiviComuni = new CartaObiettivo[NUMERO_OBIETTIVI_COMUNI]; //creo il vettore degli obiettivi comuni vuoto
 	}
 	
 	
@@ -183,5 +184,13 @@ public class Tavolo {
 	public void aggiungiObiettivoComune(int indice, CartaObiettivo carta) {
 		obiettiviComuni[indice] = carta;
 		System.out.println("Carta aggiunta agli obiettivi comuni");
+	}
+	
+	
+	public void stampaObiettiviComuni() {
+		System.out.println("Gli obiettivi comuni di questa partita sono:");
+		for(int t=0; t<NUMERO_OBIETTIVI_COMUNI; t++) {
+			System.out.println("- "+obiettiviComuni[t].toString());
+		}
 	}
 }

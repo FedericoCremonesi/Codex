@@ -30,4 +30,9 @@ public class Mano {
 			System.out.println();
 		}
 	}
+	
+	
+	public CartaGiocabile getCartaDaMano(int indice) {
+		return carteInMano.get(indice);
+	}
 }

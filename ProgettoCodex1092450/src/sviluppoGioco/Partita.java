@@ -210,18 +210,7 @@ public class Partita {
 			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
 			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiPrimaCartaDaMazzo();
 			
-			String sceltaFacciaDiGioco;
-			do {
-				System.out.println(g.getNickname()+" su quale faccia vuoi giocare la carta?");
-				Scanner sc = new Scanner(System.in);
-				sceltaFacciaDiGioco = sc.nextLine().toUpperCase();
-				if(sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) {
-					cartaInizialeEstratta.setFacciaDiGioco(sceltaFacciaDiGioco); //setto la faccia di gioco della carta iniziale (giocabile) a "FRONTE" o "RETRO"
-					cartaInizialeEstratta.posizionaSuCampo((CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
-				} else {
-					System.out.println("Inserimento non valido, scrivere Fronte oppure Retro");
-				}
-			} while (!( (sceltaFacciaDiGioco.equals("FRONTE") || sceltaFacciaDiGioco.equals("RETRO")) ));
+			g.scegliFacciaDiGioco(cartaInizialeEstratta);
 		}
 	}
 	
@@ -319,15 +308,13 @@ public class Partita {
 				g.getCampo().stampa3x3AttornoACartaInCampo(coordinateCasella);
 				break;
 			case "B":
-				//...
-				System.out.println("SCELTAb");
+				tavoloDiGioco.stampaObiettiviComuni();
 				break;
 			case "C":
-				//...
-				System.out.println("SCELTAc");
+				System.out.println(g.getNickname()+", il tuo obiettivo segreto è:\n"+g.getObiettivoSegreto());
 				break;
 			case "D":
-				System.out.println();
+				System.out.println(); //va semplicemente a capo
 				break;
 			default:
 				System.out.println("Inserimento non valido, scrivere A, B, C oppure D");
@@ -335,7 +322,7 @@ public class Partita {
 				
 		} while (!( sceltaOpzione.equals("D") ));
 		
-		//...
+		g.giocaCartaDaMano();
 	}
 	
 	

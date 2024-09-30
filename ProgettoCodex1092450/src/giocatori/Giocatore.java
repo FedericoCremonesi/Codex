@@ -1,10 +1,13 @@
 package giocatori;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import campoECaselle.Campo;
+import campoECaselle.CasellaGiocabile;
 import carte.Carta;
+import carte.CartaGiocabile;
 import carte.CartaObiettivo;
 
 public class Giocatore {
@@ -112,5 +115,45 @@ public class Giocatore {
 	public void assegnaColorePedina(Pedina pedinaScelta) {
 		String codiceColorePedina = Pedina.ottieniStringCodiceColoreDaStringa(pedinaScelta.toString());
 		nickname = codiceColorePedina+nickname+Pedina.CODICE_RESET_COLORE;
+	}
+	
+	
+	public void scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare) {
+		String facciaDiGiocoScelta;
+		do {
+			System.out.println(nickname+" su quale faccia vuoi giocare la carta?");
+			Scanner sc = new Scanner(System.in);
+			facciaDiGiocoScelta = sc.nextLine().toUpperCase();
+			if(facciaDiGiocoScelta.equals("FRONTE") || facciaDiGiocoScelta.equals("RETRO")) {
+				cartaDaGiocare.setFacciaDiGioco(facciaDiGiocoScelta); //setto la faccia di gioco della carta (giocabile) a "FRONTE" o "RETRO"
+				cartaDaGiocare.posizionaSuCampo((CasellaGiocabile) campo.getCasellaDaCoordinate(40,40));
+			} else {
+				System.out.println("Inserimento non valido, scrivere Fronte oppure Retro");
+			}
+		} while (!( (facciaDiGiocoScelta.equals("FRONTE") || facciaDiGiocoScelta.equals("RETRO")) ));
+	}
+	
+	
+	public void giocaCartaDaMano() {
+		//Non stampo di nuovo le carte in mano perchè le ho già fatte visualizzare a inizio turno
+		
+		int indiceCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
+		do {
+			try {
+				System.out.println("Quale carta vuoi giocare dalla tua mano?");
+				Scanner sc = new Scanner(System.in);
+				indiceCartaScelta = sc.nextInt();
+				if(!(indiceCartaScelta >= 1 && indiceCartaScelta <= 3))
+				{
+					System.out.println("Indice inserito non valido, inserire un numero tra 1 e 3");
+				}
+			} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
+				System.out.println("Inserimento non valido, inserire un numero");
+			}
+		} while (!(indiceCartaScelta >= 1 && indiceCartaScelta <= 3));
+		indiceCartaScelta = indiceCartaScelta-1; //decremento di 1 il valore dell'indice inserito perchè gli indici delle carte nella lista mano vanno da 0 a 2 (non da 1 a 3)
+		scegliFacciaDiGioco(mano.getCartaDaMano(indiceCartaScelta));
+		
+		//...
 	}
 }
