@@ -4,9 +4,24 @@ import facceEAngoli.Risorsa;
 import facceEAngoli.Oggetto;
 
 public class AngoloVisibile extends Angolo {
-	
+
 	private String contenuto; //può essere una Risorsa, un Oggetto o nulla, uso String
 	private boolean coperto;
+	
+	
+	public String getContenuto() {
+		return contenuto;
+	}
+	public void setContenuto(String contenuto) {
+		this.contenuto = contenuto;
+	}
+
+	public boolean isCoperto() {
+		return coperto;
+	}
+	public void setCoperto(boolean coperto) {
+		this.coperto = coperto;
+	}
 
 	
 	public AngoloVisibile(String contenuto) {

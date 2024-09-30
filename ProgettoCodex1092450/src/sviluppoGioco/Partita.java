@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -288,7 +289,12 @@ public class Partita {
 	
 	public void giocaTurno(Giocatore g) {
 		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
+		
 		g.getCampo().stampaMatriceCampoAQuadratini();
+		
+		g.getCampo().contaRisorseEOggettiVisibili(40,40); //inizio a contare risorse e oggetti dalla carta iniziale, in posizione 40,40
+		g.getCampo().stampaConteggioRisorseEOggettiVisibili();
+			
 		g.getMano().stampaCarteInMano();
 		
 		String sceltaOpzione;
