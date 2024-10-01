@@ -292,8 +292,11 @@ public class Partita {
 		
 		g.getCampo().stampaMatriceCampoAQuadratini();
 		
-		g.getCampo().contaRisorseEOggettiVisibili(40,40); //inizio a contare risorse e oggetti dalla carta iniziale, in posizione 40,40
-		g.getCampo().stampaConteggioRisorseEOggettiVisibili();
+		g.getCampo().contaRisorseEOggettiVisibili(40,40,true,true); //inizio a contare risorse e oggetti dalla carta iniziale, in posizione 40,40
+		/*
+		 * il primo true passato al metodo serve per indicare che è la prima volta che questa funzione viene chiamata ricorsivamente
+		 * il secondo "true" passato al metodo serve per comunicargli di stampare il conteggio delle risorse e degli oggetti
+		 */
 			
 		g.getMano().stampaCarteInMano();
 		

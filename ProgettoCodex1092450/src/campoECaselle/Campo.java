@@ -19,19 +19,12 @@ public class Campo {
 	 */
 	
 	private Casella[][] caselleDelCampo;
-	HashMap<String, Integer> conteggioRisorseEOggetti;
+	//Creo una hashmap con tutte le risorse e gli oggetti
+	HashMap<String, Integer> conteggioRisorseEOggetti = new HashMap<String, Integer>();
 	
 	
 	public Casella getCasellaDaCoordinate(int i, int j) {
 		return caselleDelCampo[i][j];
-	}
-	
-	
-	public HashMap<String, Integer> getConteggioRisorseEOggetti() {
-		return conteggioRisorseEOggetti;
-	}
-	public void setConteggioRisorseEOggetti(HashMap<String, Integer> conteggioRisorseEOggetti) {
-		this.conteggioRisorseEOggetti = conteggioRisorseEOggetti;
 	}
 	
 	
@@ -52,20 +45,24 @@ public class Campo {
 			}
 		}
 		
-		//Creo una hashmap con tutte le risorse e gli oggetti, inizializzando a 0 tutti i valori interi associati
-		conteggioRisorseEOggetti = new HashMap<String, Integer>();
-		conteggioRisorseEOggetti.put("FUNGHI", 0);
-		conteggioRisorseEOggetti.put("VEGETALE", 0);
-		conteggioRisorseEOggetti.put("ANIMALE", 0);
-		conteggioRisorseEOggetti.put("INSETTI", 0);
-		conteggioRisorseEOggetti.put("PIUMA", 0);
-		conteggioRisorseEOggetti.put("INCHIOSTRO", 0);
-		conteggioRisorseEOggetti.put("PERGAMENA", 0);
 	}
 	
 	
 	//Funzione ricorsiva per contare tutte le risorse e gli oggetti sul campo
-	public void contaRisorseEOggettiVisibili(int i, int j) {
+	public void contaRisorseEOggettiVisibili(int i, int j, boolean inizioScorrimento, boolean stampaConteggio) {
+		
+		if(inizioScorrimento) {
+			//All'inizio di ogni scorrimento del campo, pongo a 0 tutti i valori interi associati alle risorse e agli oggetti
+			//(altrimenti continuerebbero a incrementare ogni volta che li conta, senza ripartire a contare da 0)
+			conteggioRisorseEOggetti.put("FUNGHI", 0);
+			conteggioRisorseEOggetti.put("VEGETALE", 0);
+			conteggioRisorseEOggetti.put("ANIMALE", 0);
+			conteggioRisorseEOggetti.put("INSETTI", 0);
+			conteggioRisorseEOggetti.put("PIUMA", 0);
+			conteggioRisorseEOggetti.put("INCHIOSTRO", 0);
+			conteggioRisorseEOggetti.put("PERGAMENA", 0);
+		}
+				
 		if( ((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty() ) {
 			return;
 		} else {
@@ -74,7 +71,7 @@ public class Campo {
 				//Analizzo l'angolo in alto a sinistra della faccia fronte
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoSx() instanceof AngoloVisibile ) { //gestisco caso: angolo nascosto
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoSx()).isCoperto() ) { //gestistisco caso: angolo coperto
-						contaRisorseEOggettiVisibili(i-1,j-1); //chiamo ricorsivamente la funzione, stavolta dicendogli di analizzare la casella (giocabile) in alto a sx rispetto a quella in analisi adesso
+						contaRisorseEOggettiVisibili(i-1,j-1,false,false); //chiamo ricorsivamente la funzione, stavolta dicendogli di analizzare la casella (giocabile) in alto a sx rispetto a quella in analisi adesso
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoSx()).getContenuto()!=null ) { //gestistisco caso: angolo vuoto
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoSx()).getContenuto() );
 					}
@@ -84,7 +81,7 @@ public class Campo {
 				//Analizzo l'angolo in alto a destra della faccia fronte
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoDx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoDx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i-1,j+1);
+						contaRisorseEOggettiVisibili(i-1,j+1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoDx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloAltoDx()).getContenuto() );
 					}
@@ -94,7 +91,7 @@ public class Campo {
 				//Analizzo l'angolo in basso a sinistra della faccia fronte
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoSx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoSx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i+1,j-1);
+						contaRisorseEOggettiVisibili(i+1,j-1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoSx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoSx()).getContenuto() );
 					}
@@ -104,7 +101,7 @@ public class Campo {
 				//Analizzo l'angolo in basso a destra della faccia fronte
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoDx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoDx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i+1,j+1);
+						contaRisorseEOggettiVisibili(i+1,j+1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoDx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFronte().getAngoloBassoDx()).getContenuto() );
 					}
@@ -116,7 +113,7 @@ public class Campo {
 				//Analizzo l'angolo in alto a sinistra della faccia retro
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoSx() instanceof AngoloVisibile ) { //gestisco caso: angolo nascosto
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoSx()).isCoperto() ) { //gestistisco caso: angolo coperto
-						contaRisorseEOggettiVisibili(i-1,j-1); //chiamo ricorsivamente la funzione, stavolta dicendogli di analizzare la casella (giocabile) in alto a sx rispetto a quella in analisi adesso
+						contaRisorseEOggettiVisibili(i-1,j-1,false,false); //chiamo ricorsivamente la funzione, stavolta dicendogli di analizzare la casella (giocabile) in alto a sx rispetto a quella in analisi adesso
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoSx()).getContenuto()!=null ) { //gestistisco caso: angolo vuoto
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoSx()).getContenuto() );
 					}
@@ -126,7 +123,7 @@ public class Campo {
 				//Analizzo l'angolo in alto a destra della faccia retro
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoDx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoDx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i-1,j+1);
+						contaRisorseEOggettiVisibili(i-1,j+1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoDx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloAltoDx()).getContenuto() );
 					}
@@ -136,7 +133,7 @@ public class Campo {
 				//Analizzo l'angolo in basso a sinistra della faccia retro
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoSx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoSx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i+1,j-1);
+						contaRisorseEOggettiVisibili(i+1,j-1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoSx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoSx()).getContenuto() );
 					}
@@ -146,7 +143,7 @@ public class Campo {
 				//Analizzo l'angolo in basso a destra della faccia retro
 				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoDx() instanceof AngoloVisibile ) {
 					if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoDx()).isCoperto() ) {
-						contaRisorseEOggettiVisibili(i+1,j+1);
+						contaRisorseEOggettiVisibili(i+1,j+1,false,false);
 					} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoDx()).getContenuto()!=null ) {
 						incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getAngoloBassoDx()).getContenuto() );
 					}
@@ -166,6 +163,10 @@ public class Campo {
 					incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva2().toString() );
 				}
 			}
+		}
+		
+		if(stampaConteggio) {
+			stampaConteggioRisorseEOggettiVisibili();
 		}
 	}
 	
