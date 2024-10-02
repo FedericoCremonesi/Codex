@@ -7,6 +7,7 @@ import java.util.Scanner;
 import carte.CartaOro;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Risorsa;
+import facceEAngoli.Angolo;
 import facceEAngoli.AngoloNascosto;
 import sviluppoGioco.Partita;
 
@@ -343,6 +344,132 @@ public class Campo {
 			System.out.println("Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
 			return false;
 		}
+	}
+	
+	
+	public boolean controllaCondizioniGiocataCartaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
+		System.out.println("Verificando le condizioni per giocare la carta sul campo...");
+		
+		//Controllo che la casella selezionata sia libera per posizionare la carta
+		if( !(casellaInCuiPosizionareCarta.isEmpty()) ) {
+			System.out.println(" ➤"+"\u001B[31m"+"La casella selezionata risulta essere già occupata"+"\u001B[0m");
+			return false;
+		} else {
+			System.out.println(" ➤"+"\u001B[32m"+"La casella selezionata è libera, ulteriori controlli in corso..."+"\u001B[0m");
+		}
+		
+		
+		//Controllo altre due condizioni (scritte nelle variabili qui sotto) per posizionare la carta
+			/*
+			 * tra le condizioni non verifico che gli angoli visibili siano anche non coperti,
+			 * ciò non è necessario perchè il caso in cui gli angoli visibili risultano coperti è solo quello in cui la casella presa in considerazione sia già occupata
+			 * (e questo ho già verificato che non fosse vero in precedenza)
+			 */
+		boolean almenoUnAngoloVisibile = false; //basta un angolo visibile per rendere true questa variabile *
+		boolean tutteCaselleAdiacentiLibereOConAngoliVisibili = true; //basta una casella occupata con angolo nascosto per rendere false questa variabile **
+		
+		int x = casellaInCuiPosizionareCarta.getX();
+		int y = casellaInCuiPosizionareCarta.getY();
+		
+		CasellaGiocabile casellaDaAnalizzare;
+		
+		casellaDaAnalizzare = ((CasellaGiocabile) caselleDelCampo[x-1][y-1]);
+		if( !( casellaDaAnalizzare.isEmpty() ) ) {
+			String facciaDiGiocoCarta = casellaDaAnalizzare.getCartaContenuta().getFacciaDiGioco();
+			Angolo angoloDaControllare = null;
+			if(facciaDiGiocoCarta.equals("FRONTE")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getFronte().getAngoloBassoDx();
+			}
+			if(facciaDiGiocoCarta.equals("RETRO")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getRetro().getAngoloBassoDx();
+			}
+			
+			if( (angoloDaControllare instanceof AngoloVisibile) ) {
+				System.out.println("In alto a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				almenoUnAngoloVisibile = true;
+			} else if(angoloDaControllare instanceof AngoloNascosto) {
+				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
+			}
+		}
+		
+		casellaDaAnalizzare = ((CasellaGiocabile) caselleDelCampo[x-1][y+1]);
+		if( !( casellaDaAnalizzare.isEmpty() ) ) {
+			String facciaDiGiocoCarta = casellaDaAnalizzare.getCartaContenuta().getFacciaDiGioco();
+			Angolo angoloDaControllare = null;
+			if(facciaDiGiocoCarta.equals("FRONTE")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getFronte().getAngoloBassoSx();
+			}
+			if(facciaDiGiocoCarta.equals("RETRO")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getRetro().getAngoloBassoSx();
+			}
+			
+			if( (angoloDaControllare instanceof AngoloVisibile) ) {
+				System.out.println("In alto a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				almenoUnAngoloVisibile = true;
+			} else if(angoloDaControllare instanceof AngoloNascosto) {
+				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
+			}
+		}
+		
+		casellaDaAnalizzare = ((CasellaGiocabile) caselleDelCampo[x+1][y-1]);
+		if( !( casellaDaAnalizzare.isEmpty() ) ) {
+			String facciaDiGiocoCarta = casellaDaAnalizzare.getCartaContenuta().getFacciaDiGioco();
+			Angolo angoloDaControllare = null;
+			if(facciaDiGiocoCarta.equals("FRONTE")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getFronte().getAngoloAltoDx();
+			}
+			if(facciaDiGiocoCarta.equals("RETRO")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getRetro().getAngoloAltoDx();
+			}
+			
+			if( (angoloDaControllare instanceof AngoloVisibile) ) {
+				System.out.println("In basso a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				almenoUnAngoloVisibile = true;
+			} else if(angoloDaControllare instanceof AngoloNascosto) {
+				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
+			}
+		}
+		
+		casellaDaAnalizzare = ((CasellaGiocabile) caselleDelCampo[x+1][y+1]);
+		if( !( casellaDaAnalizzare.isEmpty() ) ) {
+			String facciaDiGiocoCarta = casellaDaAnalizzare.getCartaContenuta().getFacciaDiGioco();
+			Angolo angoloDaControllare = null;
+			if(facciaDiGiocoCarta.equals("FRONTE")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getFronte().getAngoloAltoSx();
+			}
+			if(facciaDiGiocoCarta.equals("RETRO")) {
+				angoloDaControllare = casellaDaAnalizzare.getCartaContenuta().getRetro().getAngoloAltoSx();
+			}
+			
+			if( (angoloDaControllare instanceof AngoloVisibile) ) {
+				System.out.println("In basso a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				almenoUnAngoloVisibile = true;
+			} else if(angoloDaControllare instanceof AngoloNascosto) {
+				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
+			}
+		}
+		
+		
+		if(!almenoUnAngoloVisibile) {
+			System.out.println("  ➤"+"\u001B[31m"+"Non risulta esserci nessun angolo a cui la carta possa agganciarsi"+"\u001B[0m");
+			return false;
+		} else {
+			System.out.println("  ➤"+"\u001B[32m"+"E' stato trovato almeno un angolo (visibile) a cui la carta che si sta giocando può agganciarsi"+"\u001B[0m"); //*
+		}
+		
+		if(!tutteCaselleAdiacentiLibereOConAngoliVisibili) {
+			System.out.println("   ➤"+"\u001B[31m"+"Giocando la carta in questa posizione, questa andrà a sovrapporsi ad un angolo nascosto, ciò non è ammesso"+"\u001B[0m"); //**
+			return false;
+		} else {
+			System.out.println("   ➤"+"\u001B[32m"+"Tutte le caselle adiacenti sono libere oppure gli angoli su cui andrà a posizionarsi la carta sono visibili"+"\u001B[0m");
+		}
+		
+		
+		/*
+		 * se sono stati superati tutti gli if precedenti senza eseguire il loro interno (cioè eseguendo solo gli else),
+		 * la funzione ritornerà true a simboleggiare che sia tutto ok e che si può giocare la carta nella casella selezionata
+		 */
+		return true;
 	}
 	
 }

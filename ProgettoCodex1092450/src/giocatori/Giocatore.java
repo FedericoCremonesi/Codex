@@ -158,13 +158,19 @@ public class Giocatore {
 		} while (indietroASceltaCarta); //questo è il caso in cui il giocatore abbia deciso di tornare indietro alla scelta della carta
 		
 		
-		boolean ok = false;
-		do {
+		
+		while(true) {
 			System.out.println("In quale casella vuoi giocare la carta?");
 			int[] coordinateCasella = scegliCoordinateCasellaGiocabile();
 			
-			ok = cartaDaGiocare.posizionaSuCampo((CasellaGiocabile) campo.getCasellaDaCoordinate(coordinateCasella[0],coordinateCasella[1]));
-		} while(!ok);
+			CasellaGiocabile casellaInCuiPosizionareCarta = (CasellaGiocabile) campo.getCasellaDaCoordinate(coordinateCasella[0],coordinateCasella[1]);
+			
+			if(campo.controllaCondizioniGiocataCartaSuCampo(casellaInCuiPosizionareCarta)) {
+				cartaDaGiocare.posizionaSuCampo(casellaInCuiPosizionareCarta);
+				return;
+			}
+			
+		}
 		
 	}
 	
