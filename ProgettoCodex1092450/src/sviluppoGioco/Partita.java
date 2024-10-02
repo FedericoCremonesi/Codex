@@ -211,7 +211,9 @@ public class Partita {
 			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
 			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiPrimaCartaDaMazzo();
 			
-			g.scegliFacciaDiGioco(cartaInizialeEstratta);
+			g.scegliFacciaDiGioco(cartaInizialeEstratta, false); //passo false al metodo perchè in questo caso non si può tornare indietro
+																 //(a differenza di quando si sceglie la faccia di gioco di una delle carte dalla mano, lì si può tornare alla scelta della carta da giocare)
+			cartaInizialeEstratta.posizionaSuCampo((CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
 		}
 	}
 	
@@ -313,7 +315,8 @@ public class Partita {
 			
 			switch (sceltaOpzione) {
 			case "A":
-				int[] coordinateCasella = chiediCoordinateCasellaGiocabile(g);
+				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
+				int[] coordinateCasella = g.scegliCoordinateCasellaGiocabile();
 				g.getCampo().stampa3x3AttornoACartaInCampo(coordinateCasella);
 				break;
 			case "B":
@@ -333,38 +336,7 @@ public class Partita {
 		
 		g.giocaCartaDaMano();
 	}
+
 	
 	
-	public int[] chiediCoordinateCasellaGiocabile(Giocatore g) {
-		int[] coordinate = {0,0}; //inseriti dei qualsiasi valori di partenza, verranno sovrascritti da ciò che inserirà l'utente
-		boolean ok;
-		
-		do {
-			
-			ok = false;
-			try {
-				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
-				
-				Scanner sc = new Scanner(System.in); //va qui, altrimenti in caso di errore il ciclo viene eseguito all'infinito
-				
-				System.out.print("Coordinata righe: ");
-				coordinate[0] = sc.nextInt()+40; //L'utente inserirà una coordinata tra -40 e +40 perchè sono quelle stampate ai lati della matrice, in realtà gli indici degli array vanno da 0 a 80, dunque sommo 40
-				System.out.print("Coordinata colonne: ");
-				coordinate[1] = sc.nextInt()+40;
-				
-				if(g.getCampo().getCasellaDaCoordinate(coordinate[0],coordinate[1]) instanceof CasellaGiocabile) {
-					ok = true;
-				} else {
-					System.out.println("\nLe coordinate inserite risultano indicare una casella non giocabile");
-				}
-			} catch (InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
-				System.out.println("\nInserimento non valido, inserire due numeri");
-			} catch (ArrayIndexOutOfBoundsException e) { //gestisco il caso con una eccezione NON controllata
-				System.out.println("\nInserimento non valido, almeno uno degli indici inseriti risulta eccedere la dimensione dell'array");
-			}
-			
-		} while (!ok);
-		
-		return coordinate;
-	}
 }

@@ -62,10 +62,28 @@ public abstract class CartaGiocabile extends Carta {
 	public abstract void print(String numeroLineaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
 	
 	
-	public void posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
-		casellaInCuiPosizionareCarta.setCartaContenuta(this);
-		this.setCasellaDiGioco(casellaInCuiPosizionareCarta);
-		System.out.println("Carta giocata!");
+	public boolean posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
+		/*
+		if(condizione1) {
+			System.out.println("...");
+			return false;
+		} else if(condizione2) {
+			System.out.println("...");
+			return false;
+		} else if(condizione3) {
+			System.out.println("...");
+			return false;
+		} else if(condizione4) {
+			System.out.println("...");
+			return false;
+		} else {
+			casellaInCuiPosizionareCarta.setCartaContenuta(this);
+			this.setCasellaDiGioco(casellaInCuiPosizionareCarta);
+			System.out.println("Carta giocata!");
+			return true;
+		}
+		*/
+		return false;
 	}
 	
 	

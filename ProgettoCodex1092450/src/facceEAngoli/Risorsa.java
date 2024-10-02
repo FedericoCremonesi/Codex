@@ -1,5 +1,7 @@
 package facceEAngoli;
 
+import giocatori.Pedina;
+
 public enum Risorsa {
 	
 	FUNGHI,		//Codice colore: "\u001B[31m"
@@ -14,4 +16,21 @@ public enum Risorsa {
 	public static final String CODICE_COLORE_RISORSA_ANIMALE = "\u001B[34m";
 	public static final String CODICE_COLORE_RISORSA_INSETTI = "\u001B[35m";
 	public static final String CODICE_RESET_COLORE = "\u001B[0m";
+	
+	
+	public static String ottieniStringCodiceColoreDaRisorsa(String risorsa)
+	//utilizzo i codici dei colori per "colorare" i nickname dei giocatori in base al colore scelto
+	{
+		if( risorsa.equals(Risorsa.FUNGHI.toString()) ) {
+			return Risorsa.CODICE_COLORE_RISORSA_FUNGHI;
+		} else if( risorsa.equals(Risorsa.VEGETALE.toString()) ) {
+			return Risorsa.CODICE_COLORE_RISORSA_VEGETALE;
+		} else if( risorsa.equals(Risorsa.ANIMALE.toString()) ) {
+			return Risorsa.CODICE_COLORE_RISORSA_ANIMALE;
+		} else if( risorsa.equals(Risorsa.INSETTI.toString()) ) {
+			return Risorsa.CODICE_COLORE_RISORSA_INSETTI;
+		} else {
+			return "";
+		}
+	}
 }

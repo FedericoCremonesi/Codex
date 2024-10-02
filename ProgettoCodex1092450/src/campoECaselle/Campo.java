@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import carte.CartaOro;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Risorsa;
 import facceEAngoli.AngoloNascosto;
@@ -214,16 +215,8 @@ public class Campo {
 	public void stampaConteggioRisorseEOggettiVisibili() {
 		System.out.println("\nSul tuo campo sono visibili:");
 		for (String risorsaOppureOggetto : conteggioRisorseEOggetti.keySet()) { //Utilizzo keyset per scorrere gli elementi della hashmap
-			String coloreTesto = "";
-			if( risorsaOppureOggetto.equals(Risorsa.FUNGHI.toString()) ) {
-				coloreTesto = Risorsa.CODICE_COLORE_RISORSA_FUNGHI;
-			} else if( risorsaOppureOggetto.equals(Risorsa.VEGETALE.toString()) ) {
-				coloreTesto = Risorsa.CODICE_COLORE_RISORSA_VEGETALE;
-			} else if( risorsaOppureOggetto.equals(Risorsa.ANIMALE.toString()) ) {
-				coloreTesto = Risorsa.CODICE_COLORE_RISORSA_ANIMALE;
-			} else if( risorsaOppureOggetto.equals(Risorsa.INSETTI.toString()) ) {
-				coloreTesto = Risorsa.CODICE_COLORE_RISORSA_INSETTI;
-			}
+			String coloreTesto = Risorsa.ottieniStringCodiceColoreDaRisorsa(risorsaOppureOggetto);
+			
 			System.out.println("➤ "+conteggioRisorseEOggetti.get(risorsaOppureOggetto)+" simboli di tipo "+coloreTesto+risorsaOppureOggetto.toLowerCase()+Risorsa.CODICE_RESET_COLORE); //con get accedo al valore intero associato ad ogni stringa
 		}
 	}
@@ -326,5 +319,30 @@ public class Campo {
 	}
 	
 	
+	public boolean controllaRisorseNecessariePerCartaOro(CartaOro cartaDaGiocare) {
+		System.out.println("Verifica dei requisiti necessari per giocare questa carta oro sulla faccia frontale...");
+		contaRisorseEOggettiVisibili(40,40,true,false);
+		
+		boolean ok1=false;
+		boolean ok2=false;
+		
+		if( (conteggioRisorseEOggetti.get(cartaDaGiocare.getRisorsaNecessaria1().toString()))>=cartaDaGiocare.getQuantitàRisorsaNecessaria1() ) {
+			ok1 = true;
+		}
+		
+		if( (conteggioRisorseEOggetti.get(cartaDaGiocare.getRisorsaNecessaria2())) == null) { //questo è il caso in cui la carta oro ha un solo tipo di risorsa necessaria
+			ok2 = true;
+		} else if( (conteggioRisorseEOggetti.get(cartaDaGiocare.getRisorsaNecessaria2().toString()))>=cartaDaGiocare.getQuantitàRisorsaNecessaria2() ) {
+			ok2 = true;
+		}
+		
+		if(ok1 && ok2) {
+			System.out.println("Hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
+			return true;
+		} else {
+			System.out.println("Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
+			return false;
+		}
+	}
 	
 }

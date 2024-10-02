@@ -13,11 +13,49 @@ public class CartaOro extends CartaGiocabile {
 	private int punti;
 	private String condizionePunti; //non posso usare "Oggetto" perchè alcune carte danno i punti in base agli angoli coperti alla loro giocata, uso String
 	
-	private Risorsa risorsaNecessaria1;
 	private int quantitàRisorsaNecessaria1;
 	
 	private Risorsa risorsaNecessaria2;
 	private int quantitàRisorsaNecessaria2;
+	
+	
+	private Risorsa risorsaNecessaria1;
+	public int getPunti() {
+		return punti;
+	}
+	public void setPunti(int punti) {
+		this.punti = punti;
+	}
+	public String getCondizionePunti() {
+		return condizionePunti;
+	}
+	public void setCondizionePunti(String condizionePunti) {
+		this.condizionePunti = condizionePunti;
+	}
+	public Risorsa getRisorsaNecessaria1() {
+		return risorsaNecessaria1;
+	}
+	public void setRisorsaNecessaria1(Risorsa risorsaNecessaria1) {
+		this.risorsaNecessaria1 = risorsaNecessaria1;
+	}
+	public int getQuantitàRisorsaNecessaria1() {
+		return quantitàRisorsaNecessaria1;
+	}
+	public void setQuantitàRisorsaNecessaria1(int quantitàRisorsaNecessaria1) {
+		this.quantitàRisorsaNecessaria1 = quantitàRisorsaNecessaria1;
+	}
+	public Risorsa getRisorsaNecessaria2() {
+		return risorsaNecessaria2;
+	}
+	public void setRisorsaNecessaria2(Risorsa risorsaNecessaria2) {
+		this.risorsaNecessaria2 = risorsaNecessaria2;
+	}
+	public int getQuantitàRisorsaNecessaria2() {
+		return quantitàRisorsaNecessaria2;
+	}
+	public void setQuantitàRisorsaNecessaria2(int quantitàRisorsaNecessaria2) {
+		this.quantitàRisorsaNecessaria2 = quantitàRisorsaNecessaria2;
+	}
 	
 	
 	public ColoreCarta getColore() {
