@@ -130,7 +130,7 @@ public class Giocatore {
 		boolean indietroASceltaCarta;
 		boolean indietroASceltaFaccia;
 		
-		//Con questi do while annidati permetto anche all'utente di tornare indietro se la scelta appena fatta non lo soddisfa
+		//Con questi do while annidati permetto all'utente di tornare indietro se la scelta appena fatta non lo soddisfa
 		
 		do {
 			cartaDaGiocare = scegliCartaDaMano();
@@ -167,6 +167,8 @@ public class Giocatore {
 			
 			if(campo.controllaCondizioniGiocataCartaSuCampo(casellaInCuiPosizionareCarta)) {
 				cartaDaGiocare.posizionaSuCampo(casellaInCuiPosizionareCarta);
+				campo.copriAngoliAdiacentiACartaGiocata(casellaInCuiPosizionareCarta);
+				mano.removeCarta(cartaDaGiocare);
 				return;
 			}
 			
@@ -230,7 +232,7 @@ public class Giocatore {
 	
 	public boolean confermaVolontàDiGioco() {
 		while(true) { //il ciclo verrà eseguito all'infinito finchè non si incontrerà un return (all'interno degli if)
-			System.out.println(nickname+" vuoi proseguire con la giocata della carta? (in caso contrario, si torna alla scelta della faccia di gioco)");
+			System.out.println(nickname+" vuoi proseguire con la giocata della carta? Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)");
 			Scanner sc = new Scanner(System.in);
 			String scelta = sc.nextLine().toUpperCase();
 			if(scelta.equals("SI")) {

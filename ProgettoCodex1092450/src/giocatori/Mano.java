@@ -3,6 +3,7 @@ package giocatori;
 import java.util.ArrayList;
 import java.util.List;
 
+import carte.Carta;
 import carte.CartaGiocabile;
 
 public class Mano {
@@ -34,5 +35,12 @@ public class Mano {
 	
 	public CartaGiocabile getCartaDaMano(int indice) {
 		return carteInMano.get(indice);
+	}
+	
+	
+	//Viene rimossa dalla mano una carta specifica passata in ingresso
+	public void removeCarta(Carta cartaDaRimuovere)
+	{
+		carteInMano.remove(cartaDaRimuovere);
 	}
 }
