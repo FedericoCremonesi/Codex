@@ -1,9 +1,11 @@
 package carte;
 
+import campoECaselle.Campo;
 import campoECaselle.Casella;
 import campoECaselle.CasellaGiocabile;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
+import giocatori.Giocatore;
 import giocatori.Mano;
 
 public abstract class CartaGiocabile extends Carta {
@@ -73,4 +75,5 @@ public abstract class CartaGiocabile extends Carta {
 	public void aggiungiAMano(Mano manoInCuiAggiungereCarta) {
 		manoInCuiAggiungereCarta.aggiungiCartaAMano(this);
 	}
+	
 }

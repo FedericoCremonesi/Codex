@@ -1,8 +1,10 @@
 package carte;
 
+import campoECaselle.Campo;
 import campoECaselle.Casella;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
+import giocatori.Giocatore;
 
 public class CartaIniziale extends CartaGiocabile {
 

@@ -32,68 +32,48 @@ public class Giocatore {
 	public String getNickname() {
 		return nickname;
 	}
-
-
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-
 	public Pedina getColorePedina() {
 		return colorePedina;
 	}
-
-
 	public void setColorePedina(Pedina colorePedina) {
 		this.colorePedina = colorePedina;
 	}
 	
-	
 	public int getPunti() {
 		return punti;
 	}
-
-
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
 
-
 	public Campo getCampo() {
 		return campo;
 	}
-
-
 	public void setCampo(Campo campo) {
 		this.campo = campo;
 	}
 
-
 	public Mano getMano() {
 		return mano;
 	}
-
-
 	public void setMano(Mano mano) {
 		this.mano = mano;
 	}
 
-
 	public CartaObiettivo getObiettivoSegreto() {
 		return obiettivoSegreto;
 	}
-
-
 	public void setObiettivoSegreto(CartaObiettivo obiettivoSegreto) {
 		this.obiettivoSegreto = obiettivoSegreto;
 	}
 
-
 	public int getConteggioObiettiviCompletati() {
 		return conteggioObiettiviCompletati;
 	}
-
-
 	public void setConteggioObiettiviCompletati(int conteggioObiettiviCompletati) {
 		this.conteggioObiettiviCompletati = conteggioObiettiviCompletati;
 	}
@@ -167,8 +147,15 @@ public class Giocatore {
 			
 			if(campo.controllaCondizioniGiocataCartaSuCampo(casellaInCuiPosizionareCarta)) {
 				cartaDaGiocare.posizionaSuCampo(casellaInCuiPosizionareCarta);
-				campo.copriAngoliAdiacentiACartaGiocata(casellaInCuiPosizionareCarta);
+				int numeroAngoliCopertiConGiocata = campo.copriAngoliAdiacentiACartaGiocata(casellaInCuiPosizionareCarta);
 				mano.removeCarta(cartaDaGiocare);
+				
+				if(cartaDaGiocare instanceof CartaRisorsa) {
+					((CartaRisorsa) cartaDaGiocare).assegnaPunti(this);
+				} else if(cartaDaGiocare instanceof CartaOro) {
+					((CartaOro) cartaDaGiocare).assegnaPunti(this, numeroAngoliCopertiConGiocata);
+				} 
+				System.out.println(nickname+" i tuoi punti attuali sono: "+punti);
 				return;
 			}
 			

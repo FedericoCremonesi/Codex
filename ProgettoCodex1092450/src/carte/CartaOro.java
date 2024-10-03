@@ -1,9 +1,14 @@
 package carte;
 
+import java.util.HashMap;
+
+import campoECaselle.Campo;
 import campoECaselle.Casella;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
+import facceEAngoli.Oggetto;
 import facceEAngoli.Risorsa;
+import giocatori.Giocatore;
 
 public class CartaOro extends CartaGiocabile {
 	
@@ -156,4 +161,46 @@ public class CartaOro extends CartaGiocabile {
 		}
 		//se la carta non è ancora stata giocata sul campo, stampo anche le informazioni aggiuntive relative ad essa
 	}
+	
+	
+	public void assegnaPunti(Giocatore giocatore, int numeroAngoliCopertiConGiocata) {
+		if(super.getFacciaDiGioco().equals("FRONTE")) {
+			int puntiIniziali = giocatore.getPunti();
+			int incremento = 0;
+			
+			if(!(this.condizionePunti.equals("nessunaCondizione"))) {
+				System.out.println("Contando anche la carta appena giocata,");
+				HashMap<String, Integer> conteggioRisorseEOggetti = giocatore.getCampo().contaRisorseEOggettiVisibili(40, 40, true, true);
+				//Così facendo eseguo lo scorrimento del campo, conto le risorse e gli oggetti, e inoltre salvo il risultato nella variabile locale di questo metodo
+				
+				if(this.condizionePunti.equals("angoliCoperti")) {
+					//Caso in cui punti dati da: numero di angoli coperti alla giocata della carta
+					incremento = (this.punti)*(numeroAngoliCopertiConGiocata);
+				} else {
+					//Caso in cui punti dati da: numero di piume/inchiostri/pergamene sul campo
+					String oggettoCheConferiscePunti = this.condizionePunti;
+					incremento = (this.punti)*(conteggioRisorseEOggetti.get(oggettoCheConferiscePunti));
+				}
+			} else {
+				//Caso in cui punti non dipendono da nessuna condizione
+				incremento = this.punti;
+			}
+			
+			giocatore.setPunti(puntiIniziali+incremento);
+			
+			if(incremento == 0) {
+				System.out.println("Non hai guadagnato nessun punto");
+			} else {
+				System.out.print("Hai guadagnato "+incremento);
+				if(incremento == 1) {
+					System.out.println(" punto");
+				} else {
+					System.out.println(" punti");
+				} 
+			}
+		}
+	}
+	
+	
+	
 }

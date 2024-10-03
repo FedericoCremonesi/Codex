@@ -22,7 +22,7 @@ public class Campo {
 	
 	private Casella[][] caselleDelCampo;
 	//Creo una hashmap con tutte le risorse e gli oggetti
-	HashMap<String, Integer> conteggioRisorseEOggetti = new HashMap<String, Integer>();
+	HashMap<String, Integer> conteggioRisorseEOggetti;
 	
 	
 	public Casella getCasellaDaCoordinate(int i, int j) {
@@ -51,7 +51,8 @@ public class Campo {
 	
 	
 	//Funzione ricorsiva per contare tutte le risorse e gli oggetti sul campo
-	public void contaRisorseEOggettiVisibili(int i, int j, boolean inizioScorrimento, boolean stampaConteggio) {
+	public HashMap<String, Integer> contaRisorseEOggettiVisibili(int i, int j, boolean inizioScorrimento, boolean stampaConteggio) {
+		conteggioRisorseEOggetti = new HashMap<String, Integer>();
 		
 		if(inizioScorrimento) {
 			//All'inizio di ogni scorrimento del campo, pongo a 0 tutti i valori interi associati alle risorse e agli oggetti
@@ -66,7 +67,7 @@ public class Campo {
 		}
 				
 		if( ((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty() ) {
-			return;
+			return null;
 		} else {
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFacciaDiGioco().equals("FRONTE") ) {
 				
@@ -170,6 +171,8 @@ public class Campo {
 		if(stampaConteggio) {
 			stampaConteggioRisorseEOggettiVisibili();
 		}
+		
+		return conteggioRisorseEOggetti; //viene ritornata la hashmap in caso serva utilizzarla per altri motivi (es assegnare punti date determinate condizioni delle carte oro o obiettivo)
 	}
 	
 	

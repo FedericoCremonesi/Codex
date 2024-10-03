@@ -1,9 +1,11 @@
 package carte;
 
+import campoECaselle.Campo;
 import campoECaselle.Casella;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
 import facceEAngoli.Risorsa;
+import giocatori.Giocatore;
 
 public class CartaRisorsa extends CartaGiocabile {
 
@@ -61,4 +63,26 @@ public class CartaRisorsa extends CartaGiocabile {
 		}
 		//se la carta non è ancora stata giocata sul campo, stampo anche le informazioni aggiuntive relative ad essa
 	}
+	
+	
+	public void assegnaPunti(Giocatore giocatore) {
+		if(super.getFacciaDiGioco().equals("FRONTE")) {
+			int puntiIniziali = giocatore.getPunti();
+			
+			if(this.punti == 0) {
+				System.out.println("La giocata di questa carta non fa guadagnare punti");
+			} else {
+				giocatore.setPunti(puntiIniziali+this.punti);
+				System.out.print("Hai guadagnato "+this.punti);
+				if(this.punti == 1) {
+					System.out.println(" punto");
+				} else {
+					System.out.println(" punti");
+				}
+			}
+		}
+	}
+	
+	
+	
 }
