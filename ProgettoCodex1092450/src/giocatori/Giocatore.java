@@ -11,6 +11,7 @@ import carte.CartaGiocabile;
 import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
+import tavoloEMazzi.Mazzo;
 
 public class Giocatore {
 	
@@ -124,6 +125,7 @@ public class Giocatore {
 					boolean chiediConfermaVolontà = true;
 					
 					if( (cartaDaGiocare instanceof CartaOro) && (cartaDaGiocare.getFacciaDiGioco().equals("FRONTE")) ) {
+						//Controllo le risorse necessarie per giocare una carta oro sulla faccia frontale
 						indietroASceltaFaccia = !( getCampo().controllaRisorseNecessariePerCartaOro((CartaOro) cartaDaGiocare) ); //posso eseguire il casting perchè ho appena controllato che la carta da giocare fosse di tipo oro
 						chiediConfermaVolontà = !indietroASceltaFaccia; //se bisogna tornare automaticamente alla scelta della faccia perchè il giocatore non ha abbastanza risorse necessarie per giocare la carta (oro sul fronte), non si chiederà ovviamente conferma se il giocatore vuole proseguire (perchè non può)
 																		//viceversa, se le risorse sul campo del giocatore soddisfano i requisiti necessari, si dovrà chiedere al giocatore se vuole proseguire con la giocata della carta
@@ -145,11 +147,14 @@ public class Giocatore {
 			
 			CasellaGiocabile casellaInCuiPosizionareCarta = (CasellaGiocabile) campo.getCasellaDaCoordinate(coordinateCasella[0],coordinateCasella[1]);
 			
+			//Controllo se sul campo ci sono le condizioni per giocare una carta nella posizione desiderata
 			if(campo.controllaCondizioniGiocataCartaSuCampo(casellaInCuiPosizionareCarta)) {
+				//Posiziono sul campo
 				cartaDaGiocare.posizionaSuCampo(casellaInCuiPosizionareCarta);
 				int numeroAngoliCopertiConGiocata = campo.copriAngoliAdiacentiACartaGiocata(casellaInCuiPosizionareCarta);
 				mano.removeCarta(cartaDaGiocare);
 				
+				//Assegno eventuali punti
 				if(cartaDaGiocare instanceof CartaRisorsa) {
 					((CartaRisorsa) cartaDaGiocare).assegnaPunti(this);
 				} else if(cartaDaGiocare instanceof CartaOro) {
@@ -264,4 +269,51 @@ public class Giocatore {
 		return coordinate;
 	}
 	
+	
+	
+	public void pescaCartaDaMazzi(Mazzo mazzoCarteRisorsa, Mazzo mazzoCarteOro) {
+		System.out.println("\n"+nickname+", ora devi pescare una carta da uno dei due mazzi");
+		System.out.println("Mazzo risorsa:");
+		mazzoCarteRisorsa.visualizzaTreCartePerPesca();
+		System.out.println("Mazzo oro:");
+		mazzoCarteOro.visualizzaTreCartePerPesca();
+		
+		String mazzoDaCuiPescare;
+		do {
+			System.out.println("Da quale mazzo vuoi pescare la carta?");
+			Scanner sc=new Scanner(System.in);
+			mazzoDaCuiPescare=sc.nextLine().toUpperCase();
+			if(mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) {
+				System.out.print("Ok! ");
+				
+				int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
+				do {
+					try {
+						System.out.println("Quale carta vuoi prendere tra le tre proposte?");
+						sc = new Scanner(System.in);
+						numeroCartaScelta = sc.nextInt();
+						if(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)
+						{
+							if(mazzoDaCuiPescare.equals("RISORSA")) {
+								mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteRisorsa.estraiCartaDaMazzo(numeroCartaScelta-1, false));
+								//poichè ho stampato gli indici delle carte nel mazzo sommando 1 (per rendere più facile la scelta dell'utente), quando utilizzo l'input da tastiera dovrò diminuire il valore ottenuto di 1
+								System.out.println("Carta risorsa aggiunta alla mano!");
+							} else if(mazzoDaCuiPescare.equals("ORO")) {
+								mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteOro.estraiCartaDaMazzo(numeroCartaScelta-1, false));
+								System.out.println("Carta oro aggiunta alla mano!");
+							}
+						} else {
+							System.out.println("Inserimento non valido, inserire un numero tra 1 e 3");
+						}
+					} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
+						System.out.println("Inserimento non valido, inserire un numero");
+					}
+				} while (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3));
+				
+			} else {
+				System.out.println("Inserimento non valido, scrivere risorsa oppure oro");
+			}
+		} while(! (mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) );
+		
+	}
 }

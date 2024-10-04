@@ -209,7 +209,7 @@ public class Partita {
 		for(Giocatore g : gruppoGiocatori)
 		{
 			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
-			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiPrimaCartaDaMazzo();
+			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiCartaDaMazzo(0, true);
 			
 			g.scegliFacciaDiGioco(cartaInizialeEstratta, false); //passo false al metodo perchè in questo caso non si può tornare indietro
 																 //(a differenza di quando si sceglie la faccia di gioco di una delle carte dalla mano, lì si può tornare alla scelta della carta da giocare)
@@ -224,14 +224,14 @@ public class Partita {
 			//Carte risorsa:
 			System.out.println("\nEstraendo due carte risorsa per: "+g.getNickname()+"...");
 			for(int i=0; i<2; i++) {
-				CartaRisorsa cartaRisorsaEstratta = (CartaRisorsa) tavoloDiGioco.getMazzoCarteRisorsa().estraiPrimaCartaDaMazzo();
+				CartaRisorsa cartaRisorsaEstratta = (CartaRisorsa) tavoloDiGioco.getMazzoCarteRisorsa().estraiCartaDaMazzo(0, true); //passo 0 per estrarre la prima carta
 				
 				cartaRisorsaEstratta.aggiungiAMano(g.getMano());
 			}
 			
 			//Carta oro:
 			System.out.println("\nEstraendo una carta oro per: "+g.getNickname()+"...");
-			CartaOro cartaOroEstratta = (CartaOro) tavoloDiGioco.getMazzoCarteOro().estraiPrimaCartaDaMazzo();
+			CartaOro cartaOroEstratta = (CartaOro) tavoloDiGioco.getMazzoCarteOro().estraiCartaDaMazzo(0, true); //passo 0 per estrarre la prima carta
 			
 			cartaOroEstratta.aggiungiAMano(g.getMano());
 			
@@ -242,7 +242,7 @@ public class Partita {
 	public void scopriObiettiviComuni() {
 		System.out.println("\nEstraendo i due obiettivi comuni...");
 		for(int i=0; i<2; i++) {
-			tavoloDiGioco.aggiungiObiettivoComune( i, (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo()) );
+			tavoloDiGioco.aggiungiObiettivoComune( i, (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiCartaDaMazzo(0, true)) );
 		}
 	}
 
@@ -252,9 +252,9 @@ public class Partita {
 		{
 			System.out.println("\nEstraendo due carte obiettivo per: "+g.getNickname()+"...");
 			System.out.print("A:");
-			CartaObiettivo obiettivoEstratto1 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo());
+			CartaObiettivo obiettivoEstratto1 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiCartaDaMazzo(0, true));
 			System.out.print("B:");
-			CartaObiettivo obiettivoEstratto2 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiPrimaCartaDaMazzo());
+			CartaObiettivo obiettivoEstratto2 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiCartaDaMazzo(0, true));
 			
 			String sceltaObiettivo;
 			do {
@@ -335,6 +335,9 @@ public class Partita {
 		} while (!( sceltaOpzione.equals("D") ));
 		
 		g.giocaCartaDaMano();
+		g.pescaCartaDaMazzi(tavoloDiGioco.getMazzoCarteRisorsa(), tavoloDiGioco.getMazzoCarteOro());
+		
+		//2CheckPerFinePartita TODO
 	}
 
 	
