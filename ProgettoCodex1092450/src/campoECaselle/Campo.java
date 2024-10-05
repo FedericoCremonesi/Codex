@@ -22,7 +22,7 @@ public class Campo {
 	
 	private Casella[][] caselleDelCampo;
 	//Creo una hashmap con tutte le risorse e gli oggetti
-	HashMap<String, Integer> conteggioRisorseEOggetti;
+	HashMap<String, Integer> conteggioRisorseEOggetti = new HashMap<String, Integer>();;
 	
 	
 	public Casella getCasellaDaCoordinate(int i, int j) {
@@ -52,7 +52,6 @@ public class Campo {
 	
 	//Funzione ricorsiva per contare tutte le risorse e gli oggetti sul campo
 	public HashMap<String, Integer> contaRisorseEOggettiVisibili(int i, int j, boolean inizioScorrimento, boolean stampaConteggio) {
-		conteggioRisorseEOggetti = new HashMap<String, Integer>();
 		
 		if(inizioScorrimento) {
 			//All'inizio di ogni scorrimento del campo, pongo a 0 tutti i valori interi associati alle risorse e agli oggetti
@@ -341,7 +340,7 @@ public class Campo {
 		}
 		
 		if(ok1 && ok2) {
-			System.out.println("Hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
+			System.out.println("Ok! Hai abbastanza requisiti");
 			return true;
 		} else {
 			System.out.println("Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");

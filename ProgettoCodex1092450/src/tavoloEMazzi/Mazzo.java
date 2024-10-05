@@ -84,4 +84,13 @@ public class Mazzo <T extends Carta> {
 		}
 		System.out.println("(di quest'ultima carta puoi conoscere solo il retro)\n");
 	}
+	
+	
+	public boolean controllaSeMazzoFinito() {
+		if(carteNelMazzo.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

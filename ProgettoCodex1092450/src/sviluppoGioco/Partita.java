@@ -31,6 +31,8 @@ public class Partita {
 	private static int numeroRoundGiocati;
 	private Boolean ultimoRound;
 	
+	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 20;
+	
 	
 	public static int getNumeroRoundGiocati() {
 		return numeroRoundGiocati;
@@ -63,11 +65,11 @@ public class Partita {
 		consegnaCarteRisorsaEOro();
 		scopriObiettiviComuni();
 		assegnaObiettivoSegreto();
-		if(!ultimoRound) {
+		while(!ultimoRound) {
 			giocaRound();
-		} else {
-			//controlla punti carte obiettivo ecc (TODO)
 		}
+		controllaObiettivi();
+		
 	}
 	
 	
@@ -326,7 +328,7 @@ public class Partita {
 				System.out.println(g.getNickname()+", il tuo obiettivo segreto è:\n"+g.getObiettivoSegreto());
 				break;
 			case "D":
-				System.out.println(); //va semplicemente a capo
+				System.out.println(); //va semplicemente a capo (ed esce dal ciclo)
 				break;
 			default:
 				System.out.println("Inserimento non valido, scrivere A, B, C oppure D");
@@ -337,9 +339,59 @@ public class Partita {
 		g.giocaCartaDaMano();
 		g.pescaCartaDaMazzi(tavoloDiGioco.getMazzoCarteRisorsa(), tavoloDiGioco.getMazzoCarteOro());
 		
-		//2CheckPerFinePartita TODO
+		if(!ultimoRound) {
+			ultimoRound = eseguiCheckFinePartita();
+		}
 	}
 
+	
+	public boolean eseguiCheckFinePartita() {
+		//Controllo se almeno un giocatore ha raggiunto (o superato) i 20 punti
+		boolean almeno20Punti = false;
+		
+		for(Giocatore g : gruppoGiocatori)
+		{
+			if(g.getPunti()>=PUNTEGGIO_MINIMO_FINE_PARTITA) {
+				System.out.println("\n"+g.getNickname()+" ha raggiunto "+g.getPunti()+" punti!");
+				almeno20Punti = true;
+			}
+		}
+		
+		
+		//Controllo se entrambi i mazzi di carte sono finiti
+		boolean fineMazzoRisorsa = false;
+		boolean fineMazzoOro = false;
+		boolean fineEntrambiMazzi = false;;
+		
+		if(tavoloDiGioco.getMazzoCarteRisorsa().controllaSeMazzoFinito()) {
+			System.out.println("Le carte nel mazzo risorsa sono finite");
+			fineMazzoRisorsa = true;
+		}
+		if(tavoloDiGioco.getMazzoCarteOro().controllaSeMazzoFinito()) {
+			System.out.println("Le carte nel mazzo oro sono finite");
+			fineMazzoOro = true;
+		}
+		
+		if(fineMazzoRisorsa && fineMazzoOro) {
+			System.out.println("\n"+"Sono finite le carte in entrambi i mazzi (risorsa e oro)");
+			fineEntrambiMazzi = true;
+		}
+		
+		
+		//Annuncio che siamo verso la fine della partita nel caso sia verificata almeno una delle condizioni verificate in precedenza
+		if(almeno20Punti || fineEntrambiMazzi) {
+			System.out.println("I prossimi turni saranno gli ultimi della partita, non si inizierà un altro round");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	public void controllaObiettivi() {
+		System.out.println("\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
+		//...
+	}
 	
 	
 }
