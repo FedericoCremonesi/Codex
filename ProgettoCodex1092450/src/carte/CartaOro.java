@@ -178,8 +178,9 @@ public class CartaOro extends CartaGiocabile {
 			
 			if(!(this.condizionePunti.equals("nessunaCondizione"))) {
 				System.out.println("Contando anche la carta appena giocata,");
-				HashMap<String, Integer> conteggioRisorseEOggetti = giocatore.getCampo().contaRisorseEOggettiVisibili(40, 40, true, true);
+				HashMap<String, Integer> conteggioRisorseEOggetti = giocatore.getCampo().contaRisorseEOggettiVisibili(40, 40, true);
 				//Così facendo eseguo lo scorrimento del campo, conto le risorse e gli oggetti, e inoltre salvo il risultato nella variabile locale di questo metodo
+				giocatore.getCampo().stampaConteggioRisorseEOggettiVisibili();
 				
 				if(this.condizionePunti.equals("angoliCoperti")) {
 					//Caso in cui punti dati da: numero di angoli coperti alla giocata della carta

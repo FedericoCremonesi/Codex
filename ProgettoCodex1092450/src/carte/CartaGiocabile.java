@@ -3,6 +3,7 @@ package carte;
 import campoECaselle.Campo;
 import campoECaselle.Casella;
 import campoECaselle.CasellaGiocabile;
+import facceEAngoli.Faccia;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
 import giocatori.Giocatore;
@@ -43,6 +44,18 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	public void setRetro(FacciaRetro retro) {
 		this.retro = retro;
+	}
+	
+	
+	public Faccia ottieniFacciaSuCuiGiocata() {
+		if(facciaDiGioco.equals("FRONTE")) {
+			return fronte;
+		} else if(facciaDiGioco.equals("RETRO")) {
+			return retro;
+		} else {
+			System.out.println("Questa carta non è ancora stata giocata");
+			return null;
+		}
 	}
 	
 	

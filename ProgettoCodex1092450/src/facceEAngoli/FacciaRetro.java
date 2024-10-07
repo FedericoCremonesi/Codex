@@ -2,7 +2,7 @@ package facceEAngoli;
 
 import carte.ColoreCarta;
 
-public class FacciaRetro extends FacciaFronte {
+public class FacciaRetro extends Faccia {
 	
 	private Risorsa risorsaRetroCentrale; //solo per le facce retro
 	private Risorsa risorsaRetroCentraleAggiuntiva1; //solo per le facce retro di carte iniziali che la hanno

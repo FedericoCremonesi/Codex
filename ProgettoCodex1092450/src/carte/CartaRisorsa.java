@@ -60,7 +60,7 @@ public class CartaRisorsa extends CartaGiocabile {
 			for(Integer k=0; k<FacciaFronte.NUMERO_LINEE_FACCIA; k++) {
 				//per poter usare il metodo toString, devo usare il tipo Integer (non int, che è un tipo primitivo e non ha metodi)
 				super.getFronte().printFaccia(colore.toString(), tipologiaCarta, k.toString());
-				System.out.print("\t");
+				System.out.print(" \t");
 				super.getRetro().printFaccia(colore.toString(), tipologiaCarta, k.toString());
 				System.out.print("\n");
 			}
