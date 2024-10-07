@@ -31,7 +31,7 @@ public class CartaIniziale extends CartaGiocabile {
 		{
 			super.getRetro().printFaccia("Nessun colore", tipologiaCarta, numeroLineaDaStampare);
 		}
-		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
+		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta (una sopra l'altro) nel caso in cui non sia ancora stata giocata
 		
 	}
 	

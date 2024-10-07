@@ -10,7 +10,7 @@ public class FacciaFronte {
 	private Angolo angoloBassoDx;
 	
 	protected String[] insiemeLineeFaccia;
-	public final int NUMERO_LINEE_FACCIA=13; //in una faccia ci sono 13 linee in totale
+	public final static int NUMERO_LINEE_FACCIA=13; //in una faccia ci sono 13 linee in totale
 	
 	
 	public Angolo getAngoloAltoSx() {

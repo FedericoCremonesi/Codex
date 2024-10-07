@@ -126,16 +126,24 @@ public class CartaOro extends CartaGiocabile {
 	@Override
 	public void print(String numeroLineaDaStampare) {
 		String tipologiaCarta = "oro";
-		if (!(super.getFacciaDiGioco().equals("RETRO")))
+		if(super.getFacciaDiGioco().equals("FRONTE"))
 		{
 			super.getFronte().printFaccia(colore.toString(), tipologiaCarta, numeroLineaDaStampare);
 		}
-		if (!(super.getFacciaDiGioco().equals("FRONTE")))
+		if(super.getFacciaDiGioco().equals("RETRO"))
 		{
 			super.getRetro().printFaccia(colore.toString(), tipologiaCarta, numeroLineaDaStampare);
 		}
-		//usando le negazioni delle condizioni negli if è possibile stampare sia il fronte che il retro della carta nel caso in cui non sia ancora stata giocata
-		
+		//Così stampo le due faccie affiancate (nel caso non sia ancora stata giocata la carta)
+		if (super.getFacciaDiGioco().equals("non ancora giocata")) {
+			for(Integer k=0; k<FacciaFronte.NUMERO_LINEE_FACCIA; k++) {
+				//per poter usare il metodo toString, devo usare il tipo Integer (non int, che è un tipo primitivo e non ha metodi)
+				super.getFronte().printFaccia(colore.toString(), tipologiaCarta, k.toString());
+				System.out.print(" \t");
+				super.getRetro().printFaccia(colore.toString(), tipologiaCarta, k.toString());
+				System.out.print("\n");
+			}
+		}
 		
 		if (super.getFacciaDiGioco().equals("non ancora giocata")) {
 			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Punti dati dalla carta: "+ColoreCarta.CODICE_RESET_COLORE+punti);
