@@ -50,7 +50,6 @@ public abstract class Faccia {
 	
 	
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx) {
-		super();
 		this.angoloAltoSx = angoloAltoSx;
 		this.angoloAltoDx = angoloAltoDx;
 		this.angoloBassoSx = angoloBassoSx;

@@ -329,12 +329,7 @@ public class Campo {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getFronte().getAngoloBassoDx();
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getRetro().getAngoloBassoDx();
-			}
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				System.out.println("In alto a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -348,12 +343,7 @@ public class Campo {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getFronte().getAngoloBassoSx();
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getRetro().getAngoloBassoSx();
-			}
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				System.out.println("In alto a destra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -367,12 +357,7 @@ public class Campo {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getFronte().getAngoloAltoDx();
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getRetro().getAngoloAltoDx();
-			}
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				System.out.println("In basso a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -386,12 +371,7 @@ public class Campo {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getFronte().getAngoloAltoSx();
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaDaControllare.getCartaContenuta().getRetro().getAngoloAltoSx();
-			}
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				System.out.println("In basso a destra: c'è angolo visibile non coperto a cui agganciarsi");

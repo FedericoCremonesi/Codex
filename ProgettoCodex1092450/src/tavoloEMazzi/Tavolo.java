@@ -10,10 +10,12 @@ import carte.CartaIniziale;
 import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
+import carte.ColoreCarta;
 import facceEAngoli.Angolo;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.FacciaFronte;
 import facceEAngoli.FacciaRetro;
+import facceEAngoli.Oggetto;
 import facceEAngoli.Risorsa;
 
 public class Tavolo {
@@ -144,9 +146,22 @@ public class Tavolo {
 								new FacciaRetro(Angolo.creaAngoloInBaseAInput(splitted[5]),Angolo.creaAngoloInBaseAInput(splitted[6]),Angolo.creaAngoloInBaseAInput(splitted[7]),Angolo.creaAngoloInBaseAInput(splitted[8]),Risorsa.valueOf(splitted[9]),Risorsa.valueOf(splitted[10]),Risorsa.valueOf(splitted[11])) ));
 					}
 				} else
-				if(Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 102)
-				{
-					mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]) ));
+				if (Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 102) {
+					if (Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 90) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]) ));
+					}
+					if (Integer.parseInt(splitted[0]) >= 91 && Integer.parseInt(splitted[0]) <= 94) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]),ColoreCarta.valueOf(splitted[4]) ));
+					}
+					if (Integer.parseInt(splitted[0]) >= 95 && Integer.parseInt(splitted[0]) <= 98) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),Risorsa.valueOf(splitted[2]),Integer.parseInt(splitted[3]) ));
+					}
+					if (Integer.parseInt(splitted[0]) >= 99 && Integer.parseInt(splitted[0]) <= 102) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),
+																						Oggetto.valueOf(splitted[2]),Integer.parseInt(splitted[3]),
+																						Oggetto.valueOf(splitted[4]),Integer.parseInt(splitted[5]),
+																						Oggetto.valueOf(splitted[6]),Integer.parseInt(splitted[7])));
+					}
 				}
 				
 			}
