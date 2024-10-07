@@ -317,7 +317,7 @@ public class Partita {
 			case "A":
 				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
 				int[] coordinateCasella = g.scegliCoordinateCasellaGiocabile();
-				g.getCampo().stampa3x3AttornoACartaInCampo(coordinateCasella);
+				g.getCampo().stampa5x5AttornoACartaInCampo(coordinateCasella);
 				break;
 			case "B":
 				tavoloDiGioco.stampaObiettiviComuni();

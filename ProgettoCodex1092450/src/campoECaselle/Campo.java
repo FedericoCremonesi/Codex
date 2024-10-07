@@ -250,22 +250,22 @@ public class Campo {
 	}
 	
 	
-	public void stampa3x3AttornoACartaInCampo(int[] coordinateCasella) {
-		int partenzaI = coordinateCasella[0]-1; //voglio stampare anche la carta nella riga sopra rispetto a quella alle coordinate comunicate, quindi calcolo -1
-		int partenzaJ = coordinateCasella[1]-1; //voglio stampare anche la carta nella colonna a sinistra rispetto a quella alle coordinate comunicate, quindi calcolo -1
+	public void stampa5x5AttornoACartaInCampo(int[] coordinateCasella) {
+		int partenzaI = coordinateCasella[0]-2; //voglio stampare anche la carta nella seconda riga sopra rispetto a quella alle coordinate comunicate, quindi calcolo -2
+		int partenzaJ = coordinateCasella[1]-2; //voglio stampare anche la carta nella seconda colonna a sinistra rispetto a quella alle coordinate comunicate, quindi calcolo -2
 		System.out.println();
 		
-		//Con questi 3 cicli for stampo una "matrice" 3x3 di caselle (giocabili e non) affiancate
+		//Con questi 3 cicli for stampo una "matrice" 5x5 di caselle (giocabili e non) affiancate
 		
-		for(int i=partenzaI; i<=(partenzaI+2); i++) //Scorre le righe della matrice Campo
+		for(int i=partenzaI; i<=(partenzaI+4); i++) //Scorre le righe della matrice Campo
 		{
 			for(Integer k=0; k<13; k++) //Scorre le linee delle singole carte
 			{
-				for(int j=partenzaJ; j<=(partenzaJ+2); j++) //Scorre le colonne della matrice Campo
+				for(int j=partenzaJ; j<=(partenzaJ+4); j++) //Scorre le colonne della matrice Campo
 				{
 					caselleDelCampo[i][j].stampaLineaCasellaIngrandita(k);
 				}
-				System.out.println(); //va a capo una volta finito di stampare la linea k di tutte le 3 caselle affiancate
+				System.out.println(); //va a capo una volta finito di stampare la linea k di tutte le 5 caselle affiancate
 			}
 		}
 		
