@@ -13,7 +13,7 @@ public class CasellaGiocabile extends Casella {
 	private CartaGiocabile cartaContenuta;
 	
 	//Questa costante (array di stringhe) serve per stampare una casella giocabile nel caso non contenga ancora una carta giocabile
-	private static final String[] INSIEME_LINEE_CASELLA_GIOCABILE_VUOTA =  {"▛---                              ---▜",
+	private static final String[] INSIEME_LINEE_CASELLA_GIOCABILE_VUOTA =  {"╭---                              ---╮",
 																			"|                                    |",
 																			"|                                    |",
 																			"                                      ",
@@ -25,7 +25,7 @@ public class CasellaGiocabile extends Casella {
 																			"                                      ",
 																			"|                                    |",
 																			"|                                    |",
-																			"▙---                              ---▟"};
+																			"╰---                              ---╯"};
 	
 	
 	public CartaGiocabile getCartaContenuta() {

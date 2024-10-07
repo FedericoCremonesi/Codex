@@ -95,7 +95,7 @@ public abstract class Faccia {
 		String[] lineeFaccia = new String[NUMERO_LINEE_FACCIA];
 		
 		//Costruisco la linea1 della faccia
-		lineeFaccia[0] = (coloreContorno+"▛------------------------------------▜"+ColoreCarta.CODICE_RESET_COLORE);
+		lineeFaccia[0] = (coloreContorno+"╭------------------------------------╮"+ColoreCarta.CODICE_RESET_COLORE);
 		
 		//Costruisco la linea2 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
@@ -135,12 +135,12 @@ public abstract class Faccia {
 		
 		//Costruisco la linea5 della faccia
 		if(angoloAltoSx instanceof AngoloVisibile) {
-			lineeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------▟"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------╯"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[4] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloAltoDx instanceof AngoloVisibile) {
-			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"▙------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"╰------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
@@ -156,12 +156,12 @@ public abstract class Faccia {
 		
 		//Costruisco la linea9 della faccia
 		if(angoloBassoSx instanceof AngoloVisibile) {
-			lineeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------▜"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+			lineeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------╮"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[8] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
 		if(angoloBassoDx instanceof AngoloVisibile) {
-			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"▛------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
+			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"╭------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
@@ -203,7 +203,7 @@ public abstract class Faccia {
 		}
 		
 		//Costruisco la linea13 della faccia
-		lineeFaccia[12] = (coloreContorno+"▙------------------------------------▟"+ColoreCarta.CODICE_RESET_COLORE);
+		lineeFaccia[12] = (coloreContorno+"╰------------------------------------╯"+ColoreCarta.CODICE_RESET_COLORE);
 		
 		return lineeFaccia;
 	}

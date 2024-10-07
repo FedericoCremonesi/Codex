@@ -102,7 +102,7 @@ public class Partita {
 				String nickname;
 				System.out.println("\nInserire il nickname del giocatore "+(i+1)+"\n(Nota: l'ordine di inserimento non necessariamente sarà l'ordine di gioco)");
 				Scanner sc = new Scanner(System.in);
-				nickname = sc.nextLine();
+				nickname = sc.nextLine().trim(); //con questo metodo tolgo gli spazi all'inizio e alla fine del nickname inserito
 				if(nickname.isBlank()) { //verifico che l'utente non inserisca spazio, tab o nulla
 					System.out.println("Il nickname inserito risulta essere vuoto, inserire un nickname con almeno un carattere");
 					ok = false;
