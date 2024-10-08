@@ -9,9 +9,10 @@ public enum ColoreCarta {
 			//Codice per reset colore: "\u001B[0m"
 	
 	
-	public static final String CODICE_COLORE_CARTA_RISORSA = "\u001B[30m";
-	public static final String CODICE_COLORE_CARTA_ORO = "\u001B[33m";
-	public static final String CODICE_RESET_COLORE = "\u001B[0m";
+	public static final String CODICE_COLORE_CARTA_RISORSA = "\u001B[30m";		//colore nero
+	public static final String CODICE_COLORE_CARTA_ORO = "\u001B[33m";			//colore giallo
+	public static final String CODICE_COLORE_CARTA_OBIETTIVO = "\u001B[33m";	//colore giallo
+	public static final String CODICE_RESET_COLORE = "\u001B[0m";				//reset colore
 	
 	
 	public static String ottieniStringCodiceColoreDaStringa(String stringaConColore)

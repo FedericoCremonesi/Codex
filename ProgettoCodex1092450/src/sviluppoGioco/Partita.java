@@ -323,7 +323,8 @@ public class Partita {
 				tavoloDiGioco.stampaObiettiviComuni();
 				break;
 			case "C":
-				System.out.println(g.getNickname()+", il tuo obiettivo segreto è:\n"+g.getObiettivoSegreto());
+				System.out.println(g.getNickname()+", il tuo obiettivo segreto è:");
+				g.getObiettivoSegreto().print("all");
 				break;
 			case "D":
 				System.out.println(); //va semplicemente a capo (ed esce dal ciclo)

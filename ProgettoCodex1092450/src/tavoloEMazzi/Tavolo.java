@@ -8,6 +8,8 @@ import java.util.Scanner;
 import campoECaselle.Casella;
 import carte.CartaIniziale;
 import carte.CartaObiettivo;
+import carte.CartaObiettivoPerDisposizione;
+import carte.CartaObiettivoPerQuantità;
 import carte.CartaOro;
 import carte.CartaRisorsa;
 import carte.ColoreCarta;
@@ -148,19 +150,23 @@ public class Tavolo {
 				} else
 				if (Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 102) {
 					if (Integer.parseInt(splitted[0]) >= 87 && Integer.parseInt(splitted[0]) <= 90) {
-						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]) ));
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivoPerDisposizione( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]) ));
 					}
 					if (Integer.parseInt(splitted[0]) >= 91 && Integer.parseInt(splitted[0]) <= 94) {
-						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]),ColoreCarta.valueOf(splitted[4]) ));
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivoPerDisposizione( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),splitted[2],ColoreCarta.valueOf(splitted[3]),ColoreCarta.valueOf(splitted[4]) ));
 					}
 					if (Integer.parseInt(splitted[0]) >= 95 && Integer.parseInt(splitted[0]) <= 98) {
-						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),Risorsa.valueOf(splitted[2]),Integer.parseInt(splitted[3]) ));
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivoPerQuantità( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),Risorsa.valueOf(splitted[2]),Integer.parseInt(splitted[3]) ));
 					}
-					if (Integer.parseInt(splitted[0]) >= 99 && Integer.parseInt(splitted[0]) <= 102) {
-						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivo( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),
-																						Oggetto.valueOf(splitted[2]),Integer.parseInt(splitted[3]),
-																						Oggetto.valueOf(splitted[4]),Integer.parseInt(splitted[5]),
-																						Oggetto.valueOf(splitted[6]),Integer.parseInt(splitted[7])));
+					if (Integer.parseInt(splitted[0]) == 99) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivoPerQuantità( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),
+																								  Oggetto.valueOf(splitted[2]),Integer.parseInt(splitted[3]),
+																								  Oggetto.valueOf(splitted[4]),Integer.parseInt(splitted[5]),
+																								  Oggetto.valueOf(splitted[6]),Integer.parseInt(splitted[7]) ));
+					}
+					if (Integer.parseInt(splitted[0]) >= 100 && Integer.parseInt(splitted[0]) <= 102) {
+						mazzoInCuiMettereCarte.aggiungiCartaAMazzo(new CartaObiettivoPerQuantità( Integer.parseInt(splitted[0]),Integer.parseInt(splitted[1]),
+																								  Oggetto.valueOf(splitted[2]),Integer.parseInt(splitted[3]) ));
 					}
 				}
 				
@@ -205,7 +211,7 @@ public class Tavolo {
 	public void stampaObiettiviComuni() {
 		System.out.println("Gli obiettivi comuni di questa partita sono:");
 		for(int t=0; t<NUMERO_OBIETTIVI_COMUNI; t++) {
-			System.out.println("- "+obiettiviComuni[t].toString());
+			obiettiviComuni[t].print("all");
 		}
 	}
 }

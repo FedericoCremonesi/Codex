@@ -36,23 +36,29 @@ public class AngoloVisibile extends Angolo {
 		if(coperto) {
 			return " (coperto)";
 		} else {
-			if(contenuto.equals(Risorsa.FUNGHI.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.CODICE_RESET_COLORE; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
-			} else if(contenuto.equals(Risorsa.VEGETALE.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+Risorsa.CODICE_RESET_COLORE;
-			} else if(contenuto.equals(Risorsa.ANIMALE.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+Risorsa.CODICE_RESET_COLORE;
-			} else if(contenuto.equals(Risorsa.INSETTI.toString())) {
-				return Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+Risorsa.CODICE_RESET_COLORE;
-			} else if(contenuto.equals(Oggetto.PIUMA.toString())) {
-				return "   PIUMA  ";
-			} else if(contenuto.equals(Oggetto.INCHIOSTRO.toString())) {
-				return "INCHIOSTRO";
-			} else if(contenuto.equals(Oggetto.PERGAMENA.toString())) {
-				return " PERGAMENA";
-			} else {
-				return "          ";
-			}
+			return ottieniStringaConSpaziDaStringaSimbolo(contenuto);
+		}
+	}
+	
+	
+	//Costruisco una funzione apposita perchè mi serve anche per stampare i simboli necessari per le carte obiettivo
+	public static String ottieniStringaConSpaziDaStringaSimbolo(String stringaSimbolo) {
+		if(stringaSimbolo.equals(Risorsa.FUNGHI.toString())) {
+			return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.CODICE_RESET_COLORE; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori
+		} else if(stringaSimbolo.equals(Risorsa.VEGETALE.toString())) {
+			return Risorsa.CODICE_COLORE_RISORSA_VEGETALE+" VEGETALE "+Risorsa.CODICE_RESET_COLORE;
+		} else if(stringaSimbolo.equals(Risorsa.ANIMALE.toString())) {
+			return Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  ANIMALE "+Risorsa.CODICE_RESET_COLORE;
+		} else if(stringaSimbolo.equals(Risorsa.INSETTI.toString())) {
+			return Risorsa.CODICE_COLORE_RISORSA_INSETTI+"  INSETTI "+Risorsa.CODICE_RESET_COLORE;
+		} else if(stringaSimbolo.equals(Oggetto.PIUMA.toString())) {
+			return "   PIUMA  ";
+		} else if(stringaSimbolo.equals(Oggetto.INCHIOSTRO.toString())) {
+			return "INCHIOSTRO";
+		} else if(stringaSimbolo.equals(Oggetto.PERGAMENA.toString())) {
+			return " PERGAMENA";
+		} else {
+			return "          ";
 		}
 	}
 }
