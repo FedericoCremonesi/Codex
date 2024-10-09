@@ -13,7 +13,7 @@ import sviluppoGioco.Partita;
 
 public class Campo {
 	
-	public final int DIM = 81;
+	public final static int DIM = 81;
 	/*
 	 * DIM è la dimensione di ognuno dei due array componenti la matrice campo
 	 * la dimensione degli array è 81, ovvero la quantità delle caselle totali presenti in ognuno di questi

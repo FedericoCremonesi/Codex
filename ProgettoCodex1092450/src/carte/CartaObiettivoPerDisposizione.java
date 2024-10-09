@@ -1,5 +1,7 @@
 package carte;
 
+import campoECaselle.Campo;
+
 public class CartaObiettivoPerDisposizione extends CartaObiettivo {
 	
 	private String disposizione;
@@ -92,5 +94,16 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo {
 		for(int k=0; k<NUMERO_LINEE_FACCIA_CARTA; k++) {
 			System.out.println(insiemeLineeFacciaCarta[k]);
 		}
+	}
+	
+	
+	
+	public int controllaObiettivo() {
+		for(int i=0; i<Campo.DIM; i++) {
+			for(int j=0; j<Campo.DIM; j++) {
+				
+			}
+		}
+		return 0;
 	}
 }

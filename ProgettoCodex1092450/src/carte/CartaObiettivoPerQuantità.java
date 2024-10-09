@@ -111,4 +111,10 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 			System.out.println(insiemeLineeFacciaCarta[k]);
 		}
 	}
+	
+	
+	
+	public int controllaObiettivo() {
+		return 0;
+	}
 }

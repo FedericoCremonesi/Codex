@@ -25,4 +25,7 @@ public abstract class CartaObiettivo extends Carta {
 	
 	@Override
 	public abstract void print(String numeroLineaDaStampare);
+	
+	
+	public abstract int controllaObiettivo();
 }
