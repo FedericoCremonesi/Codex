@@ -12,12 +12,6 @@ public class CartaIniziale extends CartaGiocabile {
 	public CartaIniziale(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id, fronte, retro);
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "C.Iniziale: "+super.toString();
-	}
 
 
 	@Override

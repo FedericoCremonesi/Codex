@@ -16,6 +16,7 @@ import campoECaselle.Casella;
 import campoECaselle.CasellaGiocabile;
 import carte.CartaIniziale;
 import carte.CartaObiettivo;
+import carte.CartaObiettivoPerDisposizione;
 import carte.CartaOro;
 import carte.CartaRisorsa;
 import giocatori.Giocatore;
@@ -69,7 +70,7 @@ public class Partita {
 			giocaRound();
 		}
 		controllaObiettivi();
-		
+		dichiaraVincitore();
 	}
 	
 	
@@ -389,8 +390,43 @@ public class Partita {
 	
 	public void controllaObiettivi() {
 		System.out.println("\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
-		//...
+		for(Giocatore g : gruppoGiocatori)
+		{
+			System.out.println("Controllando gli obiettivi completati da: "+g.getNickname());
+			
+			int puntiGiocatore = g.getPunti();
+			int numeroObiettiviCompletati = g.getConteggioObiettiviCompletati();
+			
+			int numeroVolteCompletatoObiettivo;
+			
+			numeroVolteCompletatoObiettivo = tavoloDiGioco.getObiettivoComuneDatoIndice(0).controllaObiettivo(g.getCampo()); //Controllo il primo obiettivo comune
+			puntiGiocatore = puntiGiocatore + ( numeroVolteCompletatoObiettivo*tavoloDiGioco.getObiettivoComuneDatoIndice(0).getPuntiPerSet() );
+			numeroObiettiviCompletati = numeroObiettiviCompletati + numeroVolteCompletatoObiettivo;
+			
+			numeroVolteCompletatoObiettivo = tavoloDiGioco.getObiettivoComuneDatoIndice(1).controllaObiettivo(g.getCampo()); //Controllo il secondo obiettivo comune
+			puntiGiocatore = puntiGiocatore + ( numeroVolteCompletatoObiettivo*tavoloDiGioco.getObiettivoComuneDatoIndice(1).getPuntiPerSet() );
+			numeroObiettiviCompletati = numeroObiettiviCompletati + numeroVolteCompletatoObiettivo;
+			
+			numeroVolteCompletatoObiettivo = g.getObiettivoSegreto().controllaObiettivo(g.getCampo()); //Controllo l'obiettivo segreto
+			puntiGiocatore = puntiGiocatore + ( numeroVolteCompletatoObiettivo*g.getObiettivoSegreto().getPuntiPerSet() );
+			numeroObiettiviCompletati = numeroObiettiviCompletati + numeroVolteCompletatoObiettivo;
+					
+			g.setPunti(puntiGiocatore);
+			g.setConteggioObiettiviCompletati(numeroObiettiviCompletati);
+			System.out.println(g.getNickname() + " hai completato " + numeroObiettiviCompletati
+					+ " obiettivi (anche contando uno stesso obiettivo completato più volte),"
+					+ " arrivando ad un totale di " + puntiGiocatore + " punti!");
+		}
 	}
 	
 	
+	public void dichiaraVincitore() {
+		System.out.println("\nClassifica finale dei giocatori:");
+		Collections.sort(gruppoGiocatori);
+		for(int k=0; k<gruppoGiocatori.size(); k++)
+		{
+			System.out.print(k+") "+gruppoGiocatori.get(k).getPunti()+" punti: "+gruppoGiocatori.get(k).getNickname());
+		}
+		//TODO ...
+	}
 }

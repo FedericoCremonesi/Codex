@@ -1,5 +1,6 @@
 package carte;
 
+import campoECaselle.Campo;
 import carte.ColoreCarta;
 import facceEAngoli.Oggetto;
 import facceEAngoli.Risorsa;
@@ -7,7 +8,16 @@ import facceEAngoli.Risorsa;
 public abstract class CartaObiettivo extends Carta {
 
 	private int puntiPerSet;
+	
 	public final static int NUMERO_LINEE_FACCIA_CARTA=13;
+	
+	
+	public int getPuntiPerSet() {
+		return puntiPerSet;
+	}
+	public void setPuntiPerSet(int puntiPerSet) {
+		this.puntiPerSet = puntiPerSet;
+	}
 	
 	
 	public CartaObiettivo(int id, int puntiPerSet) {
@@ -15,17 +25,10 @@ public abstract class CartaObiettivo extends Carta {
 		this.puntiPerSet = puntiPerSet;
 	}
 	
-
-	
-	@Override
-	public String toString() {
-		return "C.Obiettivo: "+super.toString();
-	}
-	
 	
 	@Override
 	public abstract void print(String numeroLineaDaStampare);
 	
 	
-	public abstract int controllaObiettivo();
+	public abstract int controllaObiettivo(Campo campo);
 }

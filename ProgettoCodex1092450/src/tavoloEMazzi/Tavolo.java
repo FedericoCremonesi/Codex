@@ -62,6 +62,14 @@ public class Tavolo {
 	public CartaObiettivo[] getObiettiviComuni() {
 		return obiettiviComuni;
 	}
+	public CartaObiettivo getObiettivoComuneDatoIndice(int i) {
+		try {
+			return obiettiviComuni[i];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("L'indice inserito risulta eccedere la dimensione dell'array contenente gli obiettivi comuni");
+			return null;
+		}
+	}
 	public void setObiettiviComuni(CartaObiettivo[] obiettiviComuni) {
 		this.obiettiviComuni = obiettiviComuni;
 	}

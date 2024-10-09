@@ -1,5 +1,6 @@
 package carte;
 
+import campoECaselle.Campo;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Oggetto;
 import facceEAngoli.Risorsa;
@@ -113,8 +114,10 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 	}
 	
 	
-	
-	public int controllaObiettivo() {
-		return 0;
+	public int controllaObiettivo(Campo campo) {
+		int numeroSetSimboli = 0;
+		System.out.println("ANCORA DA FARE"); //TODO
+		//...
+		return numeroSetSimboli;
 	}
 }

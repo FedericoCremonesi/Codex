@@ -21,7 +21,15 @@ public class CartaRisorsa extends CartaGiocabile {
 	public void setColore(ColoreCarta colore) {
 		this.colore = colore;
 	}
+	
+	public int getPunti() {
+		return punti;
+	}
+	public void setPunti(int punti) {
+		this.punti = punti;
+	}
 
+	
 	
 	public CartaRisorsa(int id, FacciaFronte fronte, FacciaRetro retro, int punti) {
 		super(id, fronte, retro);
@@ -35,12 +43,6 @@ public class CartaRisorsa extends CartaGiocabile {
 		} else if(retro.getRisorsaRetroCentrale().toString().toUpperCase().equals(Risorsa.INSETTI.toString())) {
 			this.colore = ColoreCarta.VIOLA;
 		}
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "C.Risorsa: "+super.toString()+" "+colore+" "+punti;
 	}
 	
 	

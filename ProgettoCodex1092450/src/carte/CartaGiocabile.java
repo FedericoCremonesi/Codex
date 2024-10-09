@@ -17,6 +17,13 @@ public abstract class CartaGiocabile extends Carta {
 	private FacciaFronte fronte;
 	private FacciaRetro retro;
 	
+	/*
+	 * Questi due attributi boolean servono per non "contare due volte" le risorse di una carta (o la carta stessa)
+	 * durante la verifica dei requisiti delle carte oro o l'assegnazione di punti per gli obiettivi
+	 */
+	boolean contatiSimboli = false;
+	boolean contataPerObiettivoDisposizione = false;
+	
 	
 	public String getFacciaDiGioco() {
 		return facciaDiGioco;
@@ -44,6 +51,20 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	public void setRetro(FacciaRetro retro) {
 		this.retro = retro;
+	}
+	
+	public boolean isContatiSimboli() {
+		return contatiSimboli;
+	}
+	public void setContatiSimboli(boolean contateRisorse) {
+		this.contatiSimboli = contateRisorse;
+	}
+	
+	public boolean isContataPerObiettivoDisposizione() {
+		return contataPerObiettivoDisposizione;
+	}
+	public void setContataPerObiettivoDisposizione(boolean contataPerObiettivoDisposizione) {
+		this.contataPerObiettivoDisposizione = contataPerObiettivoDisposizione;
 	}
 	
 	

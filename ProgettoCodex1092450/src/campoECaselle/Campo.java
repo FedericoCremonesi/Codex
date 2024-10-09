@@ -2,6 +2,7 @@ package campoECaselle;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 import carte.CartaOro;
@@ -11,7 +12,7 @@ import facceEAngoli.Angolo;
 import facceEAngoli.AngoloNascosto;
 import sviluppoGioco.Partita;
 
-public class Campo {
+public class Campo implements campoECaselle.Reset {
 	
 	public final static int DIM = 81;
 	/*
@@ -67,7 +68,25 @@ public class Campo {
 				
 		if( ((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty() ) {
 			return null;
+		} else if (((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().isContatiSimboli()) {
+			return null; //se della carta ho già contato tutti i simboli, non li conto ancora
 		} else {
+			
+			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFacciaDiGioco().equals("RETRO") ) {
+				//Analizzo la risorsa al centro sul retro n1 (che hanno tutte le carte giocabili)
+				incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentrale().toString() );
+		
+				//Analizzo la risorsa al centro sul retro n2 (che hanno alcune carte iniziali)
+				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva1()!=null ) {
+					incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva1().toString() );
+				}
+				
+				//Analizzo la risorsa al centro sul retro n2 (che hanno alcune carte iniziali)
+				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva2()!=null ) {
+					incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva2().toString() );
+				}
+			}
+			
 			//Analizzo l'angolo in alto a sinistra della faccia fronte
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx() instanceof AngoloVisibile ) { //gestisco caso: angolo nascosto
 				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx()).isCoperto() ) { //gestistisco caso: angolo coperto
@@ -95,6 +114,9 @@ public class Campo {
 				}
 			}
 			
+			//Appena prima di controllare l'ultimo angolo della carta, setto che sono già state contate tutte le risorse della carta
+			((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().setContatiSimboli(true);
+			
 			//Analizzo l'angolo in basso a destra della faccia fronte
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx() instanceof AngoloVisibile ) {
 				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx()).isCoperto() ) {
@@ -104,23 +126,9 @@ public class Campo {
 				}
 			}
 			
-			
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFacciaDiGioco().equals("RETRO") ) {
-				//Analizzo la risorsa al centro sul retro n1 (che hanno tutte le carte giocabili)
-				incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentrale().toString() );
-
-				//Analizzo la risorsa al centro sul retro n2 (che hanno alcune carte iniziali)
-				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva1()!=null ) {
-					incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva1().toString() );
-				}
-				
-				//Analizzo la risorsa al centro sul retro n2 (che hanno alcune carte iniziali)
-				if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva2()!=null ) {
-					incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentraleAggiuntiva2().toString() );
-				}
-			}
 		}
 		
+		resetConteggioSimboliOControlloDisposizione(this);
 		return conteggioRisorseEOggetti; //viene ritornata la hashmap in caso serva utilizzarla per altri motivi (es assegnare punti date determinate condizioni delle carte oro o obiettivo)
 	}
 	
@@ -162,6 +170,22 @@ public class Campo {
 		}
 		conteggioSimboloInHashMap++;
 		conteggioRisorseEOggetti.put(simboloInHashMap, conteggioSimboloInHashMap);
+	}
+	
+	
+	//Metodo da interfaccia implementata
+	@Override
+	public void resetConteggioSimboliOControlloDisposizione(Campo campo) {
+		for(int i=0; i<Campo.DIM; i++) {
+			for(int j=0; j<Campo.DIM; j++) {
+				if(campo.getCasellaDaCoordinate(i,j) instanceof CasellaGiocabile) {
+					if(!(((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).isEmpty())) {
+						((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta().setContatiSimboli(false);
+					}
+				}
+			}
+		}
+		System.out.println("Campo resettato (risorse)");
 	}
 	
 	

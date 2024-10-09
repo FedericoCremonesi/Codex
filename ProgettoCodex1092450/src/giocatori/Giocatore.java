@@ -13,7 +13,7 @@ import carte.CartaOro;
 import carte.CartaRisorsa;
 import tavoloEMazzi.Mazzo;
 
-public class Giocatore {
+public class Giocatore implements Comparable<Giocatore> {
 	
 	
 	public static final int MIN_GIOCATORI = 2;
@@ -23,7 +23,7 @@ public class Giocatore {
 	
 	private String nickname;
 	private Pedina colorePedina;
-	private int punti;
+	private Integer punti;
 	private Campo campo;
 	private Mano mano;
 	private CartaObiettivo obiettivoSegreto;
@@ -315,5 +315,13 @@ public class Giocatore {
 			}
 		} while(! (mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) );
 		
+	}
+	
+	
+	@Override
+	//Metodo derivante dall'interfaccia: posso confrontare due giocatori tra di loro in base al loro punteggio
+	//(questo confronto mi servirà per ordinare la lista dei giocatori a fine partita per dichiarare il vincitore)
+	public int compareTo(Giocatore altroGiocatore) {
+		return punti.compareTo(altroGiocatore.getPunti()); //per poter usare compareTo, devo avere punti come Integer (non int, tipo primitivo)
 	}
 }

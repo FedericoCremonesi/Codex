@@ -1,10 +1,12 @@
 package carte;
 
 import campoECaselle.Campo;
+import campoECaselle.CasellaGiocabile;
 
-public class CartaObiettivoPerDisposizione extends CartaObiettivo {
+public class CartaObiettivoPerDisposizione extends CartaObiettivo implements campoECaselle.Reset {
 	
 	private String disposizione;
+
 	private ColoreCarta coloreCarte1;
 	private ColoreCarta coloreCarte2;
 	
@@ -22,6 +24,13 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo {
 													  "",																		//linea 11, indiceArray 10 (costruisco in costruttori)
 			ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE,	//linea 12, indiceArray 11 (uguale in tutte carte obiettivo per disposizione)
 			ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"╰------------------------------------╯"+ColoreCarta.CODICE_RESET_COLORE};//linea 13, indiceArray 12 (uguale in tutte carte obiettivo)
+	
+
+
+	public ColoreCarta getColoreCarte2() {
+		return coloreCarte2;
+	}
+	
 
 	
 	/*
@@ -97,13 +106,142 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo {
 	}
 	
 	
-	
-	public int controllaObiettivo() {
+	//In ogni caso inizio a controllare le carte da quella più in alto (che è la prima ad essere individuata in una eventuale disposizione corretta)
+	public int controllaObiettivo(Campo campo) {
+		int numeroSetCarteDisposteInOrdine = 0;
 		for(int i=0; i<Campo.DIM; i++) {
 			for(int j=0; j<Campo.DIM; j++) {
 				
+				if (disposizione.equals("DiagonaleCrescente")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j-2)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j-2)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte1 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j-2)).getCartaContenuta()).getColore() == coloreCarte1 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j-2)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				} else if (disposizione.equals("DiagonaleDecrescente")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j+2)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j+2)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte1 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j+2)).getCartaContenuta()).getColore() == coloreCarte1 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j+2)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				} else if (disposizione.equals("SpigoloBassoSx")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte1 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).getColore() == coloreCarte2 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				} else if (disposizione.equals("SpigoloBassoDx")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte1 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).getColore() == coloreCarte2 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+2,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				} else if (disposizione.equals("SpigoloAltoSx")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte2 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).getColore() == coloreCarte1 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j-1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j-1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				} else if (disposizione.equals("SpigoloAltoDx")) {
+					if( !( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta() instanceof CartaIniziale ) && 
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta() instanceof CartaIniziale ) &&
+						!( ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta() instanceof CartaIniziale ) ) {
+							if( !( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) && 
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) &&
+								!( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).isContataPerObiettivoDisposizione() ) ) ) {
+									if( (((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).getColore() == coloreCarte2 ) && 
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).getColore() == coloreCarte1 ) &&
+										(((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).getColore() == coloreCarte1 ) ) {
+											numeroSetCarteDisposteInOrdine++;
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+1,j+1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											((CartaRisorsa) ((CasellaGiocabile) campo.getCasellaDaCoordinate(i+3,j+1)).getCartaContenuta()).setContataPerObiettivoDisposizione(true);
+											System.out.println("Hai completato un obiettivo! Hai ottenuto "+super.getPuntiPerSet()+" punti");
+									}
+							}
+					}
+				}
+				
 			}
 		}
-		return 0;
+		resetConteggioSimboliOControlloDisposizione(campo);
+		return numeroSetCarteDisposteInOrdine;
 	}
+	
+	
+	//Metodo da interfaccia implementata
+	@Override
+	public void resetConteggioSimboliOControlloDisposizione(Campo campo) {
+		for(int i=0; i<Campo.DIM; i++) {
+			for(int j=0; j<Campo.DIM; j++) {
+				if(campo.getCasellaDaCoordinate(i,j) instanceof CasellaGiocabile) {
+					if(!(((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).isEmpty())) {
+						((CasellaGiocabile) campo.getCasellaDaCoordinate(i,j)).getCartaContenuta().setContataPerObiettivoDisposizione(false);
+					}
+				}
+			}
+		}
+		System.out.println("Campo resettato (disposizione)");
+	}
+	
 }
