@@ -278,42 +278,48 @@ public class Giocatore implements Comparable<Giocatore> {
 		System.out.println("Mazzo oro:");
 		mazzoCarteOro.visualizzaTreCartePerPesca();
 		
-		String mazzoDaCuiPescare;
-		do {
-			System.out.println("Da quale mazzo vuoi pescare la carta?");
-			Scanner sc=new Scanner(System.in);
-			mazzoDaCuiPescare=sc.nextLine().toUpperCase();
-			if(mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) {
-				System.out.print("Ok! ");
-				
-				int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
-				do {
-					try {
-						System.out.println("Quale carta vuoi prendere tra le tre proposte?");
-						sc = new Scanner(System.in);
-						numeroCartaScelta = sc.nextInt();
-						if(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)
-						{
-							if(mazzoDaCuiPescare.equals("RISORSA")) {
-								mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteRisorsa.estraiCartaDaMazzo(numeroCartaScelta-1, false));
-								//poichè ho stampato gli indici delle carte nel mazzo sommando 1 (per rendere più facile la scelta dell'utente), quando utilizzo l'input da tastiera dovrò diminuire il valore ottenuto di 1
-								System.out.println("Carta risorsa aggiunta alla mano!");
-							} else if(mazzoDaCuiPescare.equals("ORO")) {
-								mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteOro.estraiCartaDaMazzo(numeroCartaScelta-1, false));
-								System.out.println("Carta oro aggiunta alla mano!");
+		if( !(mazzoCarteRisorsa.controllaSeMazzoFinito() && mazzoCarteOro.controllaSeMazzoFinito()) ) { //Controllo che non siano finiti entrambi i mazzi
+			
+			String mazzoDaCuiPescare;
+			do {
+				System.out.println("Da quale mazzo vuoi pescare la carta?");
+				Scanner sc=new Scanner(System.in);
+				mazzoDaCuiPescare=sc.nextLine().toUpperCase();
+				if(mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) {
+					System.out.print("Ok! ");
+					
+					int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
+					do {
+						try {
+							System.out.println("Quale carta vuoi prendere tra le tre proposte?");
+							sc = new Scanner(System.in);
+							numeroCartaScelta = sc.nextInt();
+							if(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)
+							{
+								if(mazzoDaCuiPescare.equals("RISORSA")) {
+									mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteRisorsa.estraiCartaDaMazzo(numeroCartaScelta-1, false));
+									//poichè ho stampato gli indici delle carte nel mazzo sommando 1 (per rendere più facile la scelta dell'utente), quando utilizzo l'input da tastiera dovrò diminuire il valore ottenuto di 1
+									System.out.println("Carta risorsa aggiunta alla mano!");
+								} else if(mazzoDaCuiPescare.equals("ORO")) {
+									mano.aggiungiCartaAMano((CartaGiocabile) mazzoCarteOro.estraiCartaDaMazzo(numeroCartaScelta-1, false));
+									System.out.println("Carta oro aggiunta alla mano!");
+								}
+							} else {
+								System.out.println("Inserimento non valido, inserire un numero tra 1 e 3");
 							}
-						} else {
-							System.out.println("Inserimento non valido, inserire un numero tra 1 e 3");
+						} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
+							System.out.println("Inserimento non valido, inserire un numero");
 						}
-					} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
-						System.out.println("Inserimento non valido, inserire un numero");
-					}
-				} while (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3));
-				
-			} else {
-				System.out.println("Inserimento non valido, scrivere risorsa oppure oro");
-			}
-		} while(! (mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) );
+					} while (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3));
+					
+				} else {
+					System.out.println("Inserimento non valido, scrivere risorsa oppure oro");
+				}
+			} while(! (mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) );
+			
+		} else {
+			System.out.println("Risultano terminate le carte in entrambi i mazzi, impossibile pescare");
+		}
 		
 	}
 	

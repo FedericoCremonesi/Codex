@@ -70,19 +70,25 @@ public class Mazzo <T extends Carta> {
 	
 	
 	public void visualizzaTreCartePerPesca() {
-		for(int k=0; k<3; k++) { //stampo le 3 carte in cima (cioè di indici 0, 1 e 2)
-			boolean modificataFacciaDiGioco = false;
-			if(k==2) {
-				((CartaGiocabile) carteNelMazzo.get(k)).setFacciaDiGioco("RETRO"); //setto la faccia di gioco sul retro anche se in realtà non è vero, così facendo posso stampare solo la faccia posteriore col metodo print
-				modificataFacciaDiGioco = true;
+		try {
+			for(int k=0; k<3; k++) { //stampo le 3 carte in cima (cioè di indici 0, 1 e 2)
+				boolean modificataFacciaDiGioco = false;
+				if(k==2) {
+					((CartaGiocabile) carteNelMazzo.get(k)).setFacciaDiGioco("RETRO"); //setto la faccia di gioco sul retro anche se in realtà non è vero, così facendo posso stampare solo la faccia posteriore col metodo print
+					modificataFacciaDiGioco = true;
+				}
+				System.out.println(k+1); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
+				carteNelMazzo.get(k).print("all");
+				if(modificataFacciaDiGioco) { //in caso abbia modificato la faccia di gioco (quando la carta non è stata effettivamente giocata), ri-setto questo attributo alla stringa iniziale
+					((CartaGiocabile) carteNelMazzo.get(k)).setFacciaDiGioco("non ancora giocata");
+				}
 			}
-			System.out.println(k+1); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
-			carteNelMazzo.get(k).print("all");
-			if(modificataFacciaDiGioco) { //in caso abbia modificato la faccia di gioco (quando la carta non è stata effettivamente giocata), ri-setto questo attributo alla stringa iniziale
-				((CartaGiocabile) carteNelMazzo.get(k)).setFacciaDiGioco("non ancora giocata");
-			}
+			System.out.println("(di quest'ultima carta puoi conoscere solo il retro)\n");
+		} catch (NullPointerException e) {
+			//Questo è il caso in cui si tenta di stampare una o più carte che non sono èiù nel mazzo (perchè questo si sta esaurendo o è esaurito)
+			System.out.println("Nel mazzo non sono presenti ulteriori carte");
 		}
-		System.out.println("(di quest'ultima carta puoi conoscere solo il retro)\n");
+		
 	}
 	
 	

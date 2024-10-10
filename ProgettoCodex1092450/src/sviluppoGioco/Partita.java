@@ -2,6 +2,7 @@ package sviluppoGioco;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.MulticastSocket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -429,6 +430,48 @@ public class Partita {
 		{
 			System.out.print(k+") "+gruppoGiocatori.get(k).getPunti()+" punti: "+gruppoGiocatori.get(k).getNickname());
 		}
-		//TODO ...
+		
+		
+		if(gruppoGiocatori.get(0).getPunti() == gruppoGiocatori.get(1).getPunti()) {
+			System.out.println("I primi giocatori risultano aver raggiunto lo stesso punteggio");
+			int punteggioVincente = gruppoGiocatori.get(0).getPunti();
+			for(int k=0; k<gruppoGiocatori.size(); k++)
+			{
+				if(gruppoGiocatori.get(k).getPunti() != punteggioVincente)
+				{
+					gruppoGiocatori.remove(k); //rimuovo i giocatori non "primi a pari merito"
+				}
+			}
+			
+			List<Giocatore> vincitori = new ArrayList<>();
+			vincitori.add(gruppoGiocatori.get(0)); //considero inizialmente il primo giocatore come unico vincitore
+			
+			for(int k=1; k<gruppoGiocatori.size(); k++) { //Nota: parto a scorrere gli altri giocatori con k=1, non 0, perchè il primo giocatore è già nella lista "vincitori"
+				//nei successivi 3 casi considerati confronto sempre con il primo giocatore nella lista "vincitori"
+				if(gruppoGiocatori.get(k).getConteggioObiettiviCompletati() == vincitori.get(0).getConteggioObiettiviCompletati()) { //Caso =
+					vincitori.add(gruppoGiocatori.get(k));
+				} else if(gruppoGiocatori.get(k).getConteggioObiettiviCompletati() < vincitori.get(0).getConteggioObiettiviCompletati()) { //Caso <
+					//Il giocatore in analisi sicuramente non sarà tra i vincitori perchè, nonostante abbia il punteggio più alto raggiunto (a pari merito con altri), non ha sicuramente completato il numero maggiore di pbiettivi
+				} else if(gruppoGiocatori.get(k).getConteggioObiettiviCompletati() > vincitori.get(0).getConteggioObiettiviCompletati()) { //Caso >
+					vincitori.clear(); //Svuoto la lista, il numero massimo di obiettivi completati è stato battuto
+					vincitori.add(gruppoGiocatori.get(k));
+				}
+			}
+			
+			if(vincitori.size() == 1) {
+				System.out.println("Il vincitore è: "+vincitori.get(0).getNickname()+", complimenti!");
+				System.exit(0); //Termina il programma (caso 2 di 3 totali)
+			} else {
+				System.out.print("Non c'è un solo vincitore in questa partita, sono arrivati primi a pari merito: ");
+				for(Giocatore g : vincitori) {
+					System.out.print(g.getNickname()+" ");
+				}
+				System.out.println("\nComplimenti!");
+				System.exit(0); //Termina il programma (caso 3 di 3 totali)
+			}
+		} else {
+			System.out.println("Il vincitore è: "+gruppoGiocatori.get(0).getNickname()+", complimenti!");
+			System.exit(0); //Termina il programma (caso 1 di 3 totali)
+		}
 	}
 }
