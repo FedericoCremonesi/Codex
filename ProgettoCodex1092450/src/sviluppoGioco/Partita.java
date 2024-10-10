@@ -399,6 +399,7 @@ public class Partita {
 			
 			int numeroVolteCompletatoObiettivo;
 			
+			//il numero di volte che è stato completato l'obiettivo è il numero di "set" presenti sul campo che lo soddisfano
 			numeroVolteCompletatoObiettivo = tavoloDiGioco.getObiettivoComuneDatoIndice(0).controllaObiettivo(g.getCampo()); //Controllo il primo obiettivo comune
 			puntiGiocatore = puntiGiocatore + ( numeroVolteCompletatoObiettivo*tavoloDiGioco.getObiettivoComuneDatoIndice(0).getPuntiPerSet() );
 			numeroObiettiviCompletati = numeroObiettiviCompletati + numeroVolteCompletatoObiettivo;
@@ -422,7 +423,8 @@ public class Partita {
 	
 	public void dichiaraVincitore() {
 		System.out.println("\nClassifica finale dei giocatori:");
-		Collections.sort(gruppoGiocatori);
+		Collections.sort(gruppoGiocatori, Collections.reverseOrder()); //Ordino l'arraylist di giocatori in ordine decrescente in base al punteggio
+																	   //Così facendo avrò il giocatore con il punteggio più alto nella prima posizione
 		for(int k=0; k<gruppoGiocatori.size(); k++)
 		{
 			System.out.print(k+") "+gruppoGiocatori.get(k).getPunti()+" punti: "+gruppoGiocatori.get(k).getNickname());

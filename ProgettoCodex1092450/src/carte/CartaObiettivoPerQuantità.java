@@ -1,5 +1,10 @@
 package carte;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 import campoECaselle.Campo;
 import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Oggetto;
@@ -115,9 +120,36 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 	
 	
 	public int controllaObiettivo(Campo campo) {
-		int numeroSetSimboli = 0;
-		System.out.println("ANCORA DA FARE"); //TODO
-		//...
-		return numeroSetSimboli;
+		double numeroSetSimboli = 0;
+		HashMap<String, Integer> conteggioRisorseEOggetti = campo.contaRisorseEOggettiVisibili(40,40,true);
+		
+		if(oggetto2 != null && oggetto3 != null) {
+			//Controllo la carta con id: 99
+			
+			//Per trovare quanti "set di oggetti diversi" sono presenti sul campo, basta confrontare i conteggi dei 3 oggetti tra loro e prendere il minore
+			
+			//Voglio trovare il minore tra i 3 conteggi, senza necessariamente ricordarmi anche quale oggetto compare più spesso,
+			//dunque metto in questa lista di interi le quantità dei tre rispettivi oggetti
+			List<Integer> conteggiTreOggetti = new ArrayList<>();
+			
+			conteggiTreOggetti.add(conteggioRisorseEOggetti.get(oggetto1.toString())); //nella lista dei conteggi metto quante volte compare oggetto1
+			conteggiTreOggetti.add(conteggioRisorseEOggetti.get(oggetto2.toString())); //nella lista dei conteggi metto quante volte compare oggetto2
+			conteggiTreOggetti.add(conteggioRisorseEOggetti.get(oggetto3.toString())); //nella lista dei conteggi metto quante volte compare oggetto3
+			
+			Collections.sort(conteggiTreOggetti); //ordino (in ordine crescente) la lista contenente i tre Integer indicanti le quantità di ognuno dei 3 oggetti
+			numeroSetSimboli = conteggiTreOggetti.get(0); //l'indice 0 indica il conteggio in posizione 1, ovvero il minore (poichè sono in ordine crescente dopo aver usato sort)
+		} else {
+			if(risorsa != null) {
+				//Controllo le carte con id: 95,96,97,98
+				numeroSetSimboli = ( conteggioRisorseEOggetti.get(risorsa.toString()) / quantitàRisorsa );
+			} else if(oggetto1 != null){
+				//Controllo le carte con id: 100,101,102
+				numeroSetSimboli = ( conteggioRisorseEOggetti.get(oggetto1.toString()) / quantitàOggetto1 );
+			}
+			
+			Math.floor(numeroSetSimboli); //Con questo metodo floor, approssimo per difetto il numero di set di simboli	
+		}
+		
+		return (int) numeroSetSimboli; //posso castare a intero perchè qualsiasi valore contenuto in numeroSetSimboli sarà un intero o un double arrotondato per difetto
 	}
 }
