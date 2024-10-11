@@ -89,7 +89,10 @@ public class Mazzo <T extends Carta> {
 						((CartaGiocabile) carteNelMazzo.get(k)).setFacciaDiGioco("RETRO"); //setto la faccia di gioco sul retro anche se in realtà non è vero, così facendo posso stampare solo la faccia posteriore col metodo print
 						modificataFacciaDiGioco = true;
 					}
-					System.out.println(k+1); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
+					
+					if(carteNelMazzo.size()>=(k+1)) { //così non stampo l'indice di una carta non esistente (quando queste stanno finendo)
+						System.out.println(k+1); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
+					}
 					carteNelMazzo.get(k).print("all");
 					
 					if(modificataFacciaDiGioco) { //in caso abbia modificato la faccia di gioco (quando la carta non è stata effettivamente giocata), ri-setto questo attributo alla stringa iniziale
@@ -99,7 +102,7 @@ public class Mazzo <T extends Carta> {
 				System.out.println("(di quest'ultima carta puoi conoscere solo il retro)\n");
 			} catch (IndexOutOfBoundsException e) {
 				//Questo è il caso in cui si tenta di stampare una o più carte che non sono più nel mazzo (perchè questo si sta esaurendo o è esaurito)
-				System.out.println("\nNel mazzo non sono presenti ulteriori carte");
+				System.out.println("\nNel mazzo non sono presenti ulteriori carte\n");
 				return; //Con questo stampo al massimo una volta il messaggio, non due o tre
 			}
 		}

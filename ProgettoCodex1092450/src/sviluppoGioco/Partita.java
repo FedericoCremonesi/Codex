@@ -365,23 +365,23 @@ public class Partita {
 		boolean fineEntrambiMazzi = false;;
 		
 		if(tavoloDiGioco.getMazzoCarteRisorsa().controllaSeMazzoFinito()) {
-			System.out.println("Le carte nel mazzo risorsa sono finite");
+			System.out.println("\tLe carte nel mazzo risorsa sono finite");
 			fineMazzoRisorsa = true;
 		}
 		if(tavoloDiGioco.getMazzoCarteOro().controllaSeMazzoFinito()) {
-			System.out.println("Le carte nel mazzo oro sono finite");
+			System.out.println("\tLe carte nel mazzo oro sono finite");
 			fineMazzoOro = true;
 		}
 		
 		if(fineMazzoRisorsa && fineMazzoOro) {
-			System.out.println("\n"+"Sono finite le carte in entrambi i mazzi (risorsa e oro)");
+			System.out.println("\nSono finite le carte in entrambi i mazzi (risorsa e oro)!");
 			fineEntrambiMazzi = true;
 		}
 		
 		
 		//Annuncio che siamo verso la fine della partita nel caso sia verificata almeno una delle condizioni verificate in precedenza
 		if(almeno20Punti || fineEntrambiMazzi) {
-			System.out.println("I prossimi turni saranno gli ultimi della partita, non si inizierà un altro round");
+			System.out.println("Alla conclusione di questo round non se ne inizierà uno nuovo");
 			return true;
 		} else {
 			return false;
