@@ -391,6 +391,18 @@ public class Partita {
 	
 	public void controllaObiettivi() {
 		System.out.println("\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
+		
+		//stampo tutti gli obiettivi (comuni e segreti) per ricordarli ai giocatori
+		System.out.println("Ricordiamo gli obiettivi di tutti i giocatori:");
+		System.out.println("Obiettivi comuni:");
+		tavoloDiGioco.getObiettivoComuneDatoIndice(0).print("all");
+		tavoloDiGioco.getObiettivoComuneDatoIndice(1).print("all");
+		for(Giocatore g : gruppoGiocatori)
+		{
+			System.out.println("Obiettivo segreto di "+g.getNickname());
+			g.getObiettivoSegreto().print("all");
+		}
+		
 		for(Giocatore g : gruppoGiocatori)
 		{
 			System.out.println("Controllando gli obiettivi completati da: "+g.getNickname());

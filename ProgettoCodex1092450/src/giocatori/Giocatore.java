@@ -274,9 +274,11 @@ public class Giocatore implements Comparable<Giocatore> {
 	public void pescaCartaDaMazzi(Mazzo mazzoCarteRisorsa, Mazzo mazzoCarteOro) {
 		System.out.println("\n"+nickname+", ora devi pescare una carta da uno dei due mazzi");
 		System.out.println("Mazzo risorsa:");
-		mazzoCarteRisorsa.visualizzaTreCartePerPesca();
+		mazzoCarteRisorsa.visualizzaTreCartePerPesca(); //potrebbe stampare "Carte finite!" se le carte nel mazzo sono terminate
 		System.out.println("Mazzo oro:");
 		mazzoCarteOro.visualizzaTreCartePerPesca();
+		
+		boolean sceltaCartaNonPresente = false; //questo booleano mi indica se l'utente ha scelto una carta non presente nel mazzo perchè questo sta terminando
 		
 		if( !(mazzoCarteRisorsa.controllaSeMazzoFinito() && mazzoCarteOro.controllaSeMazzoFinito()) ) { //Controllo che non siano finiti entrambi i mazzi
 			
@@ -286,12 +288,23 @@ public class Giocatore implements Comparable<Giocatore> {
 				Scanner sc=new Scanner(System.in);
 				mazzoDaCuiPescare=sc.nextLine().toUpperCase();
 				if(mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) {
-					System.out.print("Ok! ");
+					
+					//Gestisco il caso in cui l'utente abbia scelto un mazzo in cui sono terminate le carte
+					if(mazzoDaCuiPescare.equals("RISORSA") && mazzoCarteRisorsa.controllaSeMazzoFinito()) {
+						System.out.println("Le carte nel mazzo selezionato sono finite, devi pescare dal mazzo delle carte oro");
+						mazzoDaCuiPescare = "ORO";
+					} else if(mazzoDaCuiPescare.equals("ORO") && mazzoCarteOro.controllaSeMazzoFinito()) {
+						System.out.println("Le carte nel mazzo selezionato sono finite, devi pescare dal mazzo delle carte risorsa");
+						mazzoDaCuiPescare = "RISORSA";
+					} else {
+						System.out.print("Ok! ");
+					}
 					
 					int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 					do {
 						try {
 							System.out.println("Quale carta vuoi prendere tra le tre proposte?");
+							sceltaCartaNonPresente = false;
 							sc = new Scanner(System.in);
 							numeroCartaScelta = sc.nextInt();
 							if(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)
@@ -309,8 +322,13 @@ public class Giocatore implements Comparable<Giocatore> {
 							}
 						} catch(InputMismatchException e) { //gestisco il caso con una eccezione NON controllata
 							System.out.println("Inserimento non valido, inserire un numero");
+						} catch(IndexOutOfBoundsException e) {
+							//Qui catcho e gestisco il caso in cui l'utente inserisca ad esempio l'indice 3 nella decisione della carta da estrarre, ma nel mazzo rimangono solo altre 2 carte
+							//E' l'eccezione lanciata dal metodo estraiCartaDaMazzo (con throws)
+							System.out.println("Le carte nel mazzo stanno terminando, la carta indicata non esiste");
+							sceltaCartaNonPresente=true;
 						}
-					} while (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3));
+					} while ( (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)) || (sceltaCartaNonPresente) );
 					
 				} else {
 					System.out.println("Inserimento non valido, scrivere risorsa oppure oro");
@@ -319,6 +337,7 @@ public class Giocatore implements Comparable<Giocatore> {
 			
 		} else {
 			System.out.println("Risultano terminate le carte in entrambi i mazzi, impossibile pescare");
+			return;
 		}
 		
 	}
