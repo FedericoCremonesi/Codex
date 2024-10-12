@@ -110,16 +110,23 @@ public class Giocatore implements Comparable<Giocatore> {
 		
 		boolean indietroASceltaCarta;
 		boolean indietroASceltaFaccia;
+		String facciaSceltaOIndietro = "non ancora giocata"; //inizializzo alla stringa di default, poi verrà sovrascritta con la faccia scelta dall'utente
 		
-		//Con questi do while annidati permetto all'utente di tornare indietro se la scelta appena fatta non lo soddisfa
+		//Con questi do while annidati permetto all'utente di tornare indietro se la scelta appena fatta non lo soddisfa, seguendo lo schema:
+		//						SceltaCarta <-> SceltaFaccia <-> VuoiProseguire -> SceltaCaselle
 		
 		do {
+			indietroASceltaCarta = false; //inizializzo valore (verrà sovrascritto)
 			cartaDaGiocare = scegliCartaDaMano();
-			indietroASceltaCarta = false;
 			
 			do {
-				indietroASceltaCarta = scegliFacciaDiGioco(cartaDaGiocare, true);
-				indietroASceltaFaccia = false;
+				indietroASceltaFaccia = false; //inizializzo valore (verrà sovrascritto)
+				facciaSceltaOIndietro = scegliFacciaDiGioco(cartaDaGiocare, true);
+				if(facciaSceltaOIndietro.equals("FRONTE") || facciaSceltaOIndietro.equals("RETRO")) {
+					indietroASceltaCarta = false;
+				} else if(facciaSceltaOIndietro.equals("INDIETRO")) {
+					indietroASceltaCarta = true;
+				}
 				
 				if(!indietroASceltaCarta) {
 					boolean chiediConfermaVolontà = true;
@@ -139,7 +146,14 @@ public class Giocatore implements Comparable<Giocatore> {
 			
 		} while (indietroASceltaCarta); //questo è il caso in cui il giocatore abbia deciso di tornare indietro alla scelta della carta
 		
-		
+		//Qui (fuori dai cicli precedenti), facciaSceltaOIndietro sarà sicuramente o "FRONTE" o "RETRO", non "INDIETRO"
+		/*
+		 * Inoltre l'utente non potrà più tornare indietro, posso quindi settare la faccia di gioco scelta
+		 * Non lo faccio nel metodo "scegliFacciaDiGioco" perchè se l'utente decidesse di tornare indietro e scegliere un'altra carta dopo la scelta della faccia,
+		 * la faccia di gioco della carte scelta inizialmente rimarrebbe settata a "FRONTE" o "RETRO", quando invece dovrebbe essere "non ancora giocata"
+		 * Questo causa successivi problemi nella stampa della carta nella mano, in quanto (senza questa correzione) viene visualizzata solo la faccia frontale o sul retro, non entrambe (come dovrebbe accadere)
+		 */
+		cartaDaGiocare.setFacciaDiGioco(facciaSceltaOIndietro);
 		
 		while(true) {
 			System.out.println("In quale casella vuoi giocare la carta?");
@@ -155,12 +169,14 @@ public class Giocatore implements Comparable<Giocatore> {
 				mano.removeCarta(cartaDaGiocare);
 				
 				//Assegno eventuali punti
-				if(cartaDaGiocare instanceof CartaRisorsa) {
-					((CartaRisorsa) cartaDaGiocare).assegnaPunti(this);
-				} else if(cartaDaGiocare instanceof CartaOro) {
+				if(cartaDaGiocare instanceof CartaOro) { //Devo prima controllare se è una carta oro,
+														 //altrimenti eseguirà sicuramente il metodo delle carte risorsa
+														 //(essendo carta oro classe figlia di carta risorsa, tutte le carte oro sono anche risorsa)
 					((CartaOro) cartaDaGiocare).assegnaPunti(this, numeroAngoliCopertiConGiocata);
+				} else {
+					((CartaRisorsa) cartaDaGiocare).assegnaPunti(this);
 				} 
-				System.out.println(nickname+" i tuoi punti attuali sono: "+punti);
+				System.out.println("\t"+nickname+" i tuoi punti attuali sono: "+punti);
 				return;
 			}
 			
@@ -189,7 +205,7 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
-	public boolean scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare, boolean consentiTornaIndietro) {
+	public String scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare, boolean consentiTornaIndietro) {
 		String scelta;
 		do {
 			System.out.print(nickname+" su quale faccia vuoi giocare la carta?");
@@ -203,10 +219,10 @@ public class Giocatore implements Comparable<Giocatore> {
 			Scanner sc = new Scanner(System.in);
 			scelta = sc.nextLine().toUpperCase();
 			if(scelta.equals("FRONTE") || scelta.equals("RETRO")) {
-				cartaDaGiocare.setFacciaDiGioco(scelta); //setto la faccia di gioco della carta (giocabile) a "FRONTE" o "RETRO"
-				return false; //ritorna false nel caso sia stata inserita una delle due facce di gioco
+				//prima qui settavo definitivamente la faccia di gioco, ma questo causava problemi (nel metodo "giocaCartaDaMano" di Giocatore sono spiegate le motivazioni)
+				return scelta; //nel caso sia stata inserita una delle due facce di gioco
 			} else if(consentiTornaIndietro && scelta.equals("INDIETRO")) {
-				return true; //ritorna true nel caso sia stato scelto di tornare indietro
+				return scelta; //nel caso sia stato scelto di tornare indietro
 			} else {
 				System.out.print("Inserimento non valido, scrivere Fronte oppure Retro");
 				
@@ -248,9 +264,9 @@ public class Giocatore implements Comparable<Giocatore> {
 			try {
 				Scanner sc = new Scanner(System.in); //la dichiarazione dello scanner va qui, altrimenti in caso di errore il ciclo viene eseguito all'infinito
 				
-				System.out.print("Coordinata righe: ");
+				System.out.print("\tCoordinata righe: ");
 				coordinate[0] = sc.nextInt()+40; //L'utente inserirà una coordinata tra -40 e +40 perchè sono quelle stampate ai lati della matrice, in realtà gli indici degli array vanno da 0 a 80, dunque sommo 40
-				System.out.print("Coordinata colonne: ");
+				System.out.print("\tCoordinata colonne: ");
 				coordinate[1] = sc.nextInt()+40;
 				
 				if(campo.getCasellaDaCoordinate(coordinate[0],coordinate[1]) instanceof CasellaGiocabile) {

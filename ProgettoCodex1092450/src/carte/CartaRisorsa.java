@@ -80,10 +80,10 @@ public class CartaRisorsa extends CartaGiocabile {
 			int puntiIniziali = giocatore.getPunti();
 			
 			if(this.punti == 0) {
-				System.out.println("La giocata di questa carta non fa guadagnare punti");
+				System.out.println("\tLa giocata di questa carta non fa guadagnare punti");
 			} else {
 				giocatore.setPunti(puntiIniziali+this.punti);
-				System.out.print("Hai guadagnato "+this.punti);
+				System.out.print("\tHai guadagnato "+this.punti);
 				if(this.punti == 1) {
 					System.out.println(" punto");
 				} else {

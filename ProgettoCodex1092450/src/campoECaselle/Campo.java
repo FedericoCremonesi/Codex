@@ -195,7 +195,7 @@ public class Campo implements campoECaselle.Reset {
 	
 	
 	public void stampaConteggioRisorseEOggettiVisibili() {
-		System.out.println("\nSul tuo campo sono visibili:");
+		System.out.println("sul tuo campo sono visibili:");
 		for (String risorsaOppureOggetto : conteggioRisorseEOggetti.keySet()) { //Utilizzo keyset per scorrere gli elementi della hashmap
 			String coloreTesto = Risorsa.ottieniStringCodiceColoreDaRisorsa(risorsaOppureOggetto);
 			
@@ -323,6 +323,10 @@ public class Campo implements campoECaselle.Reset {
 			return true;
 		} else {
 			System.out.println("Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
+			cartaDaGiocare.setFacciaDiGioco("non ancora giocata"); //devo settare di nuovo la faccia di gioco a quella default,
+																   //altrimenti rimarrà selezionata quella frontale per tutto il corso della partita,
+																   //quindi se il giocatore sceglie di cambiare carta da giocare (cioè non gioca questa sul retro),
+																   //al suo successivo turno troverà stampata nella sua mano solo la faccia frontale di questa carta
 			return false;
 		}
 	}
@@ -458,7 +462,8 @@ public class Campo implements campoECaselle.Reset {
 			 * Non serve controllare che l'angolo sia visibile perchè ciò è già stato controllato prima, nelle condizioni della giocata della carta su campo
 			 * quindi non uso if( (angoloDaControllare instanceof AngoloVisibile) )
 			 */
-			System.out.println("E' stato coperto un angolo");
+			//System.out.println("E' stato coperto un angolo");
+			//(Usato per testing)
 			((AngoloVisibile) angoloDaControllare).setCoperto(true);
 			numeroAngoliCopertiConGiocata++;
 		}
@@ -475,7 +480,8 @@ public class Campo implements campoECaselle.Reset {
 				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloBassoSx(); //(***)
 			}
 			
-			System.out.println("E' stato coperto un angolo");
+			//System.out.println("E' stato coperto un angolo");
+			//(Usato per testing)
 			((AngoloVisibile) angoloDaControllare).setCoperto(true);
 			numeroAngoliCopertiConGiocata++;
 		}
@@ -492,7 +498,8 @@ public class Campo implements campoECaselle.Reset {
 				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloAltoDx(); //(***)
 			}
 			
-			System.out.println("E' stato coperto un angolo");
+			//System.out.println("E' stato coperto un angolo");
+			//(Usato per testing)
 			((AngoloVisibile) angoloDaControllare).setCoperto(true);
 			numeroAngoliCopertiConGiocata++;
 		}
@@ -509,13 +516,15 @@ public class Campo implements campoECaselle.Reset {
 				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloAltoSx(); //(***)
 			}
 			
-			System.out.println("E' stato coperto un angolo");
+			//System.out.println("E' stato coperto un angolo");
+			//(Usato per testing)
 			((AngoloVisibile) angoloDaControllare).setCoperto(true);
 			numeroAngoliCopertiConGiocata++;
 		}
 		
 		
-		System.out.println("Totale angoli coperti con la giocata di questa carta: "+numeroAngoliCopertiConGiocata);
+		//System.out.println("Totale angoli coperti con la giocata di questa carta: "+numeroAngoliCopertiConGiocata);
+		//(Usato per testing)
 		
 		return numeroAngoliCopertiConGiocata;
 	}

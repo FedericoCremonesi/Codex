@@ -91,7 +91,7 @@ public class Mazzo <T extends Carta> {
 					}
 					
 					if(carteNelMazzo.size()>=(k+1)) { //così non stampo l'indice di una carta non esistente (quando queste stanno finendo)
-						System.out.println(k+1); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
+						System.out.println(k+1+":"); //associata ad ogni carta stampo un numero (tra 1 e 3, dunque prendo la sua posizione nella lista e aggiungo 1
 					}
 					carteNelMazzo.get(k).print("all");
 					

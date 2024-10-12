@@ -136,37 +136,64 @@ public class CartaOro extends CartaRisorsa {
 			int puntiIniziali = giocatore.getPunti();
 			int incremento = 0;
 			
-			if(!(this.condizionePunti.equals("nessunaCondizione"))) {
-				System.out.println("Contando anche la carta appena giocata,");
-				HashMap<String, Integer> conteggioRisorseEOggetti = giocatore.getCampo().contaRisorseEOggettiVisibili(40, 40, true);
-				//Così facendo eseguo lo scorrimento del campo, conto le risorse e gli oggetti, e inoltre salvo il risultato nella variabile locale di questo metodo
-				giocatore.getCampo().stampaConteggioRisorseEOggettiVisibili();
-				
-				if(this.condizionePunti.equals("angoliCoperti")) {
-					//Caso in cui punti dati da: numero di angoli coperti alla giocata della carta
-					incremento = (super.getPunti())*(numeroAngoliCopertiConGiocata);
-				} else {
-					//Caso in cui punti dati da: numero di piume/inchiostri/pergamene sul campo
-					String oggettoCheConferiscePunti = this.condizionePunti;
-					incremento = (super.getPunti())*(conteggioRisorseEOggetti.get(oggettoCheConferiscePunti));
-				}
-			} else {
-				//Caso in cui punti non dipendono da nessuna condizione
+			if(condizionePunti.equals("nessunaCondizione")) {		//Caso in cui punti non dipendono da nessuna condizione
 				incremento = super.getPunti();
-			}
-			
-			giocatore.setPunti(puntiIniziali+incremento);
-			
-			if(incremento == 0) {
-				System.out.println("Non hai guadagnato nessun punto");
-			} else {
-				System.out.print("Hai guadagnato "+incremento);
+				
+				//Stampo a schermo il messaggio per indicare che sono stati assegnati i punti
+				System.out.print("\tHai guadagnato "+incremento);
 				if(incremento == 1) {
 					System.out.println(" punto");
 				} else {
 					System.out.println(" punti");
 				} 
+				
+			} else if(condizionePunti.equals("angoliCoperti")) {	//Caso in cui punti dati da: numero di angoli coperti alla giocata della carta
+				incremento = (super.getPunti())*(numeroAngoliCopertiConGiocata);
+				
+				//Stampo a schermo il messaggio per indicare che è stata applicata la condizione e sono stati assegnati i punti
+				System.out.print("\tCon la giocata di questa carta hai coperto "+numeroAngoliCopertiConGiocata+" ");
+				if(numeroAngoliCopertiConGiocata==1) {
+					System.out.print("angolo");
+				} else {
+					System.out.print("angoli");
+				}
+				System.out.print(", quindi ottieni "+incremento+" ");
+				if(incremento==1) {
+					System.out.println("punto");
+				} else {
+					System.out.println("punti");
+				}
+				
+			} else {												//Caso in cui punti dati da: numero di piume/inchiostri/pergamene sul campo
+				System.out.println("Contando anche la carta appena giocata,");
+				HashMap<String, Integer> conteggioRisorseEOggetti = giocatore.getCampo().contaRisorseEOggettiVisibili(40, 40, true); //Così facendo eseguo lo scorrimento del campo, conto le risorse e gli oggetti, e inoltre salvo il risultato nella variabile locale di questo metodo
+				giocatore.getCampo().stampaConteggioRisorseEOggettiVisibili();
+				String oggettoCheConferiscePunti = condizionePunti;
+				incremento = (super.getPunti())*(conteggioRisorseEOggetti.get(oggettoCheConferiscePunti));
+				
+				//Stampo a schermo il messaggio per indicare che è stata applicata la condizione e sono stati assegnati i punti
+				System.out.print("\tSul campo hai "+conteggioRisorseEOggetti.get(oggettoCheConferiscePunti)+" ");
+				if(conteggioRisorseEOggetti.get(oggettoCheConferiscePunti)==1) {
+					System.out.print("simbolo");
+				} else {
+					System.out.print("simboli");
+				}
+				System.out.print(" di "+oggettoCheConferiscePunti+" ");
+				if(conteggioRisorseEOggetti.get(oggettoCheConferiscePunti)==1) {
+					System.out.print("visibile");
+				} else {
+					System.out.print("visibili");
+				}
+				System.out.print(", quindi ottieni "+incremento+" ");
+				if(incremento==1) {
+					System.out.println("punto");
+				} else {
+					System.out.println("punti");
+				}
+				
 			}
+			
+			giocatore.setPunti(puntiIniziali+incremento);
 		}
 	}
 	

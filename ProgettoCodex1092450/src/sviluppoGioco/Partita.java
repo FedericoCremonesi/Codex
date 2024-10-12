@@ -215,8 +215,12 @@ public class Partita {
 			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
 			CartaIniziale cartaInizialeEstratta = (CartaIniziale) tavoloDiGioco.getMazzoCarteIniziali().estraiCartaDaMazzo(0, true);
 			
-			g.scegliFacciaDiGioco(cartaInizialeEstratta, false); //passo false al metodo perchè in questo caso non si può tornare indietro
+			String facciaDiGiocoScelta = g.scegliFacciaDiGioco(cartaInizialeEstratta, false); //passo false al metodo perchè in questo caso non si può tornare indietro
 																 //(a differenza di quando si sceglie la faccia di gioco di una delle carte dalla mano, lì si può tornare alla scelta della carta da giocare)
+			
+			//Poichè il settaggio della faccia di gioco non avviene nel metodo "scegliFacciaDiGioco" di Giocatore (nel metodo stesso sono spiegate le motivazioni), devo farlo qui
+			cartaInizialeEstratta.setFacciaDiGioco(facciaDiGiocoScelta);
+			
 			cartaInizialeEstratta.posizionaSuCampo((CasellaGiocabile) g.getCampo().getCasellaDaCoordinate(40,40));
 		}
 	}
@@ -296,6 +300,8 @@ public class Partita {
 	public void giocaTurno(Giocatore g) {
 		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
 		
+		System.out.println("\nPunteggio attuale: "+g.getPunti());
+		
 		g.getCampo().stampaMatriceCampoAQuadratini();
 		
 		g.getCampo().contaRisorseEOggettiVisibili(40,40,true); //inizio a contare risorse e oggetti dalla carta iniziale, in posizione 40,40
@@ -353,7 +359,8 @@ public class Partita {
 		for(Giocatore g : gruppoGiocatori)
 		{
 			if(g.getPunti()>=PUNTEGGIO_MINIMO_FINE_PARTITA) {
-				System.out.println("\n"+g.getNickname()+" ha raggiunto "+g.getPunti()+" punti!");
+				System.out.println("\n\tATTENZIONE:");
+				System.out.println(g.getNickname()+" ha raggiunto "+g.getPunti()+" punti!");
 				almeno20Punti = true;
 			}
 		}
@@ -374,7 +381,8 @@ public class Partita {
 		}
 		
 		if(fineMazzoRisorsa && fineMazzoOro) {
-			System.out.println("\nSono finite le carte in entrambi i mazzi (risorsa e oro)!");
+			System.out.println("\n\tATTENZIONE:");
+			System.out.println("Sono finite le carte in entrambi i mazzi (risorsa e oro)!");
 			fineEntrambiMazzi = true;
 		}
 		
@@ -390,7 +398,7 @@ public class Partita {
 	
 	
 	public void controllaObiettivi() {
-		System.out.println("\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
+		System.out.println("\n\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
 		
 		//stampo tutti gli obiettivi (comuni e segreti) per ricordarli ai giocatori
 		System.out.println("Ricordiamo gli obiettivi di tutti i giocatori:");
