@@ -64,6 +64,8 @@ public class Campo implements campoECaselle.Reset {
 			conteggioRisorseEOggetti.put("PIUMA", 0);
 			conteggioRisorseEOggetti.put("INCHIOSTRO", 0);
 			conteggioRisorseEOggetti.put("PERGAMENA", 0);
+			//Inoltre "resetto" tutte le carte per fare in modo di poter contare i simboli come previsto*
+			resetConteggioSimboliOControlloDisposizione(this);
 		}
 				
 		if( ((CasellaGiocabile) caselleDelCampo[i][j]).isEmpty() ) {
@@ -72,6 +74,7 @@ public class Campo implements campoECaselle.Reset {
 			return null; //se della carta ho già contato tutti i simboli, non li conto ancora
 		} else {
 			
+			//Inizio a contare gli eventuali simboli al centro...
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getFacciaDiGioco().equals("RETRO") ) {
 				//Analizzo la risorsa al centro sul retro n1 (che hanno tutte le carte giocabili)
 				incrementaConteggioDatoSimbolo( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().getRetro().getRisorsaRetroCentrale().toString() );
@@ -87,6 +90,7 @@ public class Campo implements campoECaselle.Reset {
 				}
 			}
 			
+			//...poi conto quelli negli angoli in senso orario
 			//Analizzo l'angolo in alto a sinistra della faccia fronte
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx() instanceof AngoloVisibile ) { //gestisco caso: angolo nascosto
 				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx()).isCoperto() ) { //gestistisco caso: angolo coperto
@@ -105,18 +109,6 @@ public class Campo implements campoECaselle.Reset {
 				}
 			}
 			
-			//Analizzo l'angolo in basso a sinistra della faccia fronte
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx() instanceof AngoloVisibile ) {
-				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).isCoperto() ) {
-					contaRisorseEOggettiVisibili(i+1,j-1,false);
-				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto()!=null ) {
-					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto() );
-				}
-			}
-			
-			//Appena prima di controllare l'ultimo angolo della carta, setto che sono già state contate tutte le risorse della carta
-			((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().setContatiSimboli(true);
-			
 			//Analizzo l'angolo in basso a destra della faccia fronte
 			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx() instanceof AngoloVisibile ) {
 				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx()).isCoperto() ) {
@@ -126,9 +118,22 @@ public class Campo implements campoECaselle.Reset {
 				}
 			}
 			
+			//Appena prima di controllare l'ultimo angolo della carta, setto che sono già state contate tutte le risorse della carta
+			((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().setContatiSimboli(true);
+			
+			//Analizzo l'angolo in basso a sinistra della faccia fronte
+			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx() instanceof AngoloVisibile ) {
+				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).isCoperto() ) {
+					contaRisorseEOggettiVisibili(i+1,j-1,false);
+				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto()!=null ) {
+					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto() );
+				}
+			}
+			
 		}
 		
-		resetConteggioSimboliOControlloDisposizione(this);
+		//*se facessi il reset qui, come avevo ipotizzato, il campo verrebbe resettato alla fine di ogni carta (dunque sarebbe inutile avere un booleano che controlla di quali carte sono già stati contati i simboli)
+		
 		return conteggioRisorseEOggetti; //viene ritornata la hashmap in caso serva utilizzarla per altri motivi (es assegnare punti date determinate condizioni delle carte oro o obiettivo)
 	}
 	
