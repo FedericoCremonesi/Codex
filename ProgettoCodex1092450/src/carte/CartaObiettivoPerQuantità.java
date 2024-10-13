@@ -150,6 +150,15 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 			Math.floor(numeroSetSimboli); //Con questo metodo floor, approssimo per difetto il numero di set di simboli	
 		}
 		
+		if(numeroSetSimboli!=0) {
+			System.out.print("Hai completato un obiettivo (per quantità di simboli)! ");
+			System.out.print("Hai ottenuto "+super.getPuntiPerSet());
+			if(super.getPuntiPerSet()==1) {
+				System.out.println(" punto");
+			} else {
+				System.out.println(" punti");
+			}
+		}
 		return (int) numeroSetSimboli; //posso castare a intero perchè qualsiasi valore contenuto in numeroSetSimboli sarà un intero o un double arrotondato per difetto
 	}
 }

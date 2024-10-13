@@ -33,7 +33,7 @@ public class Partita {
 	private static int numeroRoundGiocati;
 	private Boolean ultimoRound;
 	
-	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 20;
+	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 1;
 	
 	
 	public static int getNumeroRoundGiocati() {
@@ -288,12 +288,13 @@ public class Partita {
 	
 	
 	public void giocaRound() {
-		System.out.println("\nInizia un nuovo round!");
+		System.out.println("\n Inizia un nuovo round!");
 		numeroRoundGiocati++;
 		for(Giocatore g : gruppoGiocatori)
 		{
 			giocaTurno(g);
 		}
+		System.out.println("\n Fine del round");
 	}
 	
 	
@@ -360,7 +361,7 @@ public class Partita {
 		{
 			if(g.getPunti()>=PUNTEGGIO_MINIMO_FINE_PARTITA) {
 				System.out.println("\n\tATTENZIONE:");
-				System.out.println(g.getNickname()+" ha raggiunto "+g.getPunti()+" punti!");
+				System.out.println(g.getNickname()+" ha raggiunto "+g.getPunti()+" punti!"); //Questo viene stampato solo una volta, quando un giocatore del gruppo raggiunge per primo i 20 punti
 				almeno20Punti = true;
 			}
 		}
@@ -402,18 +403,22 @@ public class Partita {
 		
 		//stampo tutti gli obiettivi (comuni e segreti) per ricordarli ai giocatori
 		System.out.println("Ricordiamo gli obiettivi di tutti i giocatori:");
-		System.out.println("Obiettivi comuni:");
+		System.out.println("\nObiettivi comuni:");
 		tavoloDiGioco.getObiettivoComuneDatoIndice(0).print("all");
 		tavoloDiGioco.getObiettivoComuneDatoIndice(1).print("all");
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.println("Obiettivo segreto di "+g.getNickname());
+			System.out.println("\nObiettivo segreto di "+g.getNickname()+":");
 			g.getObiettivoSegreto().print("all");
 		}
 		
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.println("Controllando gli obiettivi completati da: "+g.getNickname());
+			System.out.println("\n\nControllando gli obiettivi completati da: "+g.getNickname());
+			
+			g.getCampo().stampaMatriceCampoAQuadratini();
+			g.getCampo().contaRisorseEOggettiVisibili(40,40,true);
+			g.getCampo().stampaConteggioRisorseEOggettiVisibili();
 			
 			int puntiGiocatore = g.getPunti();
 			int numeroObiettiviCompletati = g.getConteggioObiettiviCompletati();
@@ -435,35 +440,43 @@ public class Partita {
 					
 			g.setPunti(puntiGiocatore);
 			g.setConteggioObiettiviCompletati(numeroObiettiviCompletati);
-			System.out.println(g.getNickname() + " hai completato " + numeroObiettiviCompletati
-					+ " obiettivi (anche contando uno stesso obiettivo completato più volte),"
-					+ " arrivando ad un totale di " + puntiGiocatore + " punti!");
+			System.out.print(g.getNickname()+" hai completato in totale "+numeroObiettiviCompletati);
+			if(numeroObiettiviCompletati==1) {
+				System.out.print(" obiettivo");
+			} else {
+				System.out.print(" obiettivi");
+			}
+			System.out.println(" (anche contando uno stesso obiettivo completato più volte)");
+			System.out.println("Punteggio finale: "+puntiGiocatore+" punti!");
 		}
 	}
 	
 	
 	public void dichiaraVincitore() {
-		System.out.println("\nClassifica finale dei giocatori:");
+		System.out.println("\n\n\tClassifica finale dei giocatori:");
 		Collections.sort(gruppoGiocatori, Collections.reverseOrder()); //Ordino l'arraylist di giocatori in ordine decrescente in base al punteggio
+																	   //(Posso perchè ho reso i giocatori comparabili tra di loro con un'interfaccia implementata dalla classe di cui sono istanze)
 																	   //Così facendo avrò il giocatore con il punteggio più alto nella prima posizione
 		for(int k=0; k<gruppoGiocatori.size(); k++)
 		{
-			System.out.print(k+") "+gruppoGiocatori.get(k).getPunti()+" punti: "+gruppoGiocatori.get(k).getNickname());
+			System.out.println("\t"+(k+1)+") "+gruppoGiocatori.get(k).getNickname()+" con "+gruppoGiocatori.get(k).getPunti()+" punti");
 		}
 		
 		
 		if(gruppoGiocatori.get(0).getPunti() == gruppoGiocatori.get(1).getPunti()) {
-			System.out.println("I primi giocatori risultano aver raggiunto lo stesso punteggio");
+			System.out.println("\nI primi giocatori risultano aver raggiunto lo stesso punteggio");
+			System.out.println("Il vincitore sarà quindi colui che, tra i giocatori con punteggio più alto, ha completato più obiettivi");
 			int punteggioVincente = gruppoGiocatori.get(0).getPunti();
 			for(int k=0; k<gruppoGiocatori.size(); k++)
 			{
 				if(gruppoGiocatori.get(k).getPunti() != punteggioVincente)
 				{
-					gruppoGiocatori.remove(k); //rimuovo i giocatori non "primi a pari merito"
+					gruppoGiocatori.remove(k); //rimuovo i giocatori non "primi a pari merito" per punteggio
+					k = k-1; //devo decrementare k perchè ho appena rimosso un elemento dalla lista, se non lo facessi si "salterebbe" un giocatore
 				}
 			}
 			
-			List<Giocatore> vincitori = new ArrayList<>();
+			List<Giocatore> vincitori = new ArrayList<>(); //in questa lista tengo solo il giocatore (o giocatori) con il maggior numero di obiettivi completati (tra quelli con punteggio maggiore a pari merito)
 			vincitori.add(gruppoGiocatori.get(0)); //considero inizialmente il primo giocatore come unico vincitore
 			
 			for(int k=1; k<gruppoGiocatori.size(); k++) { //Nota: parto a scorrere gli altri giocatori con k=1, non 0, perchè il primo giocatore è già nella lista "vincitori"
@@ -479,18 +492,21 @@ public class Partita {
 			}
 			
 			if(vincitori.size() == 1) {
-				System.out.println("Il vincitore è: "+vincitori.get(0).getNickname()+", complimenti!");
+				System.out.println("\nIl vincitore è: "+vincitori.get(0).getNickname()+" con "+vincitori.get(0).getConteggioObiettiviCompletati()+" obiettivi completati, complimenti!");
 				System.exit(0); //Termina il programma (caso 2 di 3 totali)
 			} else {
-				System.out.print("Non c'è un solo vincitore in questa partita, sono arrivati primi a pari merito: ");
-				for(Giocatore g : vincitori) {
-					System.out.print(g.getNickname()+" ");
+				System.out.print("\nNon c'è un solo vincitore in questa partita, sono arrivati primi a pari merito: ");
+				for(int k=0; k<vincitori.size(); k++) {
+					System.out.print(vincitori.get(k).getNickname());
+					if(k!=(vincitori.size()-1)) {
+						System.out.print(" e ");
+					}
 				}
-				System.out.println("\nComplimenti!");
+				System.out.println(", ognuno con "+vincitori.get(0).getConteggioObiettiviCompletati()+" obiettivi completati, complimenti!");
 				System.exit(0); //Termina il programma (caso 3 di 3 totali)
 			}
 		} else {
-			System.out.println("Il vincitore è: "+gruppoGiocatori.get(0).getNickname()+", complimenti!");
+			System.out.println("\nIl vincitore è: "+gruppoGiocatori.get(0).getNickname()+", complimenti!");
 			System.exit(0); //Termina il programma (caso 1 di 3 totali)
 		}
 	}

@@ -57,7 +57,7 @@ public class CasellaGiocabile extends Casella {
 	public void stampaCasellaComeQuadratino() {
 		if(cartaContenuta instanceof CartaIniziale) {
 			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_RISORSA+"■■■"+ColoreCarta.CODICE_RESET_COLORE);
-					//uso impropriamente la costante con il codice colore nero per le carte risorsa per colorare la carta iniziale quando stampata nella matrice
+					//uso impropriamente la costante con il codice colore nero delle carte risorsa per colorare la carta iniziale quando stampata nella matrice
 			return;
 		} else {
 			String coloreCarta = null;

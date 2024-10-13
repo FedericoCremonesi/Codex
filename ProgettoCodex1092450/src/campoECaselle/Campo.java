@@ -190,7 +190,8 @@ public class Campo implements campoECaselle.Reset {
 				}
 			}
 		}
-		System.out.println("Campo resettato (risorse)");
+		//System.out.println("Campo resettato (risorse)");
+		//(Usato per testing)
 	}
 	
 	
