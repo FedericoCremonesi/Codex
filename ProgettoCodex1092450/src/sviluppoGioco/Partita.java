@@ -373,11 +373,11 @@ public class Partita {
 		boolean fineEntrambiMazzi = false;;
 		
 		if(tavoloDiGioco.getMazzoCarteRisorsa().controllaSeMazzoFinito()) {
-			System.out.println("\tLe carte nel mazzo risorsa sono finite");
+			System.out.println("\n\tLe carte nel mazzo risorsa sono finite");
 			fineMazzoRisorsa = true;
 		}
 		if(tavoloDiGioco.getMazzoCarteOro().controllaSeMazzoFinito()) {
-			System.out.println("\tLe carte nel mazzo oro sono finite");
+			System.out.println("\n\tLe carte nel mazzo oro sono finite");
 			fineMazzoOro = true;
 		}
 		

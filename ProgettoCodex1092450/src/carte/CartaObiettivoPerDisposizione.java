@@ -292,6 +292,11 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 						//es: si trova una carta rossa per la disposizione "DiagonaleDecrescente" nell'ultima casella possibile in basso a destra del campo)
 						
 						//In questo caso non bisogna fare effettivamente nulla, in quanto non è possibile posizionare carte fuori dal campo e quindi completare una disposizione qui
+						
+						/*
+						 * Forse non serve nemmeno gestire questo caso perchè non si arriverà mai a posizionare una carta nell'ultima casella ad un angolo del campo, in quanto
+						 * la partita finisce quando finiscono entrambi i mazzi, non quando finiscono entrambi i mazzi E le carte in mano di ogni giocatore
+						 */
 					}
 				}
 				

@@ -79,7 +79,7 @@ public class Mazzo <T extends Carta> {
 	
 	public void visualizzaTreCartePerPesca() {
 		if(carteNelMazzo.size()==0) {
-			System.out.println("Carte finite!");
+			System.out.println("Carte finite!\n");
 			return;
 		} else {
 			try {
