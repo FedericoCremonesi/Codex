@@ -11,6 +11,8 @@ import carte.CartaGiocabile;
 import carte.CartaObiettivo;
 import carte.CartaOro;
 import carte.CartaRisorsa;
+import sviluppoGioco.ColoreTesto;
+import sviluppoGioco.Partita;
 import tavoloEMazzi.Mazzo;
 
 public class Giocatore implements Comparable<Giocatore> {
@@ -81,7 +83,9 @@ public class Giocatore implements Comparable<Giocatore> {
 	
 	
 	public Giocatore(String nickname) {
-		System.out.println("Creazione di un giocatore con questo nickname in corso...");
+		//System.out.println("Creazione di un giocatore con questo nickname in corso...");
+		//(Usato per testing)
+		System.out.println("Ok!");
 		this.nickname = nickname;
 		this.campo = new Campo();
 		this.mano = new Mano();
@@ -96,11 +100,20 @@ public class Giocatore implements Comparable<Giocatore> {
 	
 	
 	public void assegnaColorePedina(Pedina pedinaScelta) {
+		setColorePedina(pedinaScelta);
+		
 		String codiceColorePedina = Pedina.ottieniStringCodiceColoreDaStringa(pedinaScelta.toString());
 		nickname = codiceColorePedina+nickname+Pedina.CODICE_RESET_COLORE;
 	}
 	
 	
+	public void stampaLineaColorata() {
+		System.out.println(Pedina.ottieniStringCodiceColoreSfondoDaStringa(colorePedina.toString()));
+		for(int t=0; t<Partita.NUMERO_CARATTERI_MASSIMI_ORIZZONTALI; t++) {
+			System.out.print(" ");
+		}
+		System.out.println(Pedina.CODICE_RESET_COLORE);
+	}
 	
 	
 	public void giocaCartaDaMano() {
@@ -208,7 +221,7 @@ public class Giocatore implements Comparable<Giocatore> {
 	public String scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare, boolean consentiTornaIndietro) {
 		String scelta;
 		do {
-			System.out.print(nickname+" su quale faccia vuoi giocare la carta?");
+			System.out.print(ColoreTesto.CODICE_COLORE_AZZURRO+nickname+" su quale faccia vuoi giocare la carta?"+ColoreTesto.CODICE_RESET_COLORE);
 			
 			if(consentiTornaIndietro) {
 				System.out.println(" (puoi anche tornare indietro alla scelta della carta)");

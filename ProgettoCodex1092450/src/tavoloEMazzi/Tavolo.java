@@ -86,7 +86,8 @@ public class Tavolo {
 	
 	
 	public void creaMazzi() {
-		System.out.println("Creando i 4 mazzi di carte...");
+		//System.out.println("Creando i 4 mazzi di carte...");
+		//(Usato per testing)
 		creaMazzoDaFile(mazzoCarteRisorsa, new File("fileCarteRisorsa.csv"));
 		creaMazzoDaFile(mazzoCarteOro, new File("fileCarteOro.csv"));
 		creaMazzoDaFile(mazzoCarteIniziali, new File("fileCarteIniziali.csv"));
@@ -202,7 +203,8 @@ public class Tavolo {
 	
 	
 	public void mescolaMazzi() {
-		System.out.println("Mescolando i 4 mazzi di carte...");
+		//System.out.println("Mescolando i 4 mazzi di carte...");
+		//(Usato per testing)
 		mazzoCarteRisorsa.mescolaMazzo();
 		mazzoCarteOro.mescolaMazzo();
 		mazzoCarteIniziali.mescolaMazzo();
@@ -212,7 +214,8 @@ public class Tavolo {
 	
 	public void aggiungiObiettivoComune(int indice, CartaObiettivo carta) {
 		obiettiviComuni[indice] = carta;
-		System.out.println("Carta aggiunta agli obiettivi comuni");
+		//System.out.println("Carta aggiunta agli obiettivi comuni");
+		//(Usato per testing)
 	}
 	
 	

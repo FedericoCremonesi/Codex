@@ -67,8 +67,10 @@ public class Mazzo <T extends Carta> {
 	
 	
 	public Carta estraiCartaDaMazzo(int indiceCartaDaEstrarre, boolean stampa) throws IndexOutOfBoundsException {
-		if(stampa)
-			System.out.println("\nCarta estratta:");
+		if(stampa) {
+			//System.out.println("\nCarta estratta:");
+			//(Usato per testing)
+		}
 		T cartaEstratta = carteNelMazzo.get(indiceCartaDaEstrarre); //per estrarre la prima carta serve indice 0 perchè voglio la prima carta (e le arraylist partono da 0)
 		if(stampa)
 			cartaEstratta.print("all"); //passo al metodo print il valore "all" per comunicare al metodo printFaccia() in FacciaFronte di stampare tutte le linee della carta

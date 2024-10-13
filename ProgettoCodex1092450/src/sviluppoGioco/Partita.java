@@ -20,6 +20,8 @@ import carte.CartaObiettivo;
 import carte.CartaObiettivoPerDisposizione;
 import carte.CartaOro;
 import carte.CartaRisorsa;
+import carte.ColoreCarta;
+import facceEAngoli.Risorsa;
 import giocatori.Giocatore;
 import giocatori.Pedina;
 import tavoloEMazzi.Mazzo;
@@ -33,7 +35,47 @@ public class Partita {
 	private static int numeroRoundGiocati;
 	private Boolean ultimoRound;
 	
-	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 20;
+	public final static int PUNTEGGIO_MINIMO_FINE_PARTITA = 20;
+	public final static int NUMERO_CARATTERI_MASSIMI_ORIZZONTALI = 200;
+	
+	
+	
+	public static void stampaSchermataDiGioco() {
+		System.out.println("\n\n\t\t   Benvenuti in questa partita di:\n");
+		System.out.println();
+		System.out.println( Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t╭-----\\  ╭-----╮ "	+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"┌-----╮  ┌----- \\   /"		+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |	  \\ /"			+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |----	   /"		+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |	  / \\"			+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t╰-----/  ╰-----╯ "	+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"└-----╯  └----- /   \\"		);
+		System.out.println();
+		System.out.println( Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |\\    |     /	 ------- |     | "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"┌----╮     /	  |	 | ╭------"			+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" | \\   |    / \\	    |	 |     | "	+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    |    / \\    |	 | |      "			+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |  \\  |   /---\\    |	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|----╮   /---\\	  |	 | ╰-----╮"		+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |   \\ |  /     \\   |	 \\     / "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    |  /     \\  |      |       |"	+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |    \\| /       \\  |	  ╰---╯	 "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    | /       \\ └----- | ------╯"	+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  .");
+		System.out.println(Risorsa.CODICE_RESET_COLORE);
+	}
+	
+	
+	public static void premiInvioPerContinuare() {
+		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"\n\t\t    Premere invio per continuare..."+ColoreTesto.CODICE_RESET_COLORE);
+		Scanner sc = new Scanner(System.in);
+		String inserimentoUtente = sc.nextLine();
+		return;
+	}
+	
+	
+	public static void stampaRingraziamentiERealizzatoDa() {
+		System.out.println("\n\n\n\t\t"+"Grazie per aver giocato!");
+		System.out.println("\t\t"+"Questo programma è stato realizzato da:");
+		System.out.println("\t\t\t"+"Cremonesi Federico");
+		System.out.println("\t\t\t"+"Codice Matricola: 1092450");
+		System.out.println("\t\t\t"+"Università di Bergamo - UNIBG");
+		System.out.println("\t\t\t"+"Percorso di studi: Ingegneria Informatica");
+		System.out.println("\t\t\t"+"Corso di: Programmazione ad Oggetti");
+		System.exit(0);
+	}
 	
 	
 	public static int getNumeroRoundGiocati() {
@@ -53,7 +95,9 @@ public class Partita {
 	 * Funzione principale in cui sono scritti tutti i passaggi della partita
 	 */
 	public void gioca() {
-		System.out.println("Una nuova partita ha inizio");
+		stampaSchermataDiGioco();
+		premiInvioPerContinuare();
+		System.out.println("Una nuova partita ha inizio!");
 		tavoloDiGioco.creaMazzi();
 			//tavoloDiGioco.stampaMazzi(); //testing
 		tavoloDiGioco.mescolaMazzi();
@@ -79,7 +123,7 @@ public class Partita {
 		int numeroGiocatori = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 		do {
 			try {
-				System.out.println("\nQuanti giocatori vogliono giocare questa partita?");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\nQuanti giocatori vogliono giocare questa partita?"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
 				numeroGiocatori = sc.nextInt();
 				if(!(numeroGiocatori >= 2 && numeroGiocatori <= 4))
@@ -96,13 +140,14 @@ public class Partita {
 
 	
 	public static void richiediNicknameGiocatori() {
+		System.out.println("\n(Nota:\tl'ordine di inserimento dei nickname non sarà\n\tnecessariamente l'ordine di gioco,\n\tquest'ultimo è determinato casualmente)");
 		for(int i=0; i<Giocatore.numeroGiocatori; i++)
 		{
 			boolean ok;
 			do {
 				ok = true;
 				String nickname;
-				System.out.println("\nInserire il nickname del giocatore "+(i+1)+"\n(Nota: l'ordine di inserimento non necessariamente sarà l'ordine di gioco)");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\nInserire il nickname del giocatore "+(i+1)+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
 				nickname = sc.nextLine().trim(); //con questo metodo tolgo gli spazi all'inizio e alla fine del nickname inserito
 				if(nickname.isBlank()) { //verifico che l'utente non inserisca spazio, tab o nulla
@@ -114,7 +159,8 @@ public class Partita {
 				} else {
 					Giocatore giocatore = new Giocatore(nickname);
 					gruppoGiocatori.add(giocatore);
-					System.out.println("Giocatore creato e aggiunto alla lista");
+					//System.out.println("Giocatore creato e aggiunto alla lista");
+					//(Usato per testing)
 				}
 			}while(!ok);
 		}
@@ -133,14 +179,15 @@ public class Partita {
 	
 	
 	public static void mischiaOrdineGiocatori() {
-		System.out.println("\nGenerando ordine di gioco casuale...");
+		//System.out.println("\nGenerando ordine di gioco casuale...");
+		//(Usato per testing)
 		Collections.shuffle(gruppoGiocatori);
-		System.out.println("L'ordine di gioco dei giocatori è:");
+		System.out.println("\nL'ordine di gioco dei giocatori è:");
 		
 		int indicePerOrdineGioco=1;
 		for(Giocatore g : gruppoGiocatori)
 		{
-			System.out.print(indicePerOrdineGioco+"- ");
+			System.out.print(indicePerOrdineGioco+") ");
 			g.stampaNickname();
 			indicePerOrdineGioco++;
 		}
@@ -148,22 +195,24 @@ public class Partita {
 	
 	
 	public static void creaListaColori() {
-		System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
+		//System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
+		//(Usato per testing)
 		coloriPedinaDisponibili = new HashSet<Pedina>();
 		coloriPedinaDisponibili.add(Pedina.ROSSA);
 		coloriPedinaDisponibili.add(Pedina.GIALLA);
 		coloriPedinaDisponibili.add(Pedina.VERDE);
 		coloriPedinaDisponibili.add(Pedina.BLU);
-		System.out.println("Lista delle pedine creata !");
+		//System.out.println("Lista delle pedine creata !");
+		//(Usato per testing)
 	}
 	
 	
 	public static void stampaListaColori() {
-		System.out.println("Le pedine disponibili al momento sono: ");
+		System.out.println("\nLe pedine disponibili al momento sono:");
 		for(Pedina colorePedina : coloriPedinaDisponibili)
 		{
 			System.out.print("- ");
-			System.out.println(colorePedina.toString().toLowerCase());
+			System.out.println(Pedina.ottieniStringCodiceColoreDaStringa(colorePedina.toString())+ colorePedina.toString().toLowerCase() +Pedina.CODICE_RESET_COLORE);
 		}
 	}
 	
@@ -175,7 +224,7 @@ public class Partita {
 			boolean coloreSceltoEDisponibile = false;
 			do {
 				stampaListaColori();
-				System.out.println("\n"+g.getNickname()+", quale pedina preferisci scegliere?");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n"+g.getNickname()+", quale pedina preferisci scegliere?"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
 				String coloreScelto = sc.nextLine();
 				coloreScelto = coloreScelto.toUpperCase(); //rende maiuscolo il colore inserito, in modo da considerare "Rosso","rosso","ROSSO" tutti come "ROSSO"
@@ -202,6 +251,7 @@ public class Partita {
 					System.out.println("Il colore inserito non è più disponibile, è già stato selezionato da un altro giocatore");
 				} else {
 					g.assegnaColorePedina(Pedina.valueOf(coloreScelto));
+					System.out.println("Ok! Colore assegnato");
 					coloriPedinaDisponibili.remove(Pedina.valueOf(coloreScelto));
 				}
 			} while ((!coloreSceltoEUnColore) || (!coloreSceltoEDisponibile));
@@ -210,6 +260,7 @@ public class Partita {
 	
 	
 	public void consegnaEGiocoCarteIniziali() {
+		System.out.println();
 		for(Giocatore g : gruppoGiocatori)
 		{
 			System.out.println("\nEstraendo una carta iniziale per: "+g.getNickname()+"...");
@@ -227,6 +278,7 @@ public class Partita {
 	
 	
 	public void consegnaCarteRisorsaEOro() {
+		System.out.println();
 		for(Giocatore g : gruppoGiocatori)
 		{
 			//Carte risorsa:
@@ -243,6 +295,7 @@ public class Partita {
 			
 			cartaOroEstratta.aggiungiAMano(g.getMano());
 			
+			premiInvioPerContinuare();
 		}
 	}
 	
@@ -259,14 +312,14 @@ public class Partita {
 		for(Giocatore g : gruppoGiocatori)
 		{
 			System.out.println("\nEstraendo due carte obiettivo per: "+g.getNickname()+"...");
-			System.out.print("A:");
+			System.out.println("A:");
 			CartaObiettivo obiettivoEstratto1 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiCartaDaMazzo(0, true));
-			System.out.print("B:");
+			System.out.println("B:");
 			CartaObiettivo obiettivoEstratto2 = (CartaObiettivo)(tavoloDiGioco.getMazzoCarteObiettivo().estraiCartaDaMazzo(0, true));
 			
 			String sceltaObiettivo;
 			do {
-				System.out.println(g.getNickname()+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+g.getNickname()+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
 				sceltaObiettivo = sc.nextLine().toUpperCase();
 				
@@ -288,17 +341,20 @@ public class Partita {
 	
 	
 	public void giocaRound() {
-		System.out.println("\n Inizia un nuovo round!");
+		System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n Inizia un nuovo round!");
 		numeroRoundGiocati++;
+		System.out.println(" Round numero: "+numeroRoundGiocati+ColoreTesto.CODICE_RESET_COLORE);
 		for(Giocatore g : gruppoGiocatori)
 		{
 			giocaTurno(g);
 		}
-		System.out.println("\n Fine del round");
+		System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n Fine del round"+ColoreTesto.CODICE_RESET_COLORE);
 	}
 	
 	
 	public void giocaTurno(Giocatore g) {
+		g.stampaLineaColorata();
+		
 		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
 		
 		System.out.println("\nPunteggio attuale: "+g.getPunti());
@@ -350,6 +406,8 @@ public class Partita {
 		if(!ultimoRound) {
 			ultimoRound = eseguiCheckFinePartita();
 		}
+		
+		g.stampaLineaColorata();
 	}
 
 	
@@ -493,7 +551,7 @@ public class Partita {
 			
 			if(vincitori.size() == 1) {
 				System.out.println("\nIl vincitore è: "+vincitori.get(0).getNickname()+" con "+vincitori.get(0).getConteggioObiettiviCompletati()+" obiettivi completati, complimenti!");
-				System.exit(0); //Termina il programma (caso 2 di 3 totali)
+				stampaRingraziamentiERealizzatoDa(); //Termina il programma (caso 2 di 3 totali)
 			} else {
 				System.out.print("\nNon c'è un solo vincitore in questa partita, sono arrivati primi a pari merito: ");
 				for(int k=0; k<vincitori.size(); k++) {
@@ -503,11 +561,11 @@ public class Partita {
 					}
 				}
 				System.out.println(", ognuno con "+vincitori.get(0).getConteggioObiettiviCompletati()+" obiettivi completati, complimenti!");
-				System.exit(0); //Termina il programma (caso 3 di 3 totali)
+				stampaRingraziamentiERealizzatoDa(); //Termina il programma (caso 3 di 3 totali)
 			}
 		} else {
 			System.out.println("\nIl vincitore è: "+gruppoGiocatori.get(0).getNickname()+", complimenti!");
-			System.exit(0); //Termina il programma (caso 1 di 3 totali)
+			stampaRingraziamentiERealizzatoDa(); //Termina il programma (caso 1 di 3 totali)
 		}
 	}
 }
