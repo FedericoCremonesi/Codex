@@ -33,7 +33,7 @@ public class Partita {
 	private static int numeroRoundGiocati;
 	private Boolean ultimoRound;
 	
-	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 1;
+	public final int PUNTEGGIO_MINIMO_FINE_PARTITA = 20;
 	
 	
 	public static int getNumeroRoundGiocati() {
