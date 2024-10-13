@@ -131,7 +131,7 @@ public class Giocatore implements Comparable<Giocatore> {
 				if(!indietroASceltaCarta) {
 					boolean chiediConfermaVolontà = true;
 					
-					if( (cartaDaGiocare instanceof CartaOro) && (cartaDaGiocare.getFacciaDiGioco().equals("FRONTE")) ) {
+					if( (cartaDaGiocare instanceof CartaOro) && (facciaSceltaOIndietro.equals("FRONTE")) ) { //Non posso usare il getFacciaDiGioco perchè non è ancora stata settata, verrà settata dopo che l'utente ha confermato la sua decisione
 						//Controllo le risorse necessarie per giocare una carta oro sulla faccia frontale
 						indietroASceltaFaccia = !( getCampo().controllaRisorseNecessariePerCartaOro((CartaOro) cartaDaGiocare) ); //posso eseguire il casting perchè ho appena controllato che la carta da giocare fosse di tipo oro
 						chiediConfermaVolontà = !indietroASceltaFaccia; //se bisogna tornare automaticamente alla scelta della faccia perchè il giocatore non ha abbastanza risorse necessarie per giocare la carta (oro sul fronte), non si chiederà ovviamente conferma se il giocatore vuole proseguire (perchè non può)
