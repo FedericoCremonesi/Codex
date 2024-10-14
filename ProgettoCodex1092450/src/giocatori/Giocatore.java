@@ -169,7 +169,7 @@ public class Giocatore implements Comparable<Giocatore> {
 		cartaDaGiocare.setFacciaDiGioco(facciaSceltaOIndietro);
 		
 		while(true) {
-			System.out.println("In quale casella vuoi giocare la carta?");
+			System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"In quale casella vuoi giocare la carta?"+ColoreTesto.CODICE_RESET_COLORE);
 			int[] coordinateCasella = scegliCoordinateCasellaGiocabile();
 			
 			CasellaGiocabile casellaInCuiPosizionareCarta = (CasellaGiocabile) campo.getCasellaDaCoordinate(coordinateCasella[0],coordinateCasella[1]);
@@ -202,7 +202,7 @@ public class Giocatore implements Comparable<Giocatore> {
 		int indiceCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 		do {
 			try {
-				System.out.println(nickname+" quale carta vuoi giocare dalla tua mano?");
+				System.out.println(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" quale carta vuoi giocare dalla tua mano?"+ColoreTesto.CODICE_COLORE_NERO+" [1/2/3]"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
 				indiceCartaScelta = sc.nextInt();
 				if(!(indiceCartaScelta >= 1 && indiceCartaScelta <= 3))
@@ -221,16 +221,16 @@ public class Giocatore implements Comparable<Giocatore> {
 	public String scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare, boolean consentiTornaIndietro) {
 		String scelta;
 		do {
-			System.out.print(ColoreTesto.CODICE_COLORE_AZZURRO+nickname+" su quale faccia vuoi giocare la carta?"+ColoreTesto.CODICE_RESET_COLORE);
+			System.out.print(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" su quale faccia vuoi giocare la carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Fronte/Retro]"+ColoreTesto.CODICE_RESET_COLORE);
 			
 			if(consentiTornaIndietro) {
-				System.out.println(" (puoi anche tornare indietro alla scelta della carta)");
+				System.out.println("\n (puoi anche tornare indietro alla scelta della carta inserendo "+ColoreTesto.CODICE_COLORE_NERO+"[Indietro]"+ColoreTesto.CODICE_RESET_COLORE+")");
 			} else {
 				System.out.println();
 			}
 			
 			Scanner sc = new Scanner(System.in);
-			scelta = sc.nextLine().toUpperCase();
+			scelta = sc.nextLine().toUpperCase().trim();
 			if(scelta.equals("FRONTE") || scelta.equals("RETRO")) {
 				//prima qui settavo definitivamente la faccia di gioco, ma questo causava problemi (nel metodo "giocaCartaDaMano" di Giocatore sono spiegate le motivazioni)
 				return scelta; //nel caso sia stata inserita una delle due facce di gioco
@@ -253,9 +253,9 @@ public class Giocatore implements Comparable<Giocatore> {
 	
 	public boolean confermaVolontàDiGioco() {
 		while(true) { //il ciclo verrà eseguito all'infinito finchè non si incontrerà un return (all'interno degli if)
-			System.out.println(nickname+" vuoi proseguire con la giocata della carta? Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)");
+			System.out.println(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" vuoi proseguire con la giocata della carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Si/No]"+ColoreTesto.CODICE_RESET_COLORE+"\n Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)");
 			Scanner sc = new Scanner(System.in);
-			String scelta = sc.nextLine().toUpperCase();
+			String scelta = sc.nextLine().toUpperCase().trim();
 			if(scelta.equals("SI")) {
 				return true;
 			} else if(scelta.equals("NO")) {
@@ -313,9 +313,9 @@ public class Giocatore implements Comparable<Giocatore> {
 			
 			String mazzoDaCuiPescare;
 			do {
-				System.out.println("Da quale mazzo vuoi pescare la carta?");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"Da quale mazzo vuoi pescare la carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Risorsa/Oro]"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc=new Scanner(System.in);
-				mazzoDaCuiPescare=sc.nextLine().toUpperCase();
+				mazzoDaCuiPescare=sc.nextLine().toUpperCase().trim();
 				if(mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) {
 					
 					//Gestisco il caso in cui l'utente abbia scelto un mazzo in cui sono terminate le carte
@@ -332,7 +332,7 @@ public class Giocatore implements Comparable<Giocatore> {
 					int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 					do {
 						try {
-							System.out.println("Quale carta vuoi prendere tra le tre proposte?");
+							System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"Quale carta vuoi prendere tra le tre proposte?"+ColoreTesto.CODICE_RESET_COLORE);
 							sceltaCartaNonPresente = false;
 							sc = new Scanner(System.in);
 							numeroCartaScelta = sc.nextInt();
@@ -360,7 +360,7 @@ public class Giocatore implements Comparable<Giocatore> {
 					} while ( (!(numeroCartaScelta >= 1 && numeroCartaScelta <= 3)) || (sceltaCartaNonPresente) );
 					
 				} else {
-					System.out.println("Inserimento non valido, scrivere risorsa oppure oro");
+					System.out.println("Inserimento non valido, scrivere Risorsa oppure Oro");
 				}
 			} while(! (mazzoDaCuiPescare.equals("RISORSA") || mazzoDaCuiPescare.equals("ORO")) );
 			

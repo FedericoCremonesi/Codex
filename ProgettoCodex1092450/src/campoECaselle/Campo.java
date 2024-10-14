@@ -10,6 +10,7 @@ import facceEAngoli.AngoloVisibile;
 import facceEAngoli.Risorsa;
 import facceEAngoli.Angolo;
 import facceEAngoli.AngoloNascosto;
+import sviluppoGioco.ColoreTesto;
 import sviluppoGioco.Partita;
 
 public class Campo implements campoECaselle.Reset {
@@ -196,11 +197,11 @@ public class Campo implements campoECaselle.Reset {
 	
 	
 	public void stampaConteggioRisorseEOggettiVisibili() {
-		System.out.println("sul tuo campo sono visibili:");
+		System.out.println("\nSimboli di ogni tipo visibili sul tuo campo:");
 		for (String risorsaOppureOggetto : conteggioRisorseEOggetti.keySet()) { //Utilizzo keyset per scorrere gli elementi della hashmap
 			String coloreTesto = Risorsa.ottieniStringCodiceColoreDaRisorsa(risorsaOppureOggetto);
 			
-			System.out.println("➤ "+" Simboli di tipo "+coloreTesto+risorsaOppureOggetto.toLowerCase()+Risorsa.CODICE_RESET_COLORE+": "+conteggioRisorseEOggetti.get(risorsaOppureOggetto)); //con get accedo al valore intero associato ad ogni stringa
+			System.out.println(" ➤ "+coloreTesto+risorsaOppureOggetto.toLowerCase()+Risorsa.CODICE_RESET_COLORE+": "+conteggioRisorseEOggetti.get(risorsaOppureOggetto)); //con get accedo al valore intero associato ad ogni stringa
 		}
 	}
 
@@ -303,7 +304,7 @@ public class Campo implements campoECaselle.Reset {
 	
 	
 	public boolean controllaRisorseNecessariePerCartaOro(CartaOro cartaDaGiocare) {
-		System.out.println("Verifica dei requisiti necessari per giocare questa carta oro sulla faccia frontale...");
+		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"Verifica dei requisiti necessari per giocare questa carta oro sulla faccia frontale..."+ColoreTesto.CODICE_RESET_COLORE);
 		contaRisorseEOggettiVisibili(40,40,true);
 		
 		boolean ok1=false;
@@ -320,10 +321,10 @@ public class Campo implements campoECaselle.Reset {
 		}
 		
 		if(ok1 && ok2) {
-			System.out.println("Ok! Hai abbastanza requisiti");
+			System.out.println(ColoreTesto.CODICE_COLORE_NERO+" ➤ "+ColoreTesto.CODICE_COLORE_VERDE+"Ok! Hai abbastanza requisiti"+ColoreTesto.CODICE_RESET_COLORE);
 			return true;
 		} else {
-			System.out.println("Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale");
+			System.out.println(ColoreTesto.CODICE_COLORE_NERO+" ➤ "+ColoreTesto.CODICE_COLORE_ROSSO+"Non hai abbastanza risorse visibili sul campo per giocare la carta sulla faccia frontale"+ColoreTesto.CODICE_RESET_COLORE);
 			cartaDaGiocare.setFacciaDiGioco("non ancora giocata"); //devo settare di nuovo la faccia di gioco a quella default,
 																   //altrimenti rimarrà selezionata quella frontale per tutto il corso della partita,
 																   //quindi se il giocatore sceglie di cambiare carta da giocare (cioè non gioca questa sul retro),
@@ -334,14 +335,15 @@ public class Campo implements campoECaselle.Reset {
 	
 	
 	public boolean controllaCondizioniGiocataCartaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
-		System.out.println("Verificando le condizioni per giocare la carta sul campo...");
+		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"Verificando le condizioni per giocare la carta sul campo..."+ColoreTesto.CODICE_RESET_COLORE);
 		
 		//Controllo che la casella selezionata sia libera per posizionare la carta
 		if( !(casellaInCuiPosizionareCarta.isEmpty()) ) {
-			System.out.println(" ➤"+"\u001B[31m"+"La casella selezionata risulta essere già occupata"+"\u001B[0m");
+			System.out.println(ColoreTesto.CODICE_COLORE_NERO+" ➤ "+ColoreTesto.CODICE_COLORE_ROSSO+"La casella selezionata risulta essere già occupata"+ColoreTesto.CODICE_RESET_COLORE);
 			return false;
 		} else {
-			System.out.println(" ➤"+"\u001B[32m"+"La casella selezionata è libera, ulteriori controlli in corso..."+"\u001B[0m");
+			//System.out.println(ColoreTesto.CODICE_COLORE_NERO+" ➤ "+ColoreTesto.CODICE_COLORE_VERDE+"La casella selezionata è libera"+ColoreTesto.CODICE_RESET_COLORE);
+			//(Usato per testing)
 		}
 		
 		
@@ -366,7 +368,8 @@ public class Campo implements campoECaselle.Reset {
 			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
-				System.out.println("In alto a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				//System.out.println("In alto a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				//(Usato per testing)
 				almenoUnAngoloVisibile = true;
 			} else if(angoloDaControllare instanceof AngoloNascosto) {
 				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
@@ -380,7 +383,8 @@ public class Campo implements campoECaselle.Reset {
 			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
-				System.out.println("In alto a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				//System.out.println("In alto a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				//(Usato per testing)
 				almenoUnAngoloVisibile = true;
 			} else if(angoloDaControllare instanceof AngoloNascosto) {
 				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
@@ -394,7 +398,8 @@ public class Campo implements campoECaselle.Reset {
 			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
-				System.out.println("In basso a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				//System.out.println("In basso a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
+				//(Usato per testing)
 				almenoUnAngoloVisibile = true;
 			} else if(angoloDaControllare instanceof AngoloNascosto) {
 				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
@@ -408,7 +413,8 @@ public class Campo implements campoECaselle.Reset {
 			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx();
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
-				System.out.println("In basso a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				//System.out.println("In basso a destra: c'è angolo visibile non coperto a cui agganciarsi");
+				//(Usato per testing)
 				almenoUnAngoloVisibile = true;
 			} else if(angoloDaControllare instanceof AngoloNascosto) {
 				tutteCaselleAdiacentiLibereOConAngoliVisibili = false;
@@ -417,17 +423,19 @@ public class Campo implements campoECaselle.Reset {
 		
 		
 		if(!almenoUnAngoloVisibile) {
-			System.out.println("  ➤"+"\u001B[31m"+"Non risulta esserci nessun angolo a cui la carta possa agganciarsi"+"\u001B[0m");
+			System.out.println(ColoreTesto.CODICE_COLORE_NERO+"  ➤ "+ColoreTesto.CODICE_COLORE_ROSSO+"Non risulta esserci nessun angolo a cui la carta possa agganciarsi"+ColoreTesto.CODICE_RESET_COLORE);
 			return false;
 		} else {
-			System.out.println("  ➤"+"\u001B[32m"+"E' stato trovato almeno un angolo (visibile) a cui la carta che si sta giocando può agganciarsi"+"\u001B[0m"); //*
+			//System.out.println(ColoreTesto.CODICE_COLORE_NERO+"  ➤ "+ColoreTesto.CODICE_COLORE_VERDE+"E' stato trovato almeno un angolo (visibile) a cui la carta che si sta giocando può agganciarsi"+ColoreTesto.CODICE_RESET_COLORE); //*
+			//(Usato per testing)
 		}
 		
 		if(!tutteCaselleAdiacentiLibereOConAngoliVisibili) {
-			System.out.println("   ➤"+"\u001B[31m"+"Giocando la carta in questa posizione, questa andrà a sovrapporsi ad un angolo nascosto, ciò non è ammesso"+"\u001B[0m"); //**
+			System.out.println(ColoreTesto.CODICE_COLORE_NERO+"   ➤ "+ColoreTesto.CODICE_COLORE_ROSSO+"Giocando la carta in questa posizione, questa andrà a sovrapporsi ad un angolo nascosto, ciò non è ammesso"+ColoreTesto.CODICE_RESET_COLORE); //**
 			return false;
 		} else {
-			System.out.println("   ➤"+"\u001B[32m"+"Tutte le caselle adiacenti sono libere oppure gli angoli su cui andrà a posizionarsi la carta sono visibili"+"\u001B[0m");
+			//System.out.println(ColoreTesto.CODICE_COLORE_NERO+"   ➤ "+ColoreTesto.CODICE_COLORE_VERDE+"Tutte le caselle adiacenti sono libere oppure gli angoli su cui andrà a posizionarsi la carta sono visibili"+ColoreTesto.CODICE_RESET_COLORE);
+			//(Usato per testing)
 		}
 		
 		

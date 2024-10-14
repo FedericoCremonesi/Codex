@@ -203,8 +203,7 @@ public class Tavolo {
 	
 	
 	public void mescolaMazzi() {
-		//System.out.println("Mescolando i 4 mazzi di carte...");
-		//(Usato per testing)
+		System.out.println("Mescolando i 4 mazzi di carte...");
 		mazzoCarteRisorsa.mescolaMazzo();
 		mazzoCarteOro.mescolaMazzo();
 		mazzoCarteIniziali.mescolaMazzo();

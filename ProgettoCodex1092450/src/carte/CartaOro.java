@@ -119,12 +119,12 @@ public class CartaOro extends CartaRisorsa {
 				}
 			}
 			
-			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Condizioni di gioco: "+ColoreCarta.CODICE_RESET_COLORE+quantitàRisorsaNecessaria1+" risorse del regno "+risorsaNecessaria1.toString()); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
+			System.out.print(ColoreCarta.CODICE_COLORE_CARTA_ORO+" ➤ Condizioni di gioco: "+ColoreCarta.CODICE_RESET_COLORE+quantitàRisorsaNecessaria1+" risorse del regno "+Risorsa.ottieniStringCodiceColoreDaRisorsa(risorsaNecessaria1.toString())+risorsaNecessaria1.toString()+Risorsa.CODICE_RESET_COLORE); //si intendono "condizioni di gioco per poter giocare questa carta (con la faccia frontale)"
 			if(risorsaNecessaria2==null)
 			{
 				System.out.println(); //va semplicemente a capo
 			} else {
-				System.out.println(" e "+quantitàRisorsaNecessaria2+" risorse del regno "+risorsaNecessaria2.toString());
+				System.out.println(" e "+quantitàRisorsaNecessaria2+" risorse del regno "+Risorsa.ottieniStringCodiceColoreDaRisorsa(risorsaNecessaria2.toString())+risorsaNecessaria2.toString()+Risorsa.CODICE_RESET_COLORE);
 			}
 		}
 		//se la carta non è ancora stata giocata sul campo, stampo anche le informazioni aggiuntive relative ad essa

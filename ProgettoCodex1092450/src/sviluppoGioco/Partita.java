@@ -43,17 +43,17 @@ public class Partita {
 	public static void stampaSchermataDiGioco() {
 		System.out.println("\n\n\t\t   Benvenuti in questa partita di:\n");
 		System.out.println();
-		System.out.println( Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t╭-----\\  ╭-----╮ "	+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"┌-----╮  ┌----- \\   /"		+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |	  \\ /"			+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |----	   /"		+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t|	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"|      | |	  / \\"			+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"	\t\t╰-----/  ╰-----╯ "	+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"└-----╯  └----- /   \\"		);
+		System.out.println( Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"\t\t\t"+"       ___     "  +Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"     _                    "    +"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"\t\t\t"+"      / __\\___ " +Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"  __| | _____  __         "    +"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"\t\t\t"+"     / /  / _ \\" +Risorsa.CODICE_COLORE_RISORSA_ANIMALE+" / _` |/ _ \\ \\/ /         "  +"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"\t\t\t"+"    / /__| (_) "  +Risorsa.CODICE_COLORE_RISORSA_ANIMALE+"| (_| |  __/>  <          "    +"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_VEGETALE+"\t\t\t"+"    \\____/\\___/"+Risorsa.CODICE_COLORE_RISORSA_ANIMALE+" \\__,_|\\___/_/\\_\\         ");
 		System.out.println();
-		System.out.println( Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |\\    |     /	 ------- |     | "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"┌----╮     /	  |	 | ╭------"			+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" | \\   |    / \\	    |	 |     | "	+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    |    / \\    |	 | |      "			+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |  \\  |   /---\\    |	 |     | "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|----╮   /---\\	  |	 | ╰-----╮"		+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |   \\ |  /     \\   |	 \\     / "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    |  /     \\  |      |       |"	+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  |"+"\n"+
-							Risorsa.CODICE_COLORE_RISORSA_INSETTI +" |    \\| /       \\  |	  ╰---╯	 "		+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|    | /       \\ └----- | ------╯"	+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"  .");
+		System.out.println( Risorsa.CODICE_COLORE_RISORSA_INSETTI+"\t\t\t"+"     __      _        "      +Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"           _ _     "  +ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI+"\t\t\t"+"  /\\ \\ \\__ _| |_ _   _"   +Risorsa.CODICE_COLORE_RISORSA_FUNGHI+" _ __ __ _| (_)___ "  +ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI+"\t\t\t"+" /  \\/ / _` | __| | | "     +Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"| '__/ _` | | / __|"  +ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI+"\t\t\t"+"/ /\\  / (_| | |_| |_| "     +Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"| | | (_| | | \\__ \\"+ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"\n"+
+							Risorsa.CODICE_COLORE_RISORSA_INSETTI+"\t\t\t"+"\\_\\ \\/ \\__,_|\\__|\\__,_"+Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"|_|  \\__,_|_|_|___/" +ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO);
 		System.out.println(Risorsa.CODICE_RESET_COLORE);
 	}
 	
@@ -226,7 +226,7 @@ public class Partita {
 				stampaListaColori();
 				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n"+g.getNickname()+", quale pedina preferisci scegliere?"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
-				String coloreScelto = sc.nextLine();
+				String coloreScelto = sc.nextLine().trim();
 				coloreScelto = coloreScelto.toUpperCase(); //rende maiuscolo il colore inserito, in modo da considerare "Rosso","rosso","ROSSO" tutti come "ROSSO"
 				
 				//Controllo che la stringa inserita dall'utente sia il colore di una delle pedine del gioco
@@ -319,9 +319,9 @@ public class Partita {
 			
 			String sceltaObiettivo;
 			do {
-				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+g.getNickname()+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?"+ColoreTesto.CODICE_RESET_COLORE);
+				System.out.println(g.getNickname()+ColoreTesto.CODICE_COLORE_AZZURRO+" quale dei due obiettivi vuoi che sia il tuo obiettivo segreto?"+ColoreTesto.CODICE_RESET_COLORE);
 				Scanner sc = new Scanner(System.in);
-				sceltaObiettivo = sc.nextLine().toUpperCase();
+				sceltaObiettivo = sc.nextLine().toUpperCase().trim();
 				
 				switch (sceltaObiettivo) {
 				case "A":
@@ -341,19 +341,19 @@ public class Partita {
 	
 	
 	public void giocaRound() {
-		System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n Inizia un nuovo round!");
+		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"\n Inizia un nuovo round!");
 		numeroRoundGiocati++;
 		System.out.println(" Round numero: "+numeroRoundGiocati+ColoreTesto.CODICE_RESET_COLORE);
 		for(Giocatore g : gruppoGiocatori)
 		{
 			giocaTurno(g);
 		}
-		System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"\n Fine del round"+ColoreTesto.CODICE_RESET_COLORE);
+		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"\n Fine del round"+ColoreTesto.CODICE_RESET_COLORE);
 	}
 	
 	
 	public void giocaTurno(Giocatore g) {
-		g.stampaLineaColorata();
+		g.stampaLineaColorata(); //Per dividere le schermate dei vari giocatori
 		
 		System.out.println("\n"+g.getNickname()+" è il tuo turno!");
 		
@@ -369,18 +369,18 @@ public class Partita {
 		
 		String sceltaOpzione;
 		do {
-			System.out.println("\n"+g.getNickname()+" cosa vuoi fare?");
+			System.out.println("\n"+g.getNickname()+ColoreTesto.CODICE_COLORE_AZZURRO+" cosa vuoi fare?"+ColoreTesto.CODICE_RESET_COLORE);
 			System.out.println("\tA: Visualizzare le carte attorno ad una precisa carta sul campo");
 			System.out.println("\tB: Visualizzare gli obiettivi comuni");
 			System.out.println("\tC: Visualizzare il tuo obiettivo segreto");
 			System.out.println("\tD: Proseguire con il turno");
 
 			Scanner sc = new Scanner(System.in);
-			sceltaOpzione = sc.nextLine().toUpperCase();
+			sceltaOpzione = sc.nextLine().toUpperCase().trim();
 			
 			switch (sceltaOpzione) {
 			case "A":
-				System.out.println("Di quale carta vuoi visualizzare le adiacenti?");
+				System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"Di quale carta vuoi visualizzare le adiacenti?"+ColoreTesto.CODICE_RESET_COLORE);
 				int[] coordinateCasella = g.scegliCoordinateCasellaGiocabile();
 				g.getCampo().stampa5x5AttornoACartaInCampo(coordinateCasella);
 				break;
