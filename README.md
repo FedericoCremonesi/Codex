@@ -1,3 +1,6 @@
+CODEX NATURALIS
+
+
 Benvenuti in questo progetto Java!
 Questo lavoro è l'adattamento a computer, realizzato "ad oggetti", del gioco di carte strategico "Codex Naturalis", di Cranio Creations.
 
@@ -16,5 +19,7 @@ La strategia del gioco sta nel bilanciare il piazzamento delle carte con la cons
 
 Autore:
 Cremonesi Federico [1092450]
+
 UniBG - Ingegneria Informatica
+
 Corso di Programmazione ad Oggetti
