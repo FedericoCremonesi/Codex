@@ -1,6 +1,6 @@
 package campoECaselle;
 
-public interface Reset {
+public interface Resetter {
 	
 	/*
 	 * Questa interfaccia è implementata dalle classi che utilizzano un metodo
@@ -17,6 +17,8 @@ public interface Reset {
 	 * problemi nel codice: qui entra in gioco il metodo di questa interfaccia che, a seconda del controllo eseguito,
 	 * alla fine di questo ri-setta (da qui il nome "reset") gli attributii interessati di tutte le carte sul campo.
 	 */
+	
+	
 	public void resetConteggioSimboliOControlloDisposizione(Campo campo);
 
 }

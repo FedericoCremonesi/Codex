@@ -110,6 +110,12 @@ public class FacciaRetro extends Faccia {
 	}
 	
 	
+	/**
+	 * Data una risorsa in ingresso, viene costruita una Stringa con il nome (colorato) di quella stessa risorsa, con aggiunti prima e dopo il numero di spazi necessari per costruire una linea della faccia (retro) di una carta
+	 * @param risorsa
+	 * @param coloreContorno (è dato dal colore della carta)
+	 * @return Stringa con il nome della risorsa e gli spazi necessari per costruire la linea di una faccia
+	 */
 	public String ottieniLineaCartaDaRisorsa(Risorsa risorsa, String coloreContorno) {
 		if(!(risorsa == null))
 		{

@@ -37,10 +37,14 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 			ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"╰------------------------------------╯"+ColoreCarta.CODICE_RESET_COLORE};//linea 13, indiceArray 12 (uguale in tutte carte obiettivo)
 
 	
-	/*
+	/**
 	 * Overloading del metodo costruttore
-	 * con questo costruisco le carte con id da 95 a 98
-	 * cioè le 4 carte che danno punti per ogni set di 3 risorse uguali
+	 * Questo costruisce le carte con id da 95 a 98
+	 * cioè le 4 carte che danno punti per ogni set di 3 risorse uguali tra loro
+	 * @param id
+	 * @param puntiPerSet
+	 * @param risorsa
+	 * @param quantitàRisorsa
 	 */
 	public CartaObiettivoPerQuantità(int id, int puntiPerSet, Risorsa risorsa, int quantitàRisorsa) {
 		super(id, puntiPerSet);
@@ -57,10 +61,18 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 		insiemeLineeFacciaCarta[11] = ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"|                                    |"+	ColoreCarta.CODICE_RESET_COLORE;
 	}
 	
-	/*
+	/**
 	 * Overloading del metodo costruttore
-	 * con questo costruisco le carte con id 99
-	 * cioè le 4 carte che danno punti per ogni set di oggetti (diversi o uguali tra loro)
+	 * Questo costruisce le carte con id 99
+	 * cioè le 4 carte che danno punti per ogni set di oggetti (diversi tra loro)
+	 * @param id
+	 * @param puntiPerSet
+	 * @param oggetto1
+	 * @param quantitàOggetto1
+	 * @param oggetto2
+	 * @param quantitàOggetto2
+	 * @param oggetto3
+	 * @param quantitàOggetto3
 	 */
 	public CartaObiettivoPerQuantità(int id, int puntiPerSet, Oggetto oggetto1, int quantitàOggetto1, Oggetto oggetto2, int quantitàOggetto2, Oggetto oggetto3, int quantitàOggetto3) {
 		super(id, puntiPerSet);
@@ -81,10 +93,14 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 		insiemeLineeFacciaCarta[11] = ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"|             "+ColoreCarta.CODICE_RESET_COLORE +AngoloVisibile.ottieniStringaConSpaziDaStringaSimbolo(oggetto3.toString())+ ColoreCarta.CODICE_COLORE_CARTA_OBIETTIVO+"             |"+ColoreCarta.CODICE_RESET_COLORE;
 	}
 	
-	/*
+	/**
 	 * Overloading del metodo costruttore
-	 * con questo costruisco le carte con id da 100 a 102
-	 * cioè le 4 carte che danno punti per ogni set di oggetti (diversi o uguali tra loro)
+	 * Questo costruisce le carte con id da 100 a 102
+	 * cioè le 4 carte che danno punti per ogni set di oggetti (uguali tra loro)
+	 * @param id
+	 * @param puntiPerSet
+	 * @param oggetto1
+	 * @param quantitàOggetto1
 	 */
 	public CartaObiettivoPerQuantità(int id, int puntiPerSet, Oggetto oggetto1, int quantitàOggetto1) {
 		super(id, puntiPerSet);
@@ -102,7 +118,7 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 	}
 	
 	
-	
+	@Override
 	public void print(String numeroLineaDaStampare)
 	/*
 	 * Ho messo questa String in ingresso per evitare che fosse eseguito il metodo (astratto) della superclasse Carta nel caso di una chiamata, da parte di un oggetto carta obiettivo, di un metodo print passante in ingresso una String
@@ -119,6 +135,7 @@ public class CartaObiettivoPerQuantità extends CartaObiettivo {
 	}
 	
 	
+	@Override
 	public int controllaObiettivo(Campo campo) {
 		double numeroSetSimboli = 0;
 		HashMap<String, Integer> conteggioRisorseEOggetti = campo.contaRisorseEOggettiVisibili(40,40,true);

@@ -24,6 +24,10 @@ public class AngoloVisibile extends Angolo {
 	}
 
 	
+	/**
+	 * Metodo Costruttore di un angolo visibile
+	 * @param contenuto dell'angolo (una risorsa scritta come Stringa, un oggetto scritto come Stringa, o "vuoto")
+	 */
 	public AngoloVisibile(String contenuto) {
 		this.contenuto = contenuto;
 		this.coperto = false;
@@ -41,7 +45,12 @@ public class AngoloVisibile extends Angolo {
 	}
 	
 	
-	//Costruisco una funzione apposita perchè mi serve anche per stampare i simboli necessari per le carte obiettivo
+	/**
+	 * Presa in ingresso una Stringa con un simbolo (risorsa o oggetto), restituisce una Stringa con un numero preciso di spazi prima e/o dopo il nome del simbolo stesso, in modo da stampare in modo corretto le facce delle carte (giocabili e obiettivo)
+	 *  Se la stringa con il simbolo passata in ingresso è vuota, restituisce un numero preciso di spazi (10), ovvero il numero totale di caratteri che si ottengono da questa funzione qualsiasi sia l'input ricevuto
+	 * @param stringaSimbolo (risorsa come Stringa, oggetto come Stringa o "vuoto")
+	 * @return La stessa String in ingresso, ma con degli spazi vuoti per arrivare a 10 caratteri (o 10 spazi vuoti se l'input è "vuoto")
+	 */
 	public static String ottieniStringaConSpaziDaStringaSimbolo(String stringaSimbolo) {
 		if(stringaSimbolo.equals(Risorsa.FUNGHI.toString())) {
 			return Risorsa.CODICE_COLORE_RISORSA_FUNGHI+"  FUNGHI  "+Risorsa.CODICE_RESET_COLORE; //uso i codici colore per colorare le scritte delle risorse con i corrispettivi colori

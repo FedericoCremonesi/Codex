@@ -7,7 +7,7 @@ import java.util.List;
 import carte.Carta;
 import carte.CartaGiocabile;
 
-public class Mazzo <T extends Carta> {
+public class Mazzo <T extends Carta> { //utilizzo il tipo generico T, che estende Carta (si potranno creare quindi mazzi di carte risorsa/oro/iniziali/obiettivo)
 	
 	private List<T> carteNelMazzo;
 	
@@ -20,17 +20,28 @@ public class Mazzo <T extends Carta> {
 	}
 
 
+	/**
+	 * Metodo Costruttore
+	 * @param carteNelMazzo
+	 */
 	public Mazzo(List<T> carteNelMazzo) {
 		this.carteNelMazzo = carteNelMazzo;
 	}
 	
 	
+	/**
+	 * Aggiunge alle carte nel mazzo una carta passata in ingresso
+	 * @param cartaDaAggiungere
+	 */
 	public void aggiungiCartaAMazzo(Carta cartaDaAggiungere)
 	{
 		carteNelMazzo.add((T) cartaDaAggiungere);
 	}
 
 	
+	/**
+	 * Per ogni carta nel mazzo, stampa tutta la carta (fronte, retro e informazioni aggiuntive, dato che non è ancora stata giocata)
+	 */
 	public void stampaMazzo()
 	{
 		for(Carta cartaDaStampare : carteNelMazzo)
@@ -47,26 +58,45 @@ public class Mazzo <T extends Carta> {
 	
 	
 	//Overloading
-	//Qui viene rimossa dal mazzo una carta specifica passata in ingresso
+	/**
+	 * Rimuove dal mazzo una carta specifica passata in ingresso
+	 * @param cartaDaRimuovere
+	 */
 	public void removeCarta(Carta cartaDaRimuovere)
 	{
 		carteNelMazzo.remove(cartaDaRimuovere);
 	}
 	
 	//Overloading
-	//Qui viene rimossa dal mazzo la prima carta del mazzo stesso
+	/**
+	 * Rimuove dal mazzo la carta associata all'indice i (cioè che occupa quella posizione nell'arraylist carteNelMazzo)
+	 * @param i
+	 */
 	public void removeCarta(int i)
 	{
 		carteNelMazzo.remove(i);
 	}
 	
+	
+	/**
+	 * Restituisce la carta associata all'indice i (cioè che occupa quella posizione nell'arraylist carteNelMazzo)
+	 * @param i
+	 * @return
+	 */
 	public T getCarta(int i)
 	{
 		return carteNelMazzo.get(i);
 	}
 	
 	
-	public Carta estraiCartaDaMazzo(int indiceCartaDaEstrarre, boolean stampa) throws IndexOutOfBoundsException {
+	/**
+	 * Restituisce la carta associata all'indice i tra le carte nel mazzo, rimuovendola da quest'ultimo
+	 * @param indiceCartaDaEstrarre
+	 * @param stampa (per stampare a schermo "Carta estratta" prima della carta stessa
+	 * @return La carta estratta dal mazzo (che precedentemente si trovava alla posizione i)
+	 * @throws IndexOutOfBoundsException
+	 */
+	public Carta estraiCartaDaMazzo(int indiceCartaDaEstrarre, boolean stampa) throws IndexOutOfBoundsException { //Lancia l'eccezione al metodo chiamante
 		if(stampa) {
 			//System.out.println("\nCarta estratta:");
 			//(Usato per testing)
@@ -79,6 +109,9 @@ public class Mazzo <T extends Carta> {
 	}
 	
 	
+	/**
+	 * Stampa a schermo le prime due carte del mazzo (fronte e retro), e solo il retro della carta appena successiva
+	 */
 	public void visualizzaTreCartePerPesca() {
 		if(carteNelMazzo.size()==0) {
 			System.out.println("Carte finite!\n");

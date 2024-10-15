@@ -20,6 +20,11 @@ public abstract class CartaObiettivo extends Carta {
 	}
 	
 	
+	/**
+	 * Metodo Costruttore
+	 * @param id
+	 * @param puntiPerSet
+	 */
 	public CartaObiettivo(int id, int puntiPerSet) {
 		super(id);
 		this.puntiPerSet = puntiPerSet;
@@ -30,5 +35,10 @@ public abstract class CartaObiettivo extends Carta {
 	public abstract void print(String numeroLineaDaStampare);
 	
 	
+	/**
+	 * Controlla che l'obiettivo assegnato da questa carta sia verificato, analizzando il campo di gioco
+	 * @param campo Campo di gioco da controllare
+	 * @return Numero di volte che questo obiettivo è stato completato
+	 */
 	public abstract int controllaObiettivo(Campo campo);
 }

@@ -82,6 +82,10 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Metodo costruttore del giocatore
+	 * @param nickname
+	 */
 	public Giocatore(String nickname) {
 		//System.out.println("Creazione di un giocatore con questo nickname in corso...");
 		//(Usato per testing)
@@ -99,14 +103,22 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Assegna al giocatore la pedina scelta (ovvero un colore), colorando anche il suo nickname tramite i codici colori ottenuti dalla funzione ottieniStringCodiceColoreDaStringa
+	 * @param pedinaScelta
+	 */
 	public void assegnaColorePedina(Pedina pedinaScelta) {
 		setColorePedina(pedinaScelta);
 		
 		String codiceColorePedina = Pedina.ottieniStringCodiceColoreDaStringa(pedinaScelta.toString());
+		//utilizzo i codici dei colori anche per "colorare" i nickname dei giocatori in base al colore scelto
 		nickname = codiceColorePedina+nickname+Pedina.CODICE_RESET_COLORE;
 	}
 	
 	
+	/**
+	 * Stampa una linea colorata (sono degli spazi con lo sfondo colorato) per dividere le schermate di gioco dei vari giocatori, servono per segnare l'inizio e la fine del turno di un giocatore (ovviamente il colore utilizzato è indicato della pedina del giocatore)
+	 */
 	public void stampaLineaColorata() {
 		System.out.println(Pedina.ottieniStringCodiceColoreSfondoDaStringa(colorePedina.toString()));
 		for(int t=0; t<Partita.NUMERO_CARATTERI_MASSIMI_ORIZZONTALI; t++) {
@@ -116,6 +128,10 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Metodo per far giocare al giocatore una carta dalla sua mano.
+	 *  La giocata è costituita da vari passaggi, l'utente può tornare indietro ad uno di quelli precedenti in caso la scelta appena fatta non lo soddisfi
+	 */
 	public void giocaCartaDaMano() {
 		//Non stampo di nuovo le carte in mano perchè le ho già fatte visualizzare a inizio turno
 		
@@ -198,6 +214,10 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Chiede all'utente un numero (un indice), e restituisce la carta (giocabile) corrispondente presa dalla sua mano
+	 * @return Carta Giocabile scelta dall'utente
+	 */
 	public CartaGiocabile scegliCartaDaMano() {
 		int indiceCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 		do {
@@ -218,6 +238,13 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Fa scegliere all'utente la faccia di gioco di una carta.
+	 *  Se la carta che si sta giocando non è quella iniziale, all'utente è anche permesso di tornare indietro
+	 * @param cartaDaGiocare
+	 * @param consentiTornaIndietro (solo nel caso in cui si stia giocando una carta dalla mano, non la carta iniziale)
+	 * @return Stringa con la faccia di gioco scelta
+	 */
 	public String scegliFacciaDiGioco(CartaGiocabile cartaDaGiocare, boolean consentiTornaIndietro) {
 		String scelta;
 		do {
@@ -251,6 +278,10 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Chiede all'utente se vuole proseguire con la scelta della casella in cui giocare la carta presa dalla sua mano
+	 * @return True o False in base a cosa vuole fare l'utente
+	 */
 	public boolean confermaVolontàDiGioco() {
 		while(true) { //il ciclo verrà eseguito all'infinito finchè non si incontrerà un return (all'interno degli if)
 			System.out.println(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" vuoi proseguire con la giocata della carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Si/No]"+"\n"+ColoreTesto.CODICE_COLORE_AZZURRO+" Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)"+ColoreTesto.CODICE_RESET_COLORE);
@@ -267,6 +298,10 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * L'utente inserisce una coppia di coordinate (riga e colonna) per giocare sul campo la carta scelta, qui viene controllato l'input da tastiera (deve essere indicata una casella giocabile, devono essere inseriti due numeri e che non eccedano la dimensione di nessuno dei due array costituenti il campo di gioco)
+	 * @return La coppia di coordinate inserite (se adeguate)
+	 */
 	public int[] scegliCoordinateCasellaGiocabile() {
 		int[] coordinate = {0,0}; //inseriti dei qualsiasi valori di partenza, verranno sovrascritti da ciò che inserirà l'utente
 		boolean ok;
@@ -299,7 +334,11 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
-	
+	/**
+	 * Stampa le prime due carte da ognuno dei due mazzi passati in ingresso, rivela il retro della carta appena successiva alle due esposte (per ognuno dei due mazzi) e fa scegliere all'utente quale pescare
+	 * @param mazzoCarteRisorsa
+	 * @param mazzoCarteOro
+	 */
 	public void pescaCartaDaMazzi(Mazzo mazzoCarteRisorsa, Mazzo mazzoCarteOro) {
 		System.out.println("\n"+nickname+", ora devi pescare una carta da uno dei due mazzi");
 		System.out.println("Mazzo risorsa:");
@@ -372,9 +411,11 @@ public class Giocatore implements Comparable<Giocatore> {
 	}
 	
 	
+	/**
+	 * Metodo derivante dall'interfaccia: confronta due giocatori tra di loro in base al loro punteggio
+	 *  (questo confronto mi servirà per ordinare la lista dei giocatori a fine partita per dichiarare il vincitore)
+	 */
 	@Override
-	//Metodo derivante dall'interfaccia: posso confrontare due giocatori tra di loro in base al loro punteggio
-	//(questo confronto mi servirà per ordinare la lista dei giocatori a fine partita per dichiarare il vincitore)
 	public int compareTo(Giocatore altroGiocatore) {
 		return punti.compareTo(altroGiocatore.getPunti()); //per poter usare compareTo, devo avere punti come Integer (non int, tipo primitivo)
 	}

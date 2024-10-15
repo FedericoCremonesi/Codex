@@ -25,6 +25,8 @@ public abstract class CartaGiocabile extends Carta {
 	boolean contataPerObiettivoDisposizione = false;
 	
 	
+	//Vari getter e setter degli attributi di questa classe
+	
 	public String getFacciaDiGioco() {
 		return facciaDiGioco;
 	}
@@ -68,6 +70,10 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
+	/**
+	 * Metodo che restituisce la faccia di gioco di una carta (quando posizionata sul campo, ovvero quando la sua faccia di gioco è "FRONTE" o "RETRO")
+	 * @return Faccia di gioco come oggetto, non viene restituita una stringa recitante "FRONTE" o "RETRO"
+	 */
 	public Faccia ottieniFacciaSuCuiGiocata() {
 		if(facciaDiGioco.equals("FRONTE")) {
 			return fronte;
@@ -80,6 +86,12 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
+	/**
+	 * Metodo costruttore
+	 * @param id
+	 * @param fronte
+	 * @param retro
+	 */
 	public CartaGiocabile(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id);
 		this.fronte = fronte;
@@ -95,10 +107,15 @@ public abstract class CartaGiocabile extends Carta {
 	
 	
 	@Override
-	public abstract void print(String numeroLineaDaStampare); //metodo astratto, scritto solo per fare overriding nelle classi figlie
+	public abstract void print(String numeroLineaDaStampare);
+	//metodo astratto, scritto solo per fare overriding nelle classi figlie
 	
 	
-	
+	/**
+	 * Metodo che posiziona una carta sul campo.
+	 *  Non esegue i controlli del caso, semplicemente pone: la carta da giocare come cartaContenuta della casella in cui va posizionata, e pone la casella stessa come casellaDiGioco della carta da posizionare)
+	 * @param casellaInCuiPosizionareCarta
+	 */
 	public void posizionaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
 		casellaInCuiPosizionareCarta.setCartaContenuta(this);
 		this.setCasellaDiGioco(casellaInCuiPosizionareCarta);
@@ -106,6 +123,10 @@ public abstract class CartaGiocabile extends Carta {
 	}
 	
 	
+	/**
+	 * Aggiunge questa (this) carta giocabile alle carte in mano di un giocatore
+	 * @param manoInCuiAggiungereCarta
+	 */
 	public void aggiungiAMano(Mano manoInCuiAggiungereCarta) {
 		manoInCuiAggiungereCarta.aggiungiCartaAMano(this);
 	}

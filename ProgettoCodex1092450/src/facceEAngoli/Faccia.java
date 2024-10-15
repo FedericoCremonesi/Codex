@@ -1,5 +1,7 @@
 package facceEAngoli;
 
+import java.util.Arrays;
+
 import carte.ColoreCarta;
 
 public abstract class Faccia {
@@ -28,14 +30,33 @@ public abstract class Faccia {
 	}
 	
 	
+	/**
+	 * Metodo Costruttore
+	 * @param angoloAltoSx
+	 * @param angoloAltoDx
+	 * @param angoloBassoSx
+	 * @param angoloBassoDx
+	 */
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx) {
 		this.angoliFaccia[0] = angoloAltoSx;
 		this.angoliFaccia[1] = angoloAltoDx;
 		this.angoliFaccia[2] = angoloBassoSx;
 		this.angoliFaccia[3] = angoloBassoDx;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "["+Arrays.toString(angoliFaccia)+"]";
+	}
 
 	
+	/**
+	 * Stampa una linea precisa della faccia della carta in questione, oppure tutta la faccia se l'input è "all"
+	 * @param coloreCarta (Rosso se del regno dei funghi, Verde se vegetale, Blu se animale, Viola se degli insetti)
+	 * @param tipologiaCarta (Oro o Risorsa)
+	 * @param numeroLineaDaStampare (intero compreso tra 0 e 12 oppure "all")
+	 */
 	public void printFaccia(String coloreCarta, String tipologiaCarta, String numeroLineaDaStampare) { 
 		String coloreContorno=null;
 		coloreContorno = ColoreCarta.ottieniStringCodiceColoreDaStringa(coloreCarta);
@@ -67,7 +88,12 @@ public abstract class Faccia {
 	}
 	
 	
-	//La stampa della carta è "spezzetata" per poter stampare comodamente le carte affiancate sul campo quando sarà necessario
+	/**
+	 * La stampa della carta è "spezzetata" per poter stampare comodamente le carte affiancate sul campo quando sarà necessario, questo metodo costruisce un array di Stringhe contenente tutte le 13 linee della faccia
+	 * @param coloreContorno (è dato dal colore della carta)
+	 * @param coloreLatiAngoli (è dato dal tipo della carta)
+	 * @return Array di 13 Stringhe, ovvero le 13 linee componenti la faccia di una carta
+	 */
 	public String[] costruisciArrayLineeFaccia(String coloreContorno, String coloreLatiAngoli) {
 		
 		String[] lineeFaccia = new String[NUMERO_LINEE_FACCIA];

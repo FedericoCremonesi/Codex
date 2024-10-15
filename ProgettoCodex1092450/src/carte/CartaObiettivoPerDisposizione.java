@@ -3,7 +3,7 @@ package carte;
 import campoECaselle.Campo;
 import campoECaselle.CasellaGiocabile;
 
-public class CartaObiettivoPerDisposizione extends CartaObiettivo implements campoECaselle.Reset {
+public class CartaObiettivoPerDisposizione extends CartaObiettivo implements campoECaselle.Resetter {
 	
 	private String disposizione;
 
@@ -33,10 +33,14 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 	
 
 	
-	/*
-	 * Overloading del metodo costruttore
-	 * con questo costruisco le carte con id da 87 a 90
+	/**
+	 * Overloading del metodo costruttore.
+	 * Questo costruisce le carte con id da 87 a 90
 	 * cioè le 4 carte che danno punti per ogni set di carte in disposizione "diagonale"
+	 * @param id
+	 * @param puntiPerSet
+	 * @param disposizione
+	 * @param coloreCarte1 Il colore di tutte le 3 carte coinvolte nella disposizione
 	 */
 	public CartaObiettivoPerDisposizione(int id, int puntiPerSet, String disposizione, ColoreCarta coloreCarte1) {
 		super(id, puntiPerSet);
@@ -56,10 +60,15 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 		}
 	}
 	
-	/*
-	 * Overloading del metodo costruttore
-	 * con questo costruisco le carte con id da 91 a 94
+	/**
+	 * Overloading del metodo costruttore.
+	 * Questo costruisce le carte con id da 91 a 94
 	 * cioè le 4 carte che danno punti per ogni set di carte in disposizione "a spigolo"
+	 * @param id
+	 * @param puntiPerSet
+	 * @param disposizione
+	 * @param coloreCarte1 Il colore di 2 delle 3 carte coinvolte nella disposizione
+	 * @param coloreCarte2 Il colore di 1 delle 3 carte coinvolte nella disposizione
 	 */
 	public CartaObiettivoPerDisposizione(int id, int puntiPerSet, String disposizione, ColoreCarta coloreCarte1, ColoreCarta coloreCarte2) {
 		super(id, puntiPerSet);
@@ -89,7 +98,7 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 	}
 	
 	
-	
+	@Override
 	public void print(String numeroLineaDaStampare)
 	/*
 	 * Ho messo questa String in ingresso per evitare che fosse eseguito il metodo (astratto) della superclasse Carta nel caso di una chiamata, da parte di un oggetto carta obiettivo, di un metodo print passante in ingresso una String
@@ -106,10 +115,12 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 	}
 	
 	
-	//In ogni caso inizio a controllare le carte da quella più in alto (che è la prima ad essere individuata in una eventuale disposizione corretta)
+	@Override
 	public int controllaObiettivo(Campo campo) {
 		int numeroSetCarteDisposteInOrdine = 0;
 		resetConteggioSimboliOControlloDisposizione(campo); //sposto il reset all'inizio, come ho fatto con l'altro metodo che lo richiama (nell'altra classe che implementa l'interfaccia Reset, ovvero Campo)
+		
+		//In ogni caso (ogni disposizione) inizio a controllare le carte da quella più in alto (che è la prima ad essere individuata in una eventuale disposizione corretta)
 		
 		for(int i=0; i<Campo.DIM; i++) {
 			for(int j=0; j<Campo.DIM; j++) {
@@ -306,7 +317,10 @@ public class CartaObiettivoPerDisposizione extends CartaObiettivo implements cam
 	}
 	
 	
-	//Metodo da interfaccia implementata
+	/**
+	 * Metodo derivante dall'interfaccia campoECaselle.Resetter implementata da questa classe.
+	 *  Serve per "resettare" il campo di gioco prima di un nuovo controllo delle disposizioni, dichiarando che nessuna delle carte presenti sul campo va "saltata" perchè già presa in analisi
+	 */
 	@Override
 	public void resetConteggioSimboliOControlloDisposizione(Campo campo) {
 		for(int i=0; i<Campo.DIM; i++) {

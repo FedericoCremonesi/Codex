@@ -75,6 +75,9 @@ public class Tavolo {
 	}
 
 	
+	/**
+	 * Metodo Costruttore
+	 */
 	public Tavolo() {
 		this.mazzoCarteRisorsa = new Mazzo<CartaRisorsa>(new ArrayList<CartaRisorsa>());
 		this.mazzoCarteOro = new Mazzo<CartaOro>(new ArrayList<CartaOro>()); //posso mettere "<CartaOro>" dopo "new Mazzo" *
@@ -85,6 +88,9 @@ public class Tavolo {
 	}
 	
 	
+	/**
+	 * Chiama la funzione creaMazzoDaFile per creare i 4 mazzi di carte (risorsa, oro, iniziali, obiettivo)
+	 */
 	public void creaMazzi() {
 		//System.out.println("Creando i 4 mazzi di carte...");
 		//(Usato per testing)
@@ -95,6 +101,11 @@ public class Tavolo {
 	}
 	
 	
+	/**
+	 * Prende un file csv ("Comma Separated Values") e lo scorre per creare tutte le carte, aggiungendole nei rispettivi mazzi
+	 * @param mazzoInCuiMettereCarte
+	 * @param fileDaCuiLeggere (File csv)
+	 */
 	public void creaMazzoDaFile(Mazzo mazzoInCuiMettereCarte, File fileDaCuiLeggere) {
 		
 		Scanner sc;
@@ -211,8 +222,8 @@ public class Tavolo {
 	}
 	
 	
-	public void aggiungiObiettivoComune(int indice, CartaObiettivo carta) {
-		obiettiviComuni[indice] = carta;
+	public void aggiungiObiettivoComune(int indice, CartaObiettivo cartaObiettivoDaAggiungere) {
+		obiettiviComuni[indice] = cartaObiettivoDaAggiungere;
 		//System.out.println("Carta aggiunta agli obiettivi comuni");
 		//(Usato per testing)
 	}

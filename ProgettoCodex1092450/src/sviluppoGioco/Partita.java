@@ -40,6 +40,9 @@ public class Partita {
 	
 	
 	
+	/**
+	 * Stampa il titolo del gioco colorato con i colori dei 4 regni
+	 */
 	public static void stampaSchermataDiGioco() {
 		System.out.println("\n\n\t\t   Benvenuti in questa partita di:\n");
 		System.out.println();
@@ -58,6 +61,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Mette in "pausa" il gioco, attendendo un Invio da parte dell'utente per proseguire con la partita
+	 */
 	public static void premiInvioPerContinuare() {
 		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"\n\t\t    Premere invio per continuare..."+ColoreTesto.CODICE_RESET_COLORE);
 		Scanner sc = new Scanner(System.in);
@@ -66,14 +72,26 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Stampa i ringraziamenti per aver giocato e le informazioni sull'autore
+	 */
 	public static void stampaRingraziamentiERealizzatoDa() {
-		System.out.println("\n\n\n\t\t"+"Grazie per aver giocato!");
-		System.out.println("\t\t"+"Questo programma è stato realizzato da:");
+		System.out.println("\n");
+		
+		System.out.println(ColoreTesto.CODICE_COLORE_SFONDO_NERO);
+		for(int t=0; t<NUMERO_CARATTERI_MASSIMI_ORIZZONTALI; t++) {
+			System.out.print(" ");
+		}
+		System.out.println(Pedina.CODICE_RESET_COLORE);
+		
+		System.out.println("\n\n\t\t"+"Grazie per aver giocato!");
+		System.out.println("\n\t\t"+"Questo programma è stato realizzato da:");
 		System.out.println("\t\t\t"+"Cremonesi Federico");
 		System.out.println("\t\t\t"+"Codice Matricola: 1092450");
 		System.out.println("\t\t\t"+"Università di Bergamo - UNIBG");
 		System.out.println("\t\t\t"+"Percorso di studi: Ingegneria Informatica");
 		System.out.println("\t\t\t"+"Corso di: Programmazione ad Oggetti");
+		
 		System.exit(0);
 	}
 	
@@ -83,6 +101,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Metodo Costruttore
+	 */
 	public Partita() {
 		this.gruppoGiocatori = new ArrayList<Giocatore>();
 		this.tavoloDiGioco = new Tavolo();
@@ -119,6 +140,10 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Chiede in ingresso il numero dei giocatori, controllando che venga inserito un numero, compreso tra 2 e 4
+	 * @return
+	 */
 	public static int richiediNumeroGiocatori() {
 		int numeroGiocatori = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 		do {
@@ -139,6 +164,9 @@ public class Partita {
 	}
 
 	
+	/**
+	 * Chiede in input il nickname che l'utente vuole utilizzare, crea un'istanza della classe Giocatore e la aggiunge al gruppo dei giocatori
+	 */
 	public static void richiediNicknameGiocatori() {
 		System.out.println("\n(Nota:\tl'ordine di inserimento dei nickname non sarà\n\tnecessariamente l'ordine di gioco,\n\tquest'ultimo è determinato casualmente)");
 		for(int i=0; i<Giocatore.numeroGiocatori; i++)
@@ -167,6 +195,11 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Controlla se il nickname che l'utente vuole utilizzare è già stato assegnato ad un altro giocatore
+	 * @param nicknameDaCercare
+	 * @return Vero se un altro utente utilizza già il nickname in analisi, altrimenti False
+	 */
 	public static boolean verificaNicknameGiaInserito(String nicknameDaCercare) {
 		for(Giocatore g : gruppoGiocatori)
 		{
@@ -178,6 +211,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Pone in ordine casuale i giocatori, in modo che l'ordine di gioco non sia lo stesso di inserimento, bensì casuale
+	 */
 	public static void mischiaOrdineGiocatori() {
 		//System.out.println("\nGenerando ordine di gioco casuale...");
 		//(Usato per testing)
@@ -194,6 +230,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Crea una lista con tutti i colori disponibili, questi verranno rimossi man mano che verranno scelti dagli utenti (per fare in modo che due giocatori diversi non abbiano lo stesso colore)
+	 */
 	public static void creaListaColori() {
 		//System.out.println("\n\nCreando la lista con i colori delle pedine disponibili...");
 		//(Usato per testing)
@@ -207,6 +246,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Stampa un elenco puntato di tutti i colori ancora disponibili
+	 */
 	public static void stampaListaColori() {
 		System.out.println("\nLe pedine disponibili al momento sono:");
 		for(Pedina colorePedina : coloriPedinaDisponibili)
@@ -217,6 +259,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Chiede all'utente quale colore della pedina lui voglia utilizzare durante il corso della partita, controllando l'input scritto da tastiera e rimuovendo il colore scelto da quelli disponibili
+	 */
 	public static void faiScegliereColore() {
 		for(Giocatore g : gruppoGiocatori)
 		{
@@ -259,6 +304,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Distribuisce 1 carta iniziale (casuale) ad ogni giocatore e la fa giocare sul proprio campo
+	 */
 	public void consegnaEGiocoCarteIniziali() {
 		System.out.println();
 		for(Giocatore g : gruppoGiocatori)
@@ -277,6 +325,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Consegna 2 carte risorsa e 1 carta oro (casuali) ad ogni giocatore e gliele pone in mano
+	 */
 	public void consegnaCarteRisorsaEOro() {
 		System.out.println();
 		for(Giocatore g : gruppoGiocatori)
@@ -300,6 +351,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Stampa a schermo i due obiettivi comuni della partita (scelti casualmente)
+	 */
 	public void scopriObiettiviComuni() {
 		System.out.println("\nEstraendo i due obiettivi comuni...");
 		for(int i=0; i<2; i++) {
@@ -308,6 +362,9 @@ public class Partita {
 	}
 
 	
+	/**
+	 * Ad ogni giocatore viene illustrato una coppia di obiettivi (casuali), lui ne sceglie uno, che diventa il suo obiettivo segreto, l'altro viene riposto in fondo al mazzo
+	 */
 	public void assegnaObiettivoSegreto() {
 		for(Giocatore g : gruppoGiocatori)
 		{
@@ -340,6 +397,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Fa giocare ad ogni giocatore un turno
+	 */
 	public void giocaRound() {
 		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"\n Inizia un nuovo round!");
 		numeroRoundGiocati++;
@@ -352,6 +412,10 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Fa eseguire al giocatore tutti i passaggi di un turno di gioco (giocata di una carta dalla mano, pesca di una carta da uno dei due mazzi)
+	 * @param g (giocatore)
+	 */
 	public void giocaTurno(Giocatore g) {
 		g.stampaLineaColorata(); //Per dividere le schermate dei vari giocatori
 		
@@ -412,6 +476,10 @@ public class Partita {
 	}
 
 	
+	/**
+	 * Controlla se almeno uno dei due requisiti di fine partita è verificato (un giocatore raggiunge o supera i 20 punti, oppure vengono esaurite le carte di entrambi i mazzi)
+	 * @return Vero se è verificata almeno una delle due condizioni, Falso se nessuna delle due è verificata
+	 */
 	public boolean eseguiCheckFinePartita() {
 		//Controllo se almeno un giocatore ha raggiunto (o superato) i 20 punti
 		boolean almeno20Punti = false;
@@ -457,6 +525,9 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Metodo eseguito a fine partita, controlla quanti obiettivi sono stati completati (e quante volte) da ogni giocatore (vengono analizzati gli obiettivi comuni e il suo obiettivo segreto), assegnando i rispettivi punti
+	 */
 	public void controllaObiettivi() {
 		System.out.println("\n\n"+"La partita è finita, controllo degli obiettivi completati in corso...");
 		
@@ -511,6 +582,13 @@ public class Partita {
 	}
 	
 	
+	/**
+	 * Dichiara il vincitore della partita.
+	 *  Vengono gestiti 3 casi:
+	 *  1) vince un giocatore perchè ha un punteggio superiore a quello di tutti gli altri;
+	 *  2) vince un giocatore perchè, a partità di punteggio, ha completato piò obiettivi;
+	 *  3) parità in caso di stesso punteggio e stesso numero di obiettivi completati da parte dei giocatori con punteggio maggiore
+	 */
 	public void dichiaraVincitore() {
 		System.out.println("\n\n\tClassifica finale dei giocatori:");
 		Collections.sort(gruppoGiocatori, Collections.reverseOrder()); //Ordino l'arraylist di giocatori in ordine decrescente in base al punteggio

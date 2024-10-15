@@ -131,6 +131,11 @@ public class CartaOro extends CartaRisorsa {
 	}
 	
 	
+	/**
+	 * Metodo per assegnare i punti dopo la giocata di una carta oro sulla faccia frontale
+	 * @param giocatore a cui assegnare punti
+	 * @param numeroAngoliCopertiConGiocata (questo serve nel caso la carta oro dia dei punti per ogni angolo coperto con la sua giocata)
+	 */
 	public void assegnaPunti(Giocatore giocatore, int numeroAngoliCopertiConGiocata) {
 		if(super.getFacciaDiGioco().equals("FRONTE")) {
 			int puntiIniziali = giocatore.getPunti();

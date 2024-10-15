@@ -36,11 +36,20 @@ public class CasellaGiocabile extends Casella {
 	}
 	
 	
+	/**
+	 * Metodo costruttore, richiama il metodo costruttore della classe madre (astratta) con super
+	 * @param x
+	 * @param y
+	 */
 	public CasellaGiocabile(int x, int y) {
 		super(x, y);
 	}
 	
 	
+	/**
+	 * Verifica se la casella giocabile è vuota o meno
+	 * @return Vero se è vuota, false se contiene una carta (giocabile)
+	 */
 	public boolean isEmpty()
 	{
 		if(cartaContenuta == null)
@@ -52,7 +61,6 @@ public class CasellaGiocabile extends Casella {
 	}
 	
 	
-	//Questo metodo serve per stampare il campo come tabella di quadratini
 	@Override
 	public void stampaCasellaComeQuadratino() {
 		if(cartaContenuta instanceof CartaIniziale) {
@@ -77,7 +85,6 @@ public class CasellaGiocabile extends Casella {
 	}
 	
 	
-	//Questo metodo serve per stampare un'area 3x3 di caselle "ingrandite"
 	@Override
 	public void stampaLineaCasellaIngrandita(Integer numeroLineaDaStampare) {
 		if(isEmpty()) {

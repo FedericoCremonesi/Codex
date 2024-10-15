@@ -13,7 +13,7 @@ import facceEAngoli.AngoloNascosto;
 import sviluppoGioco.ColoreTesto;
 import sviluppoGioco.Partita;
 
-public class Campo implements campoECaselle.Reset {
+public class Campo implements campoECaselle.Resetter {
 	
 	public final static int DIM = 81;
 	/*
@@ -27,11 +27,19 @@ public class Campo implements campoECaselle.Reset {
 	HashMap<String, Integer> conteggioRisorseEOggetti = new HashMap<String, Integer>();
 	
 	
+	/**
+	 * Restituisce la casella del campo posizionata a determinate coordinate passate in ingresso
+	 * @param i indica la riga
+	 * @param j indica la colonna
+	 */
 	public Casella getCasellaDaCoordinate(int i, int j) {
 		return caselleDelCampo[i][j];
 	}
 	
 	
+	/**
+	 * Metodo costruttore del campo
+	 */
 	public Campo() {
 		caselleDelCampo = new Casella[DIM][DIM]; //creo la matrice (doppio vettore) vuota
 		
@@ -52,7 +60,15 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
-	//Funzione ricorsiva per contare tutte le risorse e gli oggetti sul campo
+	/**
+	 * Funzione "ricorsiva" per contare tutte le risorse e gli oggetti sul campo
+	 *  (non è propriamente ricorsiva perchè non è sè stessa a chiamarsi, ma il metodo analizzaAngoloPerConteggioSimboli, chiamato esclusivamente da questa)
+	 * @param i indica la coordinata delle righe della casella in analisi
+	 * @param j indica la coordinata delle colonne della casella in analisi
+	 * @param inizioScorrimento è un booleano che indica se quella in analisi è la prima casella studiata,
+	 * 							sarà sempre false quando il metodo verrà richiamato da sè stesso, true se chiamato dall'esterno
+	 * @return Una HashMap con ogni simbolo del gioco (le keys, le chiavi), con associato il numero di volte che questo è visibile sul campo (i valori)
+	 */
 	public HashMap<String, Integer> contaRisorseEOggettiVisibili(int i, int j, boolean inizioScorrimento) {
 		
 		if(inizioScorrimento) {
@@ -115,6 +131,16 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo chiamato esclusivamente da contaRisorseEOggettiVisibili, serve per evitare di ripetere 4 volte le stesse linee di codice per
+	 *  analizzare tutti i 4 angoli di una carta e aggiungere eventuali simboli visibili al conteggio.
+	 *  Nel caso l'angolo in analisi sia coperto, è questa funzione a ri-chiamare contaRisorseEOggettiVisibili
+	 * @param i è la coordinata delle righe della casella contenente la carta di cui si sta analizzando l'angolo
+	 * @param j è la coordinata delle colonne della casella contenente la carta di cui si sta analizzando l'angolo
+	 * @param iJump è la coord. delle righe della casella contenente la carta per cui si vuole ri-chiamare la funzionzione contaRisorseEOggettiVisibili (in caso l'angolo in analisi sia coperto)
+	 * @param jJump è la coord. delle colonne della casella contenente la carta per cui si vuole ri-chiamare la funzionzione contaRisorseEOggettiVisibili (in caso l'angolo in analisi sia coperto)
+	 * @param indiceAngolo indica quale angolo della carta si sta studiando (0, 1, 2, 3 a seconda che sia quello AltoSx, AltoDx, BassoSx, BassoDx)
+	 */
 	public void analizzaAngoloPerConteggioSimboli(int i,int j, int iJump,int jJump, int indiceAngolo) {
 		if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo) instanceof AngoloVisibile ) { //Caso: angolo nascosto
 			if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo)).isCoperto() ) { //Caso: angolo coperto
@@ -126,6 +152,11 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo per incrementare il conteggio di un simbolo visibile sul campo, è chiamato da contaRisorseEOggettiVisibili se è un simbolo presente al centro di una carta giocata sul retro, altrimenti da
+	 *  analizzaAngoloPerConteggioSimboli se si trova in uno dei 4 angoli della faccia di gioco
+	 * @param simbolo
+	 */
 	public void incrementaConteggioDatoSimbolo(String simbolo) {
 		String simboloInHashMap=""; //inizializzo a Stringa non contenuta in hashmap (tra le chiavi), sarà sovrascritto durante lo switch
 		Integer conteggioSimboloInHashMap=0; //inizializzo a 0, sarà sovrascritto durante lo switch
@@ -166,7 +197,10 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
-	//Metodo da interfaccia implementata
+	/**
+	 * Metodo derivante dall'interfaccia campoECaselle.Resetter implementata da questa classe.
+	 *  Serve per "resettare" il campo di gioco prima di un nuovo conteggio dei simboli, dichiarando che nessuna delle carte presenti sul campo va "saltata" perchè già presa in analisi
+	 */
 	@Override
 	public void resetConteggioSimboliOControlloDisposizione(Campo campo) {
 		for(int i=0; i<Campo.DIM; i++) {
@@ -183,6 +217,9 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Stampa un elenco puntato con tutti i simboli del gioco (risorse e oggetti), con associata la rispettiva quantità di simboli visibili sul campo
+	 */
 	public void stampaConteggioRisorseEOggettiVisibili() {
 		System.out.println("\nSimboli di ogni tipo visibili sul tuo campo:");
 		for (String risorsaOppureOggetto : conteggioRisorseEOggetti.keySet()) { //Utilizzo keyset per scorrere gli elementi della hashmap
@@ -193,6 +230,12 @@ public class Campo implements campoECaselle.Reset {
 	}
 
 
+	/**
+	 * Stampa a schermo l'intero campo di gioco illustrando le caselle giocabili vuote come quadratini bianchi, e quelle con una carta all'interno colorate del rispettivo colore
+	 *  La dimensione del campo visualizzato aumenta con lo scorrere dei turni, per evitare di stampare sin da subito un campo 81x81
+	 *  -> questo è un caso limite verificatosi in cui si giochi in due, si esauriscano tutte le carte di entrambi i mazzi (e in mano, cosa non possibile secondo le regole del gioco)
+	 *  e si giochino tutte le carte in una singola diagonale, che parte dal centro e va verso uno dei 4 angoli del campo
+	 */
 	public void stampaMatriceCampoAQuadratini() {
 		System.out.println("\nCampo di gioco:");
 		
@@ -252,6 +295,10 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Funzione chiamata da stampaMatriceCampoAQuadratini, serve per stampare le coordinate del campo lasciando il corretto numero di spazi prima del numero in modo che siano incolonnate bene
+	 * @param coordinataDaStampare
+	 */
 	public void stampaCoordinataConSpaziPrima(int coordinataDaStampare) {
 		if(coordinataDaStampare>=0 && coordinataDaStampare<=9)
 		{
@@ -268,6 +315,11 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Funzione utile per far visualizzare al giocatore le singole carte sul suo campo di gioco, con eventuali simboli, angoli nascosti, coperti ecc.
+	 *  Viene eseguito uno "zoom" del campo di gioco attorno ad una casella indicata dall'utente
+	 * @param coordinateCasella è la coppia di coordinate (i e j) che indicano la casella di cui vengono stampate a schermo le adiacenti
+	 */
 	public void stampa5x5AttornoACartaInCampo(int[] coordinateCasella) {
 		int partenzaI = coordinateCasella[0]-2; //voglio stampare anche la carta nella seconda riga sopra rispetto a quella alle coordinate comunicate, quindi calcolo -2
 		int partenzaJ = coordinateCasella[1]-2; //voglio stampare anche la carta nella seconda colonna a sinistra rispetto a quella alle coordinate comunicate, quindi calcolo -2
@@ -290,6 +342,12 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo che controlla che sul campo ci siano abbastanza risorse per poter giocare una carta oro sulla faccia frontale (questo ovviamente dipende dalle risorse necessarie
+	 *  e dalla loro rispettiva quantità indicate sulla carta oro stessa)
+	 * @param cartaDaGiocare è la carta che si intende giocare
+	 * @return Vero o Falso a seconda che si abbiano abbastanza risorse per giocare la carte in questione
+	 */
 	public boolean controllaRisorseNecessariePerCartaOro(CartaOro cartaDaGiocare) {
 		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"Verifica dei requisiti necessari per giocare questa carta oro sulla faccia frontale..."+ColoreTesto.CODICE_RESET_COLORE);
 		contaRisorseEOggettiVisibili(40,40,true);
@@ -321,6 +379,14 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo per controllare che la casella in cui si vuole giocare una carta sia idonea, ovvero rispetti 3 parametri:
+	 *  1) Sia libera
+	 *  2) Ci sia almeno un angolo (visibile) a cui agganciarsi
+	 *  3) La carta che si vuole giocare non vada a sovrapporsi a nessun angolo nascosto
+	 * @param casellaInCuiPosizionareCarta
+	 * @return Vero o Falso a seconda che la casella di gioco sia idonea
+	 */
 	public boolean controllaCondizioniGiocataCartaSuCampo(CasellaGiocabile casellaInCuiPosizionareCarta) {
 		System.out.println(ColoreTesto.CODICE_COLORE_NERO+"Verificando le condizioni per giocare la carta sul campo..."+ColoreTesto.CODICE_RESET_COLORE);
 		
@@ -434,6 +500,11 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo per coprire gli angoli di eventuali carte posizionate nelle caselle adiacenti a quella in cui è appena stata giocata una carta
+	 * @param casellaInCuiPosizionataCarta
+	 * @return Il numero di angoli coperti con la giocata di questa carta (utile per assegnare i punti di alcune carte oro)
+	 */
 	public int copriAngoliAdiacentiACartaGiocata(CasellaGiocabile casellaInCuiPosizionataCarta) {
 		int numeroAngoliCopertiConGiocata=0;
 		
@@ -441,7 +512,7 @@ public class Campo implements campoECaselle.Reset {
 		int y = casellaInCuiPosizionataCarta.getY();
 		
 		if(copriAngolo(x-1, y-1, 3)) {
-			numeroAngoliCopertiConGiocata++;
+			numeroAngoliCopertiConGiocata++; //Se è stato coperto un angolo, si incrementa il conteggio degli angoli coperti
 		}
 		
 		if(copriAngolo(x-1, y+1, 2)) {
@@ -463,6 +534,14 @@ public class Campo implements campoECaselle.Reset {
 	}
 	
 	
+	/**
+	 * Metodo chiamato esclusivamente da copriAngoliAdiacentiACartaGiocata, serve per evitare ripetizioni di codice
+	 *  (non viene scritto 4 volte lo stesso blocco di codice cambiando solo le coordinate della casella e l'indice dell'angolo)
+	 * @param coordX è coordinata delle righe della casella contenente la carta di cui si deve coprire un angolo
+	 * @param coordY è coordinata delle colonne della casella contenente la carta di cui si deve coprire un angolo
+	 * @param indiceAngolo indica quale dei 4 angoli va coperto (0, 1, 2, 3 a seconda che sia quello AltoSx, AltoDx, BassoSx, BassoDx)
+	 * @return Vero se è stato coperto l'angolo in analisi, Falso se ciò non è accaduto (ovvero nella casella adiacenti in analisi non è presente una carta di cui coprire un angolo)
+	 */
 	public boolean copriAngolo(int coordX, int coordY, int indiceAngolo) {
 		CasellaGiocabile casellaACuiCoprireAngolo;
 		

@@ -30,7 +30,13 @@ public class CartaRisorsa extends CartaGiocabile {
 	}
 
 	
-	
+	/**
+	 * Metodo Costruttore
+	 * @param id
+	 * @param fronte
+	 * @param retro
+	 * @param punti
+	 */
 	public CartaRisorsa(int id, FacciaFronte fronte, FacciaRetro retro, int punti) {
 		super(id, fronte, retro);
 		this.punti = punti;
@@ -75,6 +81,10 @@ public class CartaRisorsa extends CartaGiocabile {
 	}
 	
 	
+	/**
+	 * Metodo per assegnare punti ad un giocatore in caso la carta risorsa ne dia (se giocata sulla faccia frontale)
+	 * @param giocatore
+	 */
 	public void assegnaPunti(Giocatore giocatore) {
 		if(super.getFacciaDiGioco().equals("FRONTE")) {
 			int puntiIniziali = giocatore.getPunti();

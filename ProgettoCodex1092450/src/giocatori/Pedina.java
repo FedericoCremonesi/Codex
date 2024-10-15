@@ -14,8 +14,12 @@ public enum Pedina {
 	public static final String CODICE_RESET_COLORE = "\u001B[0m";
 	
 	
+	/**
+	 * Data in ingresso una Stringa con il nome del colore, restituisce una Stringa con il codice colore corrispondente (per colorare il testo stampato a schermo)
+	 * @param stringaConColore
+	 * @return Stringa con codice colore per testo
+	 */
 	public static String ottieniStringCodiceColoreDaStringa(String stringaConColore)
-	//utilizzo i codici dei colori per "colorare" i nickname dei giocatori in base al colore scelto
 	{
 		if( stringaConColore.equals(Pedina.ROSSA.toString()) ) {
 			return "\u001B[31m";
@@ -30,8 +34,12 @@ public enum Pedina {
 		}
 	}
 	
+	/**
+	 * Data in ingresso una Stringa con il nome del colore, restituisce una Stringa con il codice colore corrispondente (per colorare lo sfondo del testo stampato a schermo)
+	 * @param stringaConColore
+	 * @return Stringa con codice colore per sfondo testo
+	 */
 	public static String ottieniStringCodiceColoreSfondoDaStringa(String stringaConColore)
-	//utilizzo i codici dei colori per "colorare" i nickname dei giocatori in base al colore scelto
 	{
 		if( stringaConColore.equals(Pedina.ROSSA.toString()) ) {
 			return "\u001B[41m";

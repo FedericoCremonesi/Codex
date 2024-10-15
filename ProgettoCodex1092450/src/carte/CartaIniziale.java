@@ -9,6 +9,12 @@ import giocatori.Giocatore;
 public class CartaIniziale extends CartaGiocabile {
 
 
+	/**
+	 * Metodo Costruttore
+	 * @param id
+	 * @param fronte
+	 * @param retro
+	 */
 	public CartaIniziale(int id, FacciaFronte fronte, FacciaRetro retro) {
 		super(id, fronte, retro);
 	}

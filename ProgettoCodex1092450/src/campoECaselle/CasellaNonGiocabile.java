@@ -17,20 +17,23 @@ public class CasellaNonGiocabile extends Casella {
 																			"                                      ",
 																			"                                      "};
 
-		
+	
+	/**
+	 * Metodo costruttore, richiama il metodo costruttore della classe madre (astratta) con super
+	 * @param x
+	 * @param y
+	 */
 	public CasellaNonGiocabile(int x, int y) {
 		super(x, y);
 	}
 
 	
-	//Questo metodo serve per stampare il campo come tabella di quadratini
 	@Override
 	public void stampaCasellaComeQuadratino() {
 		System.out.print("   ");
 	}
 	
 	
-	//Questo metodo serve per stampare un'area 3x3 di caselle "ingrandite"
 	@Override
 	public void stampaLineaCasellaIngrandita(Integer numeroLineaDaStampare)
 	{

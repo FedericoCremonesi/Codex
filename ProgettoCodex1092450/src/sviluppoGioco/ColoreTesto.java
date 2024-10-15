@@ -12,6 +12,8 @@ public enum ColoreTesto {
 	public static final String CODICE_COLORE_ROSSO = "\u001B[31m";
 	public static final String CODICE_COLORE_VERDE = "\u001B[32m";
 	
+	public static final String CODICE_COLORE_SFONDO_NERO = "\u001B[40m";
+	
 	public static final String CODICE_RESET_COLORE = "\u001B[0m";
 
 }

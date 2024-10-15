@@ -18,8 +18,12 @@ public enum Risorsa {
 	public static final String CODICE_RESET_COLORE = "\u001B[0m";
 	
 	
+	/**
+	 * Data in ingresso una risorsa come Stringa, restituisce una Stringa con il codice colore corrispondente al colore stesso ricevuto in ingresso
+	 * @param risorsa come String
+	 * @return Stringa con codice colore
+	 */
 	public static String ottieniStringCodiceColoreDaRisorsa(String risorsa)
-	//utilizzo i codici dei colori per "colorare" i nickname dei giocatori in base al colore scelto
 	{
 		if( risorsa.equals(Risorsa.FUNGHI.toString()) ) {
 			return Risorsa.CODICE_COLORE_RISORSA_FUNGHI;

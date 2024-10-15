@@ -15,6 +15,11 @@ public enum ColoreCarta {
 	public static final String CODICE_RESET_COLORE = "\u001B[0m";				//reset colore
 	
 	
+	/**
+	 * Data in ingresso una Stringa con il nome del colore, restituisce una Stringa con il codice colore che permette di colorare il testo stampato a schermo del colore stesso inserito
+	 * @param stringaConColore Stringa con nome colore
+	 * @return Stringa con codice colore
+	 */
 	public static String ottieniStringCodiceColoreDaStringa(String stringaConColore)
 	//utilizzo questi codici per colorare le delimitazioni (contorno e lati angoli) delle carte stampare
 	{

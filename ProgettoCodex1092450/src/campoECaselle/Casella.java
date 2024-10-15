@@ -14,16 +14,29 @@ public abstract class Casella {
 	}
 	
 	
+	/**
+	 * Metodo costruttore della casella
+	 * @param x
+	 * @param y
+	 */
 	public Casella(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
+	//(verrà richiamato sicuramente da classi figlie di Casella, in quanto questa è astratta)
 	
 	
-	//Questo metodo serve per stampare il campo come tabella di quadratini
+	/**
+	 * Metodo per stampare il campo come tabella di quadratini, nello specifico questo metodo stampa una singola casella
+	 */
 	public abstract void stampaCasellaComeQuadratino();
+	//(sarà implementato da classi figlie di Casella poichè è un metodo astratto)
 	
-	//Questo metodo serve per stampare un'area 3x3 di caselle "ingrandite"
+	/**
+	 * Metodo per stampare l'area 5x5 di caselle "ingrandite", nello specifico questo metodo stampa una singola "linea" della faccia della carta da stampare
+	 * @param numeroLineaDaStampare
+	 */
 	public abstract void stampaLineaCasellaIngrandita(Integer numeroLineaDaStampare);
+	//(sarà implementato da classi figlie di Casella poichè è un metodo astratto)
 	
 }
