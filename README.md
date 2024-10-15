@@ -17,6 +17,4 @@ La strategia del gioco sta nel bilanciare il piazzamento delle carte con la cons
 
 
 Autore:
-Cremonesi Federico [1092450]
-UniBG - Ingegneria Informatica
-Corso di Programmazione ad Oggetti
+Cremonesi Federico [1092450] - UniBG - Ingegneria Informatica - Corso di Programmazione ad Oggetti
