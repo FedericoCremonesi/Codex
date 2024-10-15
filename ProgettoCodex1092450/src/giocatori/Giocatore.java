@@ -224,7 +224,7 @@ public class Giocatore implements Comparable<Giocatore> {
 			System.out.print(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" su quale faccia vuoi giocare la carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Fronte/Retro]"+ColoreTesto.CODICE_RESET_COLORE);
 			
 			if(consentiTornaIndietro) {
-				System.out.println("\n (puoi anche tornare indietro alla scelta della carta inserendo "+ColoreTesto.CODICE_COLORE_NERO+"[Indietro]"+ColoreTesto.CODICE_RESET_COLORE+")");
+				System.out.println("\n"+ColoreTesto.CODICE_COLORE_AZZURRO+" (puoi anche tornare indietro alla scelta della carta inserendo "+ColoreTesto.CODICE_COLORE_NERO+"[Indietro]"+ColoreTesto.CODICE_COLORE_AZZURRO+")"+ColoreTesto.CODICE_RESET_COLORE);
 			} else {
 				System.out.println();
 			}
@@ -253,7 +253,7 @@ public class Giocatore implements Comparable<Giocatore> {
 	
 	public boolean confermaVolontàDiGioco() {
 		while(true) { //il ciclo verrà eseguito all'infinito finchè non si incontrerà un return (all'interno degli if)
-			System.out.println(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" vuoi proseguire con la giocata della carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Si/No]"+ColoreTesto.CODICE_RESET_COLORE+"\n Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)");
+			System.out.println(nickname+ColoreTesto.CODICE_COLORE_AZZURRO+" vuoi proseguire con la giocata della carta?"+ColoreTesto.CODICE_COLORE_NERO+" [Si/No]"+"\n"+ColoreTesto.CODICE_COLORE_AZZURRO+" Se sì, non potrai più tornare indietro (in caso contrario, si torna alla scelta della faccia di gioco)"+ColoreTesto.CODICE_RESET_COLORE);
 			Scanner sc = new Scanner(System.in);
 			String scelta = sc.nextLine().toUpperCase().trim();
 			if(scelta.equals("SI")) {
@@ -332,7 +332,7 @@ public class Giocatore implements Comparable<Giocatore> {
 					int numeroCartaScelta = 0; //dato un valore iniziale come esempio, non sarà ovviamente accettato
 					do {
 						try {
-							System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"Quale carta vuoi prendere tra le tre proposte?"+ColoreTesto.CODICE_RESET_COLORE);
+							System.out.println(ColoreTesto.CODICE_COLORE_AZZURRO+"Quale carta vuoi prendere tra le tre proposte?"+ColoreTesto.CODICE_COLORE_NERO+" [1/2/3]"+ColoreTesto.CODICE_RESET_COLORE);
 							sceltaCartaNonPresente = false;
 							sc = new Scanner(System.in);
 							numeroCartaScelta = sc.nextInt();
