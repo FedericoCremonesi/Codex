@@ -401,6 +401,7 @@ public class Partita {
 		} while (!( sceltaOpzione.equals("D") ));
 		
 		g.giocaCartaDaMano();
+		premiInvioPerContinuare();
 		g.pescaCartaDaMazzi(tavoloDiGioco.getMazzoCarteRisorsa(), tavoloDiGioco.getMazzoCarteOro());
 		
 		if(!ultimoRound) {

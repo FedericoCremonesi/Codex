@@ -93,49 +93,36 @@ public class Campo implements campoECaselle.Reset {
 			
 			//...poi conto quelli negli angoli in senso orario
 			//Analizzo l'angolo in alto a sinistra della faccia fronte
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx() instanceof AngoloVisibile ) { //gestisco caso: angolo nascosto
-				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx()).isCoperto() ) { //gestistisco caso: angolo coperto
-					contaRisorseEOggettiVisibili(i-1,j-1,false); //chiamo ricorsivamente la funzione, stavolta dicendogli di Controllare la casella (giocabile) in alto a sx rispetto a quella in analisi adesso
-				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx()).getContenuto()!=null ) { //gestistisco caso: angolo vuoto
-					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx()).getContenuto() );
-				}
-			}
+			analizzaAngoloPerConteggioSimboli(i,j, i-1,j-1, 0);
 			
 			//Analizzo l'angolo in alto a destra della faccia fronte
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx() instanceof AngoloVisibile ) {
-				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx()).isCoperto() ) {
-					contaRisorseEOggettiVisibili(i-1,j+1,false);
-				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx()).getContenuto()!=null ) {
-					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx()).getContenuto() );
-				}
-			}
+			analizzaAngoloPerConteggioSimboli(i,j, i-1,j+1, 1);
 			
 			//Analizzo l'angolo in basso a destra della faccia fronte
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx() instanceof AngoloVisibile ) {
-				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx()).isCoperto() ) {
-					contaRisorseEOggettiVisibili(i+1,j+1,false);
-				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx()).getContenuto()!=null ) {
-					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx()).getContenuto() );
-				}
-			}
+			analizzaAngoloPerConteggioSimboli(i,j, i+1,j+1, 3);
 			
 			//Appena prima di controllare l'ultimo angolo della carta, setto che sono già state contate tutte le risorse della carta
 			((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().setContatiSimboli(true);
 			
 			//Analizzo l'angolo in basso a sinistra della faccia fronte
-			if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx() instanceof AngoloVisibile ) {
-				if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).isCoperto() ) {
-					contaRisorseEOggettiVisibili(i+1,j-1,false);
-				} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto()!=null ) {
-					incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx()).getContenuto() );
-				}
-			}
+			analizzaAngoloPerConteggioSimboli(i,j, i+1,j-1, 2);
 			
 		}
 		
 		//*se facessi il reset qui, come avevo ipotizzato, il campo verrebbe resettato alla fine di ogni carta (dunque sarebbe inutile avere un booleano che controlla di quali carte sono già stati contati i simboli)
 		
 		return conteggioRisorseEOggetti; //viene ritornata la hashmap in caso serva utilizzarla per altri motivi (es assegnare punti date determinate condizioni delle carte oro o obiettivo)
+	}
+	
+	
+	public void analizzaAngoloPerConteggioSimboli(int i,int j, int iJump,int jJump, int indiceAngolo) {
+		if( ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo) instanceof AngoloVisibile ) { //Caso: angolo nascosto
+			if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo)).isCoperto() ) { //Caso: angolo coperto
+				contaRisorseEOggettiVisibili(iJump,jJump,false); //chiamo ricorsivamente la funzione, stavolta dicendogli di controllare la casella (giocabile) in cui si trova la carta che copre questo angolo
+			} else if( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo)).getContenuto()!=null ) { //Caso: angolo vuoto
+				incrementaConteggioDatoSimbolo( ((AngoloVisibile) ((CasellaGiocabile) caselleDelCampo[i][j]).getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(indiceAngolo)).getContenuto() );
+			}
+		}
 	}
 	
 	
@@ -365,7 +352,7 @@ public class Campo implements campoECaselle.Reset {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoDx();
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(3);
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				//System.out.println("In alto a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -380,7 +367,7 @@ public class Campo implements campoECaselle.Reset {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloBassoSx();
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(2);
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				//System.out.println("In alto a destra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -395,7 +382,7 @@ public class Campo implements campoECaselle.Reset {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoDx();
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(1);
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				//System.out.println("In basso a sinistra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -410,7 +397,7 @@ public class Campo implements campoECaselle.Reset {
 		if( !( casellaDaControllare.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaDaControllare.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
-			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloAltoSx();
+			angoloDaControllare = casellaDaControllare.getCartaContenuta().ottieniFacciaSuCuiGiocata().getAngoloDaIndice(0);
 			
 			if( (angoloDaControllare instanceof AngoloVisibile) ) {
 				//System.out.println("In basso a destra: c'è angolo visibile non coperto a cui agganciarsi");
@@ -453,18 +440,41 @@ public class Campo implements campoECaselle.Reset {
 		int x = casellaInCuiPosizionataCarta.getX();
 		int y = casellaInCuiPosizionataCarta.getY();
 		
+		if(copriAngolo(x-1, y-1, 3)) {
+			numeroAngoliCopertiConGiocata++;
+		}
+		
+		if(copriAngolo(x-1, y+1, 2)) {
+			numeroAngoliCopertiConGiocata++;
+		}
+		
+		if(copriAngolo(x+1, y-1, 1)) {
+			numeroAngoliCopertiConGiocata++;
+		}
+		
+		if(copriAngolo(x+1, y+1, 0)) {
+			numeroAngoliCopertiConGiocata++;
+		}	
+				
+		//System.out.println("Totale angoli coperti con la giocata di questa carta: "+numeroAngoliCopertiConGiocata);
+		//(Usato per testing)
+		
+		return numeroAngoliCopertiConGiocata;
+	}
+	
+	
+	public boolean copriAngolo(int coordX, int coordY, int indiceAngolo) {
 		CasellaGiocabile casellaACuiCoprireAngolo;
 		
-		
-		casellaACuiCoprireAngolo = ((CasellaGiocabile) caselleDelCampo[x-1][y-1]);
+		casellaACuiCoprireAngolo = ((CasellaGiocabile) caselleDelCampo[coordX][coordY]);
 		if( !( casellaACuiCoprireAngolo.isEmpty() ) ) {
 			String facciaDiGiocoCarta = casellaACuiCoprireAngolo.getCartaContenuta().getFacciaDiGioco();
 			Angolo angoloDaControllare = null;
 			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getFronte().getAngoloBassoDx();
+				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getFronte().getAngoloDaIndice(indiceAngolo);
 			}
 			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloBassoDx();
+				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloDaIndice(indiceAngolo);
 			}
 			
 			/*
@@ -474,68 +484,10 @@ public class Campo implements campoECaselle.Reset {
 			//System.out.println("E' stato coperto un angolo");
 			//(Usato per testing)
 			((AngoloVisibile) angoloDaControllare).setCoperto(true);
-			numeroAngoliCopertiConGiocata++;
+			return true;
+		} else {
+			return false;
 		}
-		
-		//Come prima, ma cambiate 3 cose: (*) e (**) e (***)
-		casellaACuiCoprireAngolo = ((CasellaGiocabile) caselleDelCampo[x-1][y+1]); //(*)
-		if( !( casellaACuiCoprireAngolo.isEmpty() ) ) {
-			String facciaDiGiocoCarta = casellaACuiCoprireAngolo.getCartaContenuta().getFacciaDiGioco();
-			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getFronte().getAngoloBassoSx(); //(**)
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloBassoSx(); //(***)
-			}
-			
-			//System.out.println("E' stato coperto un angolo");
-			//(Usato per testing)
-			((AngoloVisibile) angoloDaControllare).setCoperto(true);
-			numeroAngoliCopertiConGiocata++;
-		}
-		
-		//Come prima, ma cambiate 3 cose: (*) e (**) e (***)
-		casellaACuiCoprireAngolo = ((CasellaGiocabile) caselleDelCampo[x+1][y-1]); //(*)
-		if( !( casellaACuiCoprireAngolo.isEmpty() ) ) {
-			String facciaDiGiocoCarta = casellaACuiCoprireAngolo.getCartaContenuta().getFacciaDiGioco();
-			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getFronte().getAngoloAltoDx(); //(**)
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloAltoDx(); //(***)
-			}
-			
-			//System.out.println("E' stato coperto un angolo");
-			//(Usato per testing)
-			((AngoloVisibile) angoloDaControllare).setCoperto(true);
-			numeroAngoliCopertiConGiocata++;
-		}
-
-		//Come prima, ma cambiate 3 cose: (*) e (**) e (***)
-		casellaACuiCoprireAngolo = ((CasellaGiocabile) caselleDelCampo[x+1][y+1]); //(*)
-		if( !( casellaACuiCoprireAngolo.isEmpty() ) ) {
-			String facciaDiGiocoCarta = casellaACuiCoprireAngolo.getCartaContenuta().getFacciaDiGioco();
-			Angolo angoloDaControllare = null;
-			if(facciaDiGiocoCarta.equals("FRONTE")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getFronte().getAngoloAltoSx(); //(**)
-			}
-			if(facciaDiGiocoCarta.equals("RETRO")) {
-				angoloDaControllare = casellaACuiCoprireAngolo.getCartaContenuta().getRetro().getAngoloAltoSx(); //(***)
-			}
-			
-			//System.out.println("E' stato coperto un angolo");
-			//(Usato per testing)
-			((AngoloVisibile) angoloDaControllare).setCoperto(true);
-			numeroAngoliCopertiConGiocata++;
-		}
-		
-		
-		//System.out.println("Totale angoli coperti con la giocata di questa carta: "+numeroAngoliCopertiConGiocata);
-		//(Usato per testing)
-		
-		return numeroAngoliCopertiConGiocata;
 	}
 	
 }

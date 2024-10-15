@@ -12,10 +12,4 @@ public class FacciaFronte extends Faccia {
 		this.insiemeLineeFaccia = new String[NUMERO_LINEE_FACCIA];
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "["+super.getAngoloAltoSx()+" "+super.getAngoloAltoDx()+" "+super.getAngoloBassoSx()+" "+super.getAngoloBassoDx()+"]";
-	}
-	
 }

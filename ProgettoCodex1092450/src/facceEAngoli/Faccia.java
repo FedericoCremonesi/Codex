@@ -4,41 +4,20 @@ import carte.ColoreCarta;
 
 public abstract class Faccia {
 	
-	protected Angolo angoloAltoSx;
-	protected Angolo angoloAltoDx;
-	protected Angolo angoloBassoSx;
-	protected Angolo angoloBassoDx;
+	protected Angolo[] angoliFaccia = new Angolo[4];
+	/*
+	 * Indice 0: angoloAltoSx
+	 * Indice 1: angoloAltoDx
+	 * Indice 2: angoloBassoSx
+	 * Indice 3: angoloBassoDx
+	 */
 	
 	protected String[] insiemeLineeFaccia;
 	public final static int NUMERO_LINEE_FACCIA=13; //in una faccia ci sono 13 linee in totale
 	
 	
-	public Angolo getAngoloAltoSx() {
-		return angoloAltoSx;
-	}
-	public void setAngoloAltoSx(Angolo angoloAltoSx) {
-		this.angoloAltoSx = angoloAltoSx;
-	}
-
-	public Angolo getAngoloAltoDx() {
-		return angoloAltoDx;
-	}
-	public void setAngoloAltoDx(Angolo angoloAltoDx) {
-		this.angoloAltoDx = angoloAltoDx;
-	}
-
-	public Angolo getAngoloBassoSx() {
-		return angoloBassoSx;
-	}
-	public void setAngoloBassoSx(Angolo angoloBassoSx) {
-		this.angoloBassoSx = angoloBassoSx;
-	}
-
-	public Angolo getAngoloBassoDx() {
-		return angoloBassoDx;
-	}
-	public void setAngoloBassoDx(Angolo angoloBassoDx) {
-		this.angoloBassoDx = angoloBassoDx;
+	public Angolo getAngoloDaIndice(int indice) {
+		return angoliFaccia[indice];
 	}
 	
 	public String[] getInsiemeLineeFaccia() {
@@ -50,10 +29,10 @@ public abstract class Faccia {
 	
 	
 	public Faccia(Angolo angoloAltoSx, Angolo angoloAltoDx, Angolo angoloBassoSx, Angolo angoloBassoDx) {
-		this.angoloAltoSx = angoloAltoSx;
-		this.angoloAltoDx = angoloAltoDx;
-		this.angoloBassoSx = angoloBassoSx;
-		this.angoloBassoDx = angoloBassoDx;
+		this.angoliFaccia[0] = angoloAltoSx;
+		this.angoliFaccia[1] = angoloAltoDx;
+		this.angoliFaccia[2] = angoloBassoSx;
+		this.angoliFaccia[3] = angoloBassoDx;
 	}
 
 	
@@ -97,48 +76,48 @@ public abstract class Faccia {
 		lineeFaccia[0] = (coloreContorno+"╭------------------------------------╮"+ColoreCarta.CODICE_RESET_COLORE);
 		
 		//Costruisco la linea2 della faccia
-		if(angoloAltoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[0] instanceof AngoloVisibile) {
 			lineeFaccia[1] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[1] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloAltoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[1] instanceof AngoloVisibile) {
 			lineeFaccia[1] = (lineeFaccia[1] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[1] = (lineeFaccia[1] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 				
 		//Costruisco la linea3 della faccia
-		if(angoloAltoSx instanceof AngoloVisibile) {
-			lineeFaccia[2] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+		if(angoliFaccia[0] instanceof AngoloVisibile) {
+			lineeFaccia[2] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoliFaccia[0].toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[2] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloAltoDx instanceof AngoloVisibile) {
-			lineeFaccia[2] = (lineeFaccia[2] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloAltoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
+		if(angoliFaccia[1] instanceof AngoloVisibile) {
+			lineeFaccia[2] = (lineeFaccia[2] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoliFaccia[1].toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[2] = (lineeFaccia[2] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
 		//Costruisco la linea4 della faccia
-		if(angoloAltoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[0] instanceof AngoloVisibile) {
 			lineeFaccia[3] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[3] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloAltoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[1] instanceof AngoloVisibile) {
 			lineeFaccia[3] = (lineeFaccia[3] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[3] = (lineeFaccia[3] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
 		//Costruisco la linea5 della faccia
-		if(angoloAltoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[0] instanceof AngoloVisibile) {
 			lineeFaccia[4] = (coloreContorno+"|"+coloreLatiAngoli+"------------╯"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[4] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloAltoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[1] instanceof AngoloVisibile) {
 			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"     "+coloreLatiAngoli+"╰------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[4] = (lineeFaccia[4] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
@@ -154,48 +133,48 @@ public abstract class Faccia {
 		lineeFaccia[7] = (coloreContorno+"|                                    |"+ColoreCarta.CODICE_RESET_COLORE);
 		
 		//Costruisco la linea9 della faccia
-		if(angoloBassoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[2] instanceof AngoloVisibile) {
 			lineeFaccia[8] = (coloreContorno+"|"+coloreLatiAngoli+"------------╮"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[8] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloBassoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[3] instanceof AngoloVisibile) {
 			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"     "+coloreLatiAngoli+"╭------------"+coloreContorno+"|"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[8] = (lineeFaccia[8] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
 		//Costruisco la linea10 della faccia
-		if(angoloBassoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[2] instanceof AngoloVisibile) {
 			lineeFaccia[9] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[9] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloBassoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[3] instanceof AngoloVisibile) {
 			lineeFaccia[9] = (lineeFaccia[9] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[9] = (lineeFaccia[9] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
 		//Costruisco la linea11 della faccia
-		if(angoloBassoSx instanceof AngoloVisibile) {
-			lineeFaccia[10] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoSx.toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
+		if(angoliFaccia[2] instanceof AngoloVisibile) {
+			lineeFaccia[10] = (coloreContorno+"| "+ColoreCarta.CODICE_RESET_COLORE+angoliFaccia[2].toString()+coloreContorno+" "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[10] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloBassoDx instanceof AngoloVisibile) {
-			lineeFaccia[10] = (lineeFaccia[10] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoloBassoDx.toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
+		if(angoliFaccia[3] instanceof AngoloVisibile) {
+			lineeFaccia[10] = (lineeFaccia[10] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+" "+ColoreCarta.CODICE_RESET_COLORE+angoliFaccia[3].toString()+coloreContorno+" |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[10] = (lineeFaccia[10] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
 		}
 		
 		//Costruisco la linea12 della faccia
-		if(angoloBassoSx instanceof AngoloVisibile) {
+		if(angoliFaccia[2] instanceof AngoloVisibile) {
 			lineeFaccia[11] = (coloreContorno+"|            "+coloreLatiAngoli+"|"+coloreContorno+"     "+ColoreCarta.CODICE_RESET_COLORE);
 		} else {
 			lineeFaccia[11] = (coloreContorno+"|                  "+ColoreCarta.CODICE_RESET_COLORE);
 		}
-		if(angoloBassoDx instanceof AngoloVisibile) {
+		if(angoliFaccia[3] instanceof AngoloVisibile) {
 			lineeFaccia[11] = (lineeFaccia[11] + (coloreContorno+"     "+coloreLatiAngoli+"|"+coloreContorno+"            |"+ColoreCarta.CODICE_RESET_COLORE));
 		} else {
 			lineeFaccia[11] = (lineeFaccia[11] + (coloreContorno+"                  |"+ColoreCarta.CODICE_RESET_COLORE));
